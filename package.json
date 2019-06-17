@@ -24,7 +24,8 @@
   "homepage": "https://github.com/AppLoidx/helios-front-end#readme",
   "devDependencies": {
     "babel-cli": "^6.9.0",
-    "babel-preset-react": "^6.24.1"
+    "babel-preset-react": "^6.24.1",
+    "braces": ">=2.3.1"
   },
 
   "babel": {

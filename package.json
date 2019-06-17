@@ -1,0 +1,33 @@
+{
+  "name": "helios",
+  "version": "1.0.0",
+  "description": "Web app for helios service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/babel jsx --out-dir compiled -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AppLoidx/helios-front-end.git"
+  },
+  "keywords": [
+    "web-app",
+    "react",
+    "front-end"
+  ],
+  "author": "Arthur Kupriyanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AppLoidx/helios-front-end/issues"
+  },
+  "homepage": "https://github.com/AppLoidx/helios-front-end#readme",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-react": "^6.24.1"
+  },
+
+  "babel": {
+    "presets" : ["react"]
+  }
+}

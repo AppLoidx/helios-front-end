@@ -28,7 +28,7 @@ class QueueLink extends React.Component {
                             null,
                             React.createElement(
                                 "span",
-                                { className: "badge badge-danger font-weight-light" },
+                                { className: "badge badge-pill badge-danger font-weight-light" },
                                 this.state.messages
                             )
                         )

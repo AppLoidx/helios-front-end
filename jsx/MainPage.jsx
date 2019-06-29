@@ -1,0 +1,24 @@
+
+class MainPage extends React.Component {
+
+    componentDidMount(){
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+        });
+    }
+
+    render(){
+        return <MainPageContent/>
+    }
+}
+
+class MainPageContent extends React.Component {
+    render(){
+        return <div className="mx-auto">
+            <h3 className='display-4 mx-auto text-center mt-5'>Welcome to Helios queue service!</h3>
+        </div>
+    }
+}

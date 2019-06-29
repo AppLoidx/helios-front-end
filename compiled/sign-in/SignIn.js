@@ -2,7 +2,7 @@ class SignIn extends React.Component {
   render() {
     return React.createElement(
       "form",
-      { className: "form-signin" },
+      { className: "form-signin", action: "http://localhost:8080/mavenserver_war/api/auth" },
       React.createElement(
         "div",
         { className: "text-center mb-4" },
@@ -17,7 +17,7 @@ class SignIn extends React.Component {
           "\u0412\u043E\u0439\u0434\u0438\u0442\u0435 \u0438\u043B\u0438 ",
           React.createElement(
             "a",
-            { href: "#" },
+            { href: "#/register", className: "text-primary" },
             "\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u0443\u0439\u0442\u0435\u0441\u044C"
           ),
           " \u0432 \u0441\u0438\u0441\u0442\u0435\u043C\u0443"
@@ -26,17 +26,17 @@ class SignIn extends React.Component {
       React.createElement(
         "div",
         { className: "form-label-group" },
-        React.createElement("input", { type: "email", id: "inputEmail", className: "form-control", placeholder: "Email address", required: true, autoFocus: true }),
+        React.createElement("input", { type: "text", id: "login", className: "form-control", placeholder: "Username", name: "username", required: true, autoFocus: true }),
         React.createElement(
           "label",
-          { htmlFor: "inputEmail" },
-          "Email address"
+          { htmlFor: "login" },
+          "Username"
         )
       ),
       React.createElement(
         "div",
         { className: "form-label-group" },
-        React.createElement("input", { type: "password", id: "inputPassword", className: "form-control", placeholder: "Password", required: true }),
+        React.createElement("input", { type: "password", id: "inputPassword", className: "form-control", name: "password", placeholder: "Password", required: true }),
         React.createElement(
           "label",
           { htmlFor: "inputPassword" },

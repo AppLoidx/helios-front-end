@@ -31,11 +31,11 @@ class QueueUser extends React.Component {
                     ),
                     React.createElement(
                         "div",
-                        { "class": "dropdown show dropleft" },
+                        { className: "dropdown show dropleft" },
                         React.createElement(
                             "span",
                             { role: "button", id: "dropdownMenuLink", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "false" },
-                            React.createElement("i", { "class": "fa fa-bars", "aria-hidden": "true" })
+                            React.createElement("i", { className: "fa fa-bars", "aria-hidden": "true" })
                         ),
                         React.createElement(
                             "div",

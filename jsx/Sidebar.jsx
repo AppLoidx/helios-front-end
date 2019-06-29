@@ -1,39 +1,83 @@
+
 class Sidebar extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {"queues" : [], "loading" : true, "username" : "", "logged" : false};
+        this.fetchQueues = this.fetchQueues.bind(this);
+    }
+
+    componentDidMount(){
+    
+        this.setState({loading: true});
+        fetch('http://localhost:8080/mavenserver_war/api/user?session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw')
+        .then( response => response.json()).then(
+            resp => 
+            {
+                console.log(resp['user']);
+                let fullname = resp['user']['firstName'] + " " + resp['user']['lastName'];
+                this.setState({
+                    "queues" : resp['queues'], 
+                    "loading" : false, 
+                    "username": fullname,
+                    "logged" : true})
+            })
+        .catch(err => console.log(err));
+        
+    }
+
+    fetchQueues(){
+        fetch('http://localhost:8080/mavenserver_war/api/user?session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw')
+        .then( response => response.json()).then(resp => 
+            this.setState({"queues" : resp['queues'], "loading" : false}));
+    }
+
     render(){
         return (
             <div className="wrapper">
 
         <nav id="sidebar">
             <div className="sidebar-header">
-                <h3>HELIOS</h3>
+                <h3 className="display-4">
+                <span className="text-danger">H</span>
+                <span>E</span>
+                <span className="text-warning">L</span>
+                <span className="text-success">I</span>
+                <span className="text-primary">O</span>
+                <span className="text-light">S</span>
+                </h3>
             </div>
 
             <ul className="list-unstyled components">
-                <li ><a href="#">Мой профиль</a></li>
+                
+                <li ><a href="#/myprofile">Мой профиль</a></li>
                 <li>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Мои очереди</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" onClick={this.fetchQueues}>Мои очереди</a>
                     <ul className="collapse list-unstyled" id="homeSubmenu">
-                        <li><QueueLink link="#" name="Доп к Полякову"/></li>
-                        <li><QueueLink link="#" name="Прием лаб Перминова"/></li>
-                        <li><QueueLink link="#" name="Доп к Николаеву"/></li>
+                        
+                        {this.state.loading?(<li className="justify-content-center">Loading data...</li>)
+                                            :
+                        this.state.queues.map((i, k) => {return <li key={i[0]}><QueueLink link={"#/queue/" + i[0]} name={i[1]}/></li>})
+                        }
                     </ul>
                 </li>
                 <li><a href="#">Присоедениться</a></li>
-                <li><a href="signin.html">Войти</a></li>
+                <li><a href="#/create">Создать</a></li>
+                <li>{this.state.logged?
+                    <p>{this.state.username}</p>:
+                    <a href="#/signin">Войти</a>
+                }
+                </li>
             </ul>
         </nav>
 
         <div id="content">
-            <button type="button" id="sidebarCollapse" className="navbar-btn">
+            <button type="button" id="sidebarCollapse" className="navbar-btn bg-transparent">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-
-            <QueuePage/>
+            {this.props.content}
         </div>
-
-
         </div>
         )
         }

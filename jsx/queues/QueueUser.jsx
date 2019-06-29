@@ -6,9 +6,9 @@ class QueueUser extends React.Component {
               <div className="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <div className="d-flex justify-content-between align-items-center w-100">
                   <strong className="text-gray-dark">{this.props.fullname}</strong>
-                  <div class="dropdown show dropleft">
+                  <div className="dropdown show dropleft">
                     <span role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <i className="fa fa-bars" aria-hidden="true"></i>
                     </span>
         
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">

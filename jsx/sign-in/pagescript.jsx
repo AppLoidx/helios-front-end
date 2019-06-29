@@ -1,15 +1,13 @@
-class ContentPage extends React.Component {
+class SignInPage extends React.Component {
+    componentDidMount(){
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+        });
+    }
     render(){
-        return (
-        <div>
-            <SignIn/>
-        </div>
-        
-        )
+        return <SignIn/>
     }
 }
-
-ReactDOM.render(
-    <ContentPage/>,
-    document.getElementById('contentReact')
-)

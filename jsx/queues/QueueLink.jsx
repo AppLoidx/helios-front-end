@@ -1,3 +1,5 @@
+const React = require('react')
+
 class QueueLink extends React.Component {
     constructor(props){
         super(props);
@@ -17,3 +19,5 @@ class QueueLink extends React.Component {
         )
     }
 }
+
+module.exports = QueueLink

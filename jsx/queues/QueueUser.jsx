@@ -1,3 +1,5 @@
+const React = require('react')
+
 class QueueUser extends React.Component {
     render(){
         return (
@@ -24,3 +26,5 @@ class QueueUser extends React.Component {
         )
     }
 }
+
+module.exports = QueueUser

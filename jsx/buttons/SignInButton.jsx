@@ -1,3 +1,5 @@
+const React = require('react')
+
 class SignInButton extends React.Component {
     render(){
         return(
@@ -29,3 +31,5 @@ class SignInButton extends React.Component {
         )
     }
 }
+
+module.exports = SignInButton

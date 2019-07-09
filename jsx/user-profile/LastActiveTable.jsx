@@ -1,3 +1,5 @@
+const React = require('react')
+
 class LastActiveTable extends React.Component {
     render(){
         return (
@@ -28,3 +30,5 @@ class LastActiveTable extends React.Component {
         )
     }
 }
+
+module.exports = LastActiveTable

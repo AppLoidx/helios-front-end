@@ -1,4 +1,4 @@
-
+const React = require('react')
 class MainPage extends React.Component {
 
     componentDidMount(){
@@ -22,3 +22,5 @@ class MainPageContent extends React.Component {
         </div>
     }
 }
+
+module.exports = MainPage

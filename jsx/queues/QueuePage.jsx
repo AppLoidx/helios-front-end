@@ -1,12 +1,16 @@
+const React = require('react')
+const Sidebar = require('./../Sidebar.jsx')
+const QueueUser = require('./QueueUser.jsx')
+
 class QueuePage extends React.Component {
-  componentDidMount(){
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-        $(this).toggleClass('active');
-    });
-    });
-}
+//   componentDidMount(){
+//     $(document).ready(function () {
+//         $('#sidebarCollapse').on('click', function () {
+//         $('#sidebar').toggleClass('active');
+//         $(this).toggleClass('active');
+//     });
+//     });
+// }
 
   render(){
     return <Sidebar content={<QueuePageContent queueName={this.props.match.params.id}/>} />
@@ -81,3 +85,5 @@ class QueuePageContent extends React.Component {
         )
     }
 }
+
+module.exports = QueuePage

@@ -1,3 +1,5 @@
+const React = require('react')
+const QueueLink = require('./queues/QueueLink.jsx')
 
 class Sidebar extends React.Component {
     constructor(props){
@@ -5,6 +7,21 @@ class Sidebar extends React.Component {
         this.state = {"queues" : [], "loading" : true, "username" : "", "logged" : false};
         this.fetchQueues = this.fetchQueues.bind(this);
     }
+
+    // onMenuClick = () => function () {
+    //     $('#sidebarCollapse').on('click', function () {
+    //     $('#sidebar').toggleClass('active');
+    //     $(this).toggleClass('active');
+    // });
+    // }
+    // componentDidMount(){
+    //     $(document).ready(function () {
+    //         $('#sidebarCollapse').on('click', function () {
+    //         $('#sidebar').toggleClass('active');
+    //         $(this).toggleClass('active');
+    //     });
+    //     });
+    // }
 
     componentDidMount(){
     
@@ -82,3 +99,5 @@ class Sidebar extends React.Component {
         )
         }
 }
+
+module.exports = Sidebar

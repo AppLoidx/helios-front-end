@@ -1,3 +1,5 @@
+const React = require('react')
+const LastActiveTable  = require('./LastActiveTable.jsx')
 class UserDashboard extends React.Component {
     render() {
         return (
@@ -19,3 +21,5 @@ class UserDashboard extends React.Component {
         )
     }
 }
+
+module.exports = UserDashboard

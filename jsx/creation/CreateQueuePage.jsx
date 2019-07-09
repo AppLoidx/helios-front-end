@@ -1,12 +1,14 @@
+const React = require('react')
+
 class CreateQueuePage extends React.Component {
-    componentDidMount(){
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-        });
-    }
+    // componentDidMount(){
+    //     $(document).ready(function () {
+    //         $('#sidebarCollapse').on('click', function () {
+    //         $('#sidebar').toggleClass('active');
+    //         $(this).toggleClass('active');
+    //     });
+    //     });
+    // }
     render(){
         return <CreateQueuePageContent/>
     }
@@ -74,7 +76,7 @@ class CreateQueuePageContent extends React.Component {
             </div>
 
             <p>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSend" aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>
+            <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSend" aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>
                 Создать
             </button>
             </p>
@@ -94,3 +96,5 @@ class CreateQueuePageContent extends React.Component {
 
     }
 }
+
+module.exports = CreateQueuePage

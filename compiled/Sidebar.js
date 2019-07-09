@@ -7,6 +7,15 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    }
+
+    componentDidMount() {
 
         this.setState({ loading: true });
         fetch('http://localhost:8080/mavenserver_war/api/user?session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw').then(response => response.json()).then(resp => {

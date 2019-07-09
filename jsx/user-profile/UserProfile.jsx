@@ -1,3 +1,7 @@
+const React = require('react')
+const UserCard = require('./UserCard.jsx')
+const UserDashboard = require('./UserDashboard.jsx')
+
 class UserProfile extends React.Component {
     componentDidMount(){
             $(document).ready(function () {
@@ -20,3 +24,5 @@ class UserProfile extends React.Component {
         )
     }
 }
+
+module.exports = UserProfile

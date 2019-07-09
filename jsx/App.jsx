@@ -1,14 +1,19 @@
+const React = require('react')
+const ReactDOM = require('react-dom')
 
+const ReeactRouterDOM = require('react-router-dom')
+
+const MainPage = require('./MainPage.jsx')
+const QueuePage = require('./queues/QueuePage.jsx')
+const SignInPage = require('./sign-in/SignIn.jsx')
+const RegisterPage = require('./RegisterPage.jsx')
+const CreateQueuePage = require('./creation/CreateQueuePage.jsx')
+const UserProfile = require('./user-profile/UserProfile.jsx')
+const Chat = require('./chat/Chat.jsx')
+const Sidebar = require('./Sidebar.jsx')
 
 class ContentPage extends React.Component {
-    componentDidMount(){
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-        });
-    }
+    
 
     render(){
         return (

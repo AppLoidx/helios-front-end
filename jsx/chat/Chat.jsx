@@ -1,99 +1,86 @@
+require('./../../style/chat/chat.css')
+const React = require('react')
+const MessageIn = require('./MessageIn.jsx')
+const MessageOut = require('./MessageOut.jsx')
+const Message = require('./Message.jsx')
+
 class Chat extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {"messages" : []}
+		this.formatAMPM = this.formatAMPM.bind(this)
+		this.insertChat = this.insertChat.bind(this)
+	}
+
+
+formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}            
+
+//-- No use time. It is a javaScript effect.
+insertChat(who, text, time = 0){
+    var control = "";
+    var date = this.formatAMPM(new Date());
+    
+    if (who == "me"){
+        
+        control = <Message text={text} date={"12:06"} />                    
+    }else{
+        control = <Message text={text} date={"11:09"} author={"another"} />   
+    }
+
+            let oldMessages = this.state.messages;
+            oldMessages.push(control)
+            this.setState({"messages": oldMessages})
+}
+
+resetChat(){
+    $("ul").empty();
+}
+
+
+
+
+componentDidMount(){
+	$(".mytext").on("keyup", function(e){
+    if (e.which == 13){
+        var text = $(this).val();
+        if (text !== ""){
+            insertChat("me", text);              
+            $(this).val('');
+        }
+    }
+	});
+	this.resetChat();
+	this.insertChat("me", "Hello Tom...", 0);  
+	this.insertChat("you", "Hi, Pablo", 1500);
+	this.insertChat("me", "What would you like to talk about today?", 3500);
+	this.insertChat("you", "Tell me a joke",7000);
+	this.insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!", 9500);
+	this.insertChat("you", "LOL", 12000);
+}
     render() {
         return (
-            <div class="jumbotron m-0 p-0 bg-transparent">
-		<div class="row m-0 p-0 position-relative">
-		  <div class="col-12 p-0 m-0 position-absolute" style={{right: "0p"}}>
-			<div class="card border-0 rounded" style={"{box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10), 0 6px 10px 0 rgba(0, 0, 0, 0.01); overflow: hidden; height: 100vh;"}>
-
-			  <div class="card-header p-1 bg-light border border-top-0 border-left-0 border-right-0" style="color: rgba(96, 125, 139,1.0);">
-				
-				<img class="rounded float-left" style="width: 50px; height: 50px;" src="https://i.pinimg.com/736x/5c/24/69/5c24695df36eee73abfbdd8274085ecd--cute-anime-guys-anime-boys.jpg" ></img>
-				
-				<h6 class="float-left" style="margin: 0px; margin-left: 10px;"> Yusuf Bulgurcu <i class="fa fa-check text-primary" title="Onaylanmış Hesap!" aria-hidden="true"></i> <br/><small> İstanbul, TR </small></h6>
-					
-				  <div class="dropdown show">
-
-					  <a id="dropdownMenuLink" data-toggle="dropdown" class="btn btn-sm float-right text-secondary" role="button"><h5><i class="fa fa-ellipsis-h" title="Ayarlar!" aria-hidden="true"></i>&nbsp;</h5></a>
-
-					<div class="dropdown-menu dropdown-menu-right border p-0" aria-labelledby="dropdownMenuLink">
-						
-						<a class="dropdown-item p-2 text-secondary" href="#"> <i class="fa fa-user m-1" aria-hidden="true"></i> Profile </a>
-						<hr class="my-1"></hr>
-						<a class="dropdown-item p-2 text-secondary" href="#"> <i class="fa fa-trash m-1" aria-hidden="true"></i> Delete </a>
-
-					</div>
-				  </div>
-					
-			  </div>
-			
-				<div class="card bg-sohbet border-0 m-0 p-0" style="height: 100vh;">
-			  <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent" style="overflow-y: auto; height: 100vh;">
-			
-				<div class="balon1 p-2 m-0 position-relative" data-is="You - 3:20 pm">
-				
-					<a class="float-right"> Hey there! What's up? </a>
-				  
-				</div>
-				
-				<div class="balon2 p-2 m-0 position-relative" data-is="Yusuf - 3:22 pm">
-				
-					<a class="float-left sohbet2"> Checking out iOS7 you know.. </a>
-				  
-				</div>
-				
-				<div class="balon1 p-2 m-0 position-relative" data-is="You - 3:23 pm">
-				
-					<a class="float-right"> Check out this bubble! </a>
-				  
-				</div>
-				
-				<div class="balon2 p-2 m-0 position-relative" data-is="Yusuf - 3:26 pm">
-				
-					<a class="float-left sohbet2"> It's pretty cool! </a>
-				  
-				</div>
-				
-				<div class="balon1 p-2 m-0 position-relative" data-is="You - 3:28 pm">
-				
-					<a class="float-right"> Yeah it's pure CSS & HTML </a>
-				  
-				</div>
-				
-				<div class="balon2 p-2 m-0 position-relative" data-is="Yusuf - 3:33 pm">
-				
-					<a class="float-left sohbet2"> Wow that's impressive. But what's even more impressive is that this bubble is really high. </a>
-				  
-				</div>
-
-			  </div>
-			  </div>
-
-			  <div class="w-100 card-footer p-0 bg-light border border-bottom-0 border-left-0 border-right-0">
-				
-					<form class="m-0 p-0" action="" method="POST" autocomplete="off">
-    
-					  <div class="row m-0 p-0">
-						<div class="col-9 m-0 p-1">
-						
-							<input id="text" class="mw-100 border rounded form-control" type="text" name="text" title="Type a message..." placeholder="Type a message..." required></input>
-						  
-						</div>
-						<div class="col-3 m-0 p-1">
-						
-							<button class="btn btn-outline-secondary rounded border w-100" title="Gönder!" style="padding-right: 16px;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-									
-						</div>
-					  </div>
-				
-				</form>
-					
-			  </div>
-
-			</div>
-		  </div>
-		  
-		</div>
-	  </div>)
+            <div className="frame-chat col-sm-3 col-sm-offset-4">
+            <ul className="ul-chat">
+            	{this.state.messages.map((x,i) => {return <li style={{"width" : "100%"}} key={i}>{x}</li>})}
+            </ul>
+            <div>
+                <div className="msj-rta macro" style={{"margin" : "auto"}}>                        
+                    <div className="text-chat text-r" style={{"background":"whitesmoke !important"}}>
+                        <input className="mytext input-chat" placeholder="Type a message"/>
+                    </div> 
+                </div>
+            </div>
+            </div> )
     }
 }
+
+module.exports = Chat

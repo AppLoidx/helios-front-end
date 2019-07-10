@@ -73,7 +73,7 @@ class Sidebar extends React.Component {
                         }
                     </ul>
                 </li>
-                <li><a href="#">Присоедениться</a></li>
+                <li><a href="#/search">Присоедениться</a></li>
                 <li><a href="#/create">Создать</a></li>
                 <li>{this.state.logged?
                     <p>{this.state.username}</p>:

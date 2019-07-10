@@ -6904,7 +6904,7 @@ class Sidebar extends React.Component {
                         null,
                         React.createElement(
                             'a',
-                            { href: '#' },
+                            { href: '#/search' },
                             '\u041F\u0440\u0438\u0441\u043E\u0435\u0434\u0435\u043D\u0438\u0442\u044C\u0441\u044F'
                         )
                     ),
@@ -12170,32 +12170,59 @@ module.exports = MainPage;
 /* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// TODO: add async input validation to email, name, lastname
+
 const React = __webpack_require__(5);
 
 class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { "name": "", "email": "", "password": "", "passConfirm": "" };
+        this.state = { "name": "", "lastname": "", "email": "", "password": "", "passConfirm": "", "passwordClass": "", "passConfirmClass": "" };
         this.nameInpChange = this.nameInpChange.bind(this);
+        this.lastnameInpChange = this.lastnameInpChange.bind(this);
         this.emailInpChange = this.emailInpChange.bind(this);
         this.passInpChange = this.passInpChange.bind(this);
         this.confPassInpChange = this.confPassInpChange.bind(this);
+        this.register = this.register = this.register.bind(this);
     }
 
     nameInpChange(event) {
-        this.setState({ "name": event.value });
+        this.setState({ "name": event.target.value });
+    }
+    lastnameInpChange(event) {
+        this.setState({ "lastname": event.target.value });
     }
 
     emailInpChange(event) {
-        this.setState({ "email": event.value });
+        this.setState({ "email": event.target.value });
     }
 
     passInpChange(event) {
-        this.setState({ "password": event.value });
+        if (/[^\s]+/.test(event.target.value) && event.target.value.length > 8) {
+            this.setState({ "passwordClass": "is-valid", "password": event.target.value });
+        } else {
+            this.setState({ "passwordClass": "", "password": event.target.value });
+        }
     }
 
     confPassInpChange(event) {
-        this.setState({ "passConfirm": event.value });
+        if (this.state.password === event.target.value) {
+            this.setState({ "passConfirmClass": "is-valid", "passConfirm": event.target.value });
+        } else {
+            this.setState({ "passConfirmClass": "is-invalid", "passConfirm": event.target.value });
+        }
+    }
+
+    register(event) {
+        if (this.state.passwordClass === "is-valid" && this.state.passConfirmClass === "is-valid") {
+            if (/[^\s]+/.test(this.state.name) && /[^s]+/.test(this.state.lastname) && this.state.name.length < 15 && this.state.lastname < 20) {
+                if (/[^\s]+@[^\s]+/.test(this.state.email)) {
+                    console.log("sending request");
+                    return;
+                }
+            }
+        }
+        console.log("failed");
     }
 
     render() {
@@ -12214,35 +12241,35 @@ class RegisterPage extends React.Component {
                         React.createElement(
                             "div",
                             { className: "col-md-6" },
-                            React.createElement("input", { type: "text", className: "form-control", placeholder: "\u0418\u043C\u044F", value: this.state.name, onChange: this.nameInpChange })
+                            React.createElement("input", { type: "text", className: "form-control was-validated", placeholder: "\u0418\u043C\u044F", value: this.state.name, onChange: this.nameInpChange })
                         ),
                         React.createElement(
                             "div",
                             { className: "col-md-6" },
-                            React.createElement("input", { type: "text", className: "form-control", placeholder: "\u0424\u0430\u043C\u0438\u043B\u0438\u044F", value: this.state.name, onChange: this.nameInpChange })
+                            React.createElement("input", { type: "text", className: "form-control was-validated", placeholder: "\u0424\u0430\u043C\u0438\u043B\u0438\u044F", value: this.state.lastname, onChange: this.lastnameInpChange })
                         )
                     ),
                     React.createElement(
                         "div",
                         { className: "form-group" },
-                        React.createElement("input", { type: "email", className: "form-control", placeholder: "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430", value: this.state.email, onChange: this.emailInpChange })
+                        React.createElement("input", { type: "email", className: "form-control was-validated", placeholder: "\u042D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u0430\u044F \u043F\u043E\u0447\u0442\u0430", value: this.state.email, onChange: this.emailInpChange })
                     ),
                     React.createElement(
                         "div",
                         { className: "form-group" },
-                        React.createElement("input", { type: "password", className: "form-control", placeholder: "Your Password", value: this.state.password, onChange: this.passInpChange })
+                        React.createElement("input", { type: "password", className: "form-control " + this.state.passwordClass, placeholder: "Your Password", value: this.state.password, onChange: this.passInpChange })
                     ),
                     React.createElement(
                         "div",
                         { className: "form-group" },
-                        React.createElement("input", { type: "password", className: "form-control", placeholder: "Confirm Password", value: this.state.passConfirm, onChange: this.confPassInpChange })
+                        React.createElement("input", { type: "password", className: "form-control " + this.state.passConfirmClass, placeholder: "Confirm Password", value: this.state.passConfirm, onChange: this.confPassInpChange })
                     ),
                     React.createElement(
                         "div",
                         { className: "form-group mx-auto" },
                         React.createElement(
                             "button",
-                            { type: "button", className: "btn-primary btn justify-content-center mx-auto" },
+                            { type: "button", onClick: this.register, className: "btn-primary btn justify-content-center mx-auto" },
                             "\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F"
                         )
                     )
@@ -13080,6 +13107,7 @@ const CreateQueuePage = __webpack_require__(97);
 const UserProfile = __webpack_require__(100);
 const Chat = __webpack_require__(96);
 const Sidebar = __webpack_require__(57);
+const SearchPage = __webpack_require__(228);
 
 class ContentPage extends React.Component {
 
@@ -13111,7 +13139,8 @@ class ContentPage extends React.Component {
                             React.createElement(ReactRouterDOM.Route, { exact: true, path: '/register', component: RegisterPage }),
                             React.createElement(ReactRouterDOM.Route, { exact: true, path: '/create', component: CreateQueuePage }),
                             React.createElement(ReactRouterDOM.Route, { exact: true, path: '/myprofile', component: UserProfile }),
-                            React.createElement(ReactRouterDOM.Route, { exact: true, path: '/chat/:id', component: Chat })
+                            React.createElement(ReactRouterDOM.Route, { exact: true, path: '/chat/:id', component: Chat }),
+                            React.createElement(ReactRouterDOM.Route, { exact: true, path: '/search', component: SearchPage })
                         )
                     )
                 ) })
@@ -27674,6 +27703,79 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const React = __webpack_require__(5);
+const SearchBar = __webpack_require__(229);
+
+class SearchPage extends React.Component {
+	render() {
+		return React.createElement(
+			'div',
+			{ className: 'container' },
+			React.createElement('br', null),
+			React.createElement(
+				'div',
+				{ className: 'row justify-content-center' },
+				React.createElement(
+					'div',
+					{ className: 'col-12 col-md-12 col-lg-10' },
+					React.createElement(SearchBar, null)
+				)
+			)
+		);
+	}
+}
+
+module.exports = SearchPage;
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const React = __webpack_require__(5);
+
+class SearchBar extends React.Component {
+    render() {
+        return React.createElement(
+            "form",
+            { className: "card card-sm" },
+            React.createElement(
+                "div",
+                { className: "card-body row no-gutters align-items-center" },
+                React.createElement(
+                    "div",
+                    { className: "col" },
+                    React.createElement("input", { className: "form-control form-control-lg form-control-borderless", type: "search", placeholder: "Search topics or keywords" })
+                ),
+                React.createElement(
+                    "div",
+                    { className: "col-sm-2 d-none d-sm-block" },
+                    React.createElement(
+                        "button",
+                        { className: "btn btn-md ml-2 btn-success", type: "submit" },
+                        "Search"
+                    )
+                ),
+                React.createElement("br", null),
+                React.createElement(
+                    "div",
+                    { className: "col-sm-3 d-sm-none row no-gutters align-items-center" },
+                    React.createElement(
+                        "button",
+                        { className: "btn-sm btn-primary mx-auto col-4 mt-2", type: "submit" },
+                        React.createElement("i", { className: "fas fa-search h5 text-body" })
+                    )
+                )
+            )
+        );
+    }
+}
+
+module.exports = SearchBar;
 
 /***/ })
 /******/ ]);

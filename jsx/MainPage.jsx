@@ -1,14 +1,7 @@
 const React = require('react')
 class MainPage extends React.Component {
 
-    componentDidMount(){
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-        });
-    }
+    
 
     render(){
         return <MainPageContent/>

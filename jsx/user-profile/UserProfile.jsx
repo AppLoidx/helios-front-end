@@ -3,14 +3,7 @@ const UserCard = require('./UserCard.jsx')
 const UserDashboard = require('./UserDashboard.jsx')
 
 class UserProfile extends React.Component {
-    componentDidMount(){
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-            });
-    }
+
     render (){
         return (
             <div className = "row justify-content-center">

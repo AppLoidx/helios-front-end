@@ -14,14 +14,14 @@ class Sidebar extends React.Component {
     //     $(this).toggleClass('active');
     // });
     // }
-    // componentDidMount(){
-    //     $(document).ready(function () {
-    //         $('#sidebarCollapse').on('click', function () {
-    //         $('#sidebar').toggleClass('active');
-    //         $(this).toggleClass('active');
-    //     });
-    //     });
-    // }
+    componentDidMount(){
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+        });
+    }
 
     componentDidMount(){
     
@@ -55,12 +55,8 @@ class Sidebar extends React.Component {
         <nav id="sidebar">
             <div className="sidebar-header">
                 <h3 className="display-4">
-                <span className="text-danger">H</span>
-                <span>E</span>
-                <span className="text-warning">L</span>
-                <span className="text-success">I</span>
-                <span className="text-primary">O</span>
-                <span className="text-light">S</span>
+
+                <span className="text-light">HELIOS</span>
                 </h3>
             </div>
 

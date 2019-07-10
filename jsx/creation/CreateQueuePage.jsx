@@ -66,7 +66,7 @@ class CreateQueuePageContent extends React.Component {
             </div>
 
             <div className="form-group">
-                <input type="text" id="inputName" className="form-control" placeholder="Короткое имя для ссылки" name="queueName" value={this.state.queueName} onChange={this.handleNameInput} required autoFocus/>
+                <input type="text" id="inputName" className="form-control is-valid" placeholder="Короткое имя для ссылки" name="queueName" value={this.state.queueName} onChange={this.handleNameInput} required autoFocus/>
                 <label htmlFor="inputName"></label>
             </div>
 

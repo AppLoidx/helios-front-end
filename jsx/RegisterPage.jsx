@@ -28,30 +28,30 @@ class RegisterPage extends React.Component {
 
     render(){
         return (
-            <div class="form-content justify-content-center">
-                    <div class="row justify-content-center">
-                        <div class="col-6 justify-content-center">
-                            <div class="form-group row">
+            <div className="form-content justify-content-center">
+                    <div className="row justify-content-center">
+                        <div className="col-6 justify-content-center">
+                            <div className="form-group row">
                                 <div className="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Имя" value={this.state.name} onChange={this.nameInpChange}/>
+                                    <input type="text" className="form-control" placeholder="Имя" value={this.state.name} onChange={this.nameInpChange}/>
                                 </div>
                                 <div className="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Фамилия" value={this.state.name} onChange={this.nameInpChange}/>
+                                    <input type="text" className="form-control" placeholder="Фамилия" value={this.state.name} onChange={this.nameInpChange}/>
                                 </div>
                                 
                                 
                             </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Электронная почта" value={this.state.email} onChange={this.emailInpChange}/>
+                            <div className="form-group">
+                                <input type="email" className="form-control" placeholder="Электронная почта" value={this.state.email} onChange={this.emailInpChange}/>
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Your Password" value={this.state.password} onChange={this.passInpChange}/>
+                            <div className="form-group">
+                                <input type="password" className="form-control" placeholder="Your Password" value={this.state.password} onChange={this.passInpChange}/>
                             </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password" value={this.state.passConfirm} onChange={this.confPassInpChange}/>
+                            <div className="form-group">
+                                <input type="password" className="form-control" placeholder="Confirm Password" value={this.state.passConfirm} onChange={this.confPassInpChange}/>
                             </div>
                             <div className="form-group mx-auto">
-                            <button type="button" class="btn-primary btn justify-content-center mx-auto">Регистрация</button>
+                            <button type="button" className="btn-primary btn justify-content-center mx-auto">Регистрация</button>
                             </div>
                             
                         </div>
@@ -61,3 +61,5 @@ class RegisterPage extends React.Component {
         )
     }
 }
+
+module.exports = RegisterPage

@@ -22,11 +22,16 @@ class CreateQueuePageContent extends React.Component {
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handleFullnameInput = this.handleFullnameInput.bind(this);
         this.sendRequest = this.sendRequest.bind(this);
-        this.state = {"sending" : false, "successful" : false, "fullname" : "", "queueName" : ""}
+        this.state = {"sending" : false, "successful" : false, "fullname" : "", "queueName" : "",
+                            "inputNameClass" : "", "submitButtonClass" : "disabled", "collapseTarget" : ""}
     }
 
     sendRequest(){
-        this.setState({"sending" : true})
+        if (this.state.submitButtonClass === "disabled"){
+            return 2;
+        }
+        console.log("sending")
+        this.setState({"sending" : true, "collapseTarget" : ""})
         fetch("http://localhost:8080/mavenserver_war/api/queue?"
         + "queueName=" + this.state.queueName + "&"
         + "fullname=" + this.state.fullname + "&"
@@ -49,10 +54,26 @@ class CreateQueuePageContent extends React.Component {
     }
 
     handleNameInput(event){
+        if (/^[a-zA-Z0-9-_]+$/.test(event.target.value)){
+            if (/[^\s]+/.test(document.getElementById("inputFullname").value)){
+                this.setState({"inputNameClass" : "is-valid", "submitButtonClass" : "", "collapseTarget" : "#collapseSend"})
+            } else {
+                this.setState({"inputNameClass" : "is-valid", "submitButtonClass" : "disabled", "collapseTarget" : ""})
+            }
+        } else {
+            this.setState({"inputNameClass" : "is-invalid", "submitButtonClass" : "disabled", "collapseTarget" : ""})
+        }
         this.setState({"queueName" : event.target.value});
+           
     }
 
     handleFullnameInput(event){
+        if (/[^\s]+/.test(event.target.value) && this.state.inputNameClass === "is-valid"){
+                this.setState({"submitButtonClass" : "", "collapseTarget" : "#collapseSend"})
+        } else {
+                this.setState({"submitButtonClass" : "disabled", "collapseTarget" : ""})
+        }
+        console.log(this.state.allValid);
         this.setState({"fullname" : event.target.value});
     }
 
@@ -66,7 +87,7 @@ class CreateQueuePageContent extends React.Component {
             </div>
 
             <div className="form-group">
-                <input type="text" id="inputName" className="form-control is-valid" placeholder="Короткое имя для ссылки" name="queueName" value={this.state.queueName} onChange={this.handleNameInput} required autoFocus/>
+                <input type="text" id="inputName" className={"form-control " + this.state.inputNameClass} placeholder="Короткое имя для ссылки" name="queueName" value={this.state.queueName} onChange={this.handleNameInput} required autoFocus/>
                 <label htmlFor="inputName"></label>
             </div>
 
@@ -76,7 +97,7 @@ class CreateQueuePageContent extends React.Component {
             </div>
 
             <p>
-            <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSend" aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>
+            <button className={"btn btn-primary " + this.state.submitButtonClass} type="button" data-toggle="collapse" data-target={this.state.collapseTarget} aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>
                 Создать
             </button>
             </p>

@@ -12384,11 +12384,16 @@ class CreateQueuePageContent extends React.Component {
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handleFullnameInput = this.handleFullnameInput.bind(this);
         this.sendRequest = this.sendRequest.bind(this);
-        this.state = { "sending": false, "successful": false, "fullname": "", "queueName": "" };
+        this.state = { "sending": false, "successful": false, "fullname": "", "queueName": "",
+            "inputNameClass": "", "submitButtonClass": "disabled", "collapseTarget": "" };
     }
 
     sendRequest() {
-        this.setState({ "sending": true });
+        if (this.state.submitButtonClass === "disabled") {
+            return 2;
+        }
+        console.log("sending");
+        this.setState({ "sending": true, "collapseTarget": "" });
         fetch("http://localhost:8080/mavenserver_war/api/queue?" + "queueName=" + this.state.queueName + "&" + "fullname=" + this.state.fullname + "&" + "session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw", { "method": "POST" }).then(response => {
 
             if (response.ok) {
@@ -12405,10 +12410,25 @@ class CreateQueuePageContent extends React.Component {
     }
 
     handleNameInput(event) {
+        if (/^[a-zA-Z0-9-_]+$/.test(event.target.value)) {
+            if (/[^\s]+/.test(document.getElementById("inputFullname").value)) {
+                this.setState({ "inputNameClass": "is-valid", "submitButtonClass": "", "collapseTarget": "#collapseSend" });
+            } else {
+                this.setState({ "inputNameClass": "is-valid", "submitButtonClass": "disabled", "collapseTarget": "" });
+            }
+        } else {
+            this.setState({ "inputNameClass": "is-invalid", "submitButtonClass": "disabled", "collapseTarget": "" });
+        }
         this.setState({ "queueName": event.target.value });
     }
 
     handleFullnameInput(event) {
+        if (/[^\s]+/.test(event.target.value) && this.state.inputNameClass === "is-valid") {
+            this.setState({ "submitButtonClass": "", "collapseTarget": "#collapseSend" });
+        } else {
+            this.setState({ "submitButtonClass": "disabled", "collapseTarget": "" });
+        }
+        console.log(this.state.allValid);
         this.setState({ "fullname": event.target.value });
     }
 
@@ -12441,7 +12461,7 @@ class CreateQueuePageContent extends React.Component {
                 React.createElement(
                     "div",
                     { className: "form-group" },
-                    React.createElement("input", { type: "text", id: "inputName", className: "form-control is-valid", placeholder: "\u041A\u043E\u0440\u043E\u0442\u043A\u043E\u0435 \u0438\u043C\u044F \u0434\u043B\u044F \u0441\u0441\u044B\u043B\u043A\u0438", name: "queueName", value: this.state.queueName, onChange: this.handleNameInput, required: true, autoFocus: true }),
+                    React.createElement("input", { type: "text", id: "inputName", className: "form-control " + this.state.inputNameClass, placeholder: "\u041A\u043E\u0440\u043E\u0442\u043A\u043E\u0435 \u0438\u043C\u044F \u0434\u043B\u044F \u0441\u0441\u044B\u043B\u043A\u0438", name: "queueName", value: this.state.queueName, onChange: this.handleNameInput, required: true, autoFocus: true }),
                     React.createElement("label", { htmlFor: "inputName" })
                 ),
                 React.createElement(
@@ -12455,7 +12475,7 @@ class CreateQueuePageContent extends React.Component {
                     null,
                     React.createElement(
                         "button",
-                        { className: "btn btn-primary", type: "button", "data-toggle": "collapse", "data-target": "#collapseSend", "aria-expanded": "false", "aria-controls": "collapseSend", onClick: this.sendRequest },
+                        { className: "btn btn-primary " + this.state.submitButtonClass, type: "button", "data-toggle": "collapse", "data-target": this.state.collapseTarget, "aria-expanded": "false", "aria-controls": "collapseSend", onClick: this.sendRequest },
                         "\u0421\u043E\u0437\u0434\u0430\u0442\u044C"
                     )
                 ),

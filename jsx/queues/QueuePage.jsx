@@ -8,12 +8,12 @@ class QueuePage extends React.Component {
 //         $('#sidebarCollapse').on('click', function () {
 //         $('#sidebar').toggleClass('active');
 //         $(this).toggleClass('active');
-//     });
+//     });mdc
 //     });
 // }
 
   render(){
-    return <Sidebar content={<QueuePageContent queueName={this.props.match.params.id}/>} />
+    return <QueuePageContent queueName={this.props.match.params.id} />
   }
 }
 

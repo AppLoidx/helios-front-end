@@ -33,12 +33,12 @@
 .msj{
     float:left;background:white;
 }
-.frame-chat{
+/*.frame-chat{
     background:#e0e0de;
     height:450px;
     overflow:hidden;
     padding:0;
-}
+}*/
 .frame-chat > div:last-of-type{
     position:absolute;bottom:5px;width:100%;display:flex;
 }

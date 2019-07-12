@@ -25,7 +25,7 @@ formatAMPM(date) {
 }            
 
 //-- No use time. It is a javaScript effect.
-insertChat(who, text, time = 0){
+insertChat(who, text){
     var control = "";
     var date = this.formatAMPM(new Date());
     
@@ -49,37 +49,40 @@ resetChat(){
 
 
 componentDidMount(){
-	$(".mytext").on("keyup", function(e){
+	$("#chat-text-input").on("keyup", function(e){
     if (e.which == 13){
-        var text = $(this).val();
+        var text = $("#chat-text-input").val();
         if (text !== ""){
-            insertChat("me", text);              
-            $(this).val('');
+            this.insertChat("me", text);              
+            $('#chat-text-input').val('');
         }
     }
-	});
+	}.bind(this));
 	this.resetChat();
-	this.insertChat("me", "Hello Tom...", 0);  
-	this.insertChat("you", "Hi, Pablo", 1500);
-	this.insertChat("me", "What would you like to talk about today?", 3500);
-	this.insertChat("you", "Tell me a joke",7000);
-	this.insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!", 9500);
-	this.insertChat("you", "LOL", 12000);
+	this.insertChat("me", "Hello Tom...");  
+	this.insertChat("you", "Hi, Pablo");
+	this.insertChat("me", "What would you like to talk about today?");
+	this.insertChat("you", "Tell me a joke");
+	this.insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!");
+	this.insertChat("you", "LOL");
 }
     render() {
         return (
-            <div className="frame-chat col-sm-3 col-sm-offset-4">
-            <ul className="ul-chat">
-            	{this.state.messages.map((x,i) => {return <li style={{"width" : "100%"}} key={i}>{x}</li>})}
-            </ul>
+
             <div>
-                <div className="msj-rta macro" style={{"margin" : "auto"}}>                        
-                    <div className="text-chat text-r" style={{"background":"whitesmoke !important"}}>
-                        <input className="mytext input-chat" placeholder="Type a message"/>
+                <ul className="ul-chat">
+                	{this.state.messages.map((x,i) => {return <li style={{"width" : "100%"}} key={i}>{x}</li>})}
+                </ul>
+                <div>
+                    <div className="msj-rta macro" style={{"margin" : "auto"}}>                        
+                        <div className="text-chat text-r" style={{"background":"whitesmoke !important"}}>
+                            <input className="mytext input-chat" id="chat-text-input"placeholder="Type a message"/>
+                        </div> 
                     </div> 
                 </div>
             </div>
-            </div> )
+            
+            )
     }
 }
 

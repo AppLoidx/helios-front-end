@@ -7,13 +7,6 @@ class Sidebar extends React.Component {
         this.state = {"queues" : [], "loading" : true, "username" : "", "logged" : false};
         this.fetchQueues = this.fetchQueues.bind(this);
     }
-
-    // onMenuClick = () => function () {
-    //     $('#sidebarCollapse').on('click', function () {
-    //     $('#sidebar').toggleClass('active');
-    //     $(this).toggleClass('active');
-    // });
-    // }
     componentDidMount(){
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {

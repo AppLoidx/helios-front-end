@@ -9,7 +9,7 @@ const SignInPage = require('./sign-in/SignIn.jsx')
 const RegisterPage = require('./RegisterPage.jsx')
 const CreateQueuePage = require('./creation/CreateQueuePage.jsx')
 const UserProfile = require('./user-profile/UserProfile.jsx')
-const Chat = require('./chat/Chat.jsx')
+const ChatPage = require('./chat/ChatPage.jsx')
 const Sidebar = require('./Sidebar.jsx')
 const SearchPage = require('./search/SearchPage.jsx')
 
@@ -37,7 +37,7 @@ class ContentPage extends React.Component {
                             <ReactRouterDOM.Route exact path="/register" component={RegisterPage} />
                             <ReactRouterDOM.Route exact path="/create" component={CreateQueuePage} />
                             <ReactRouterDOM.Route exact path="/myprofile" component={UserProfile} />
-                            <ReactRouterDOM.Route exact path="/chat/:id" component={Chat} />
+                            <ReactRouterDOM.Route exact path="/chat/:id" component={ChatPage} />
                             <ReactRouterDOM.Route exact path="/search" component={SearchPage} />
                           </div>
                         </div>

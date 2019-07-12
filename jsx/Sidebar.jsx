@@ -59,7 +59,7 @@ class Sidebar extends React.Component {
                 <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" onClick={this.fetchQueues}>Мои очереди</a>
                     <ul className="collapse list-unstyled" id="homeSubmenu">
-                        
+                        <li><QueueLink link={"#/queue/test"} name="Тестовая очередь" /></li>
                         {this.state.loading?(<li className="justify-content-center">Loading data...</li>)
                                             :
                         this.state.queues.map((i, k) => {return <li key={i[0]}><QueueLink link={"#/queue/" + i[0]} name={i[1]}/></li>})

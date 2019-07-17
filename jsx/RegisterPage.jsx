@@ -58,10 +58,10 @@ class RegisterPage extends React.Component {
                             password : this.state.password
                         },
 
-                        success: function(resp){
+                        success: [function(resp){
                             this.setState({"sendingRequest": false});
                             alert("We have response : " + resp);
-                        },
+                        }],
 
                     });
                     return;

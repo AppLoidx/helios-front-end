@@ -1,17 +1,16 @@
-const React = require('react')
-const ReactDOM = require('react-dom')
+const React = require('react');
+const ReactDOM = require('react-dom');
 
-const ReeactRouterDOM = require('react-router-dom')
+const ReactRouterDOM = require('react-router-dom');
 
-const MainPage = require('./MainPage.jsx')
-const QueuePage = require('./queues/QueuePage.jsx')
-const SignInPage = require('./sign-in/SignIn.jsx')
-const RegisterPage = require('./RegisterPage.jsx')
-const CreateQueuePage = require('./creation/CreateQueuePage.jsx')
-const UserProfile = require('./user-profile/UserProfile.jsx')
-const ChatPage = require('./chat/ChatPage.jsx')
-const Sidebar = require('./Sidebar.jsx')
-const SearchPage = require('./search/SearchPage.jsx')
+const MainPage = require('./MainPage.jsx');
+const QueuePage = require('./queues/QueuePage.jsx');
+const SignInPage = require('./sign-in/SignIn.jsx');
+const RegisterPage = require('./RegisterPage.jsx');
+const CreateQueuePage = require('./creation/CreateQueuePage.jsx');
+const UserProfile = require('./user-profile/UserProfile.jsx');
+const Sidebar = require('./Sidebar.jsx');
+const SearchPage = require('./search/SearchPage.jsx');
 
 class ContentPage extends React.Component {
 
@@ -37,7 +36,7 @@ class ContentPage extends React.Component {
                             <ReactRouterDOM.Route exact path="/register" component={RegisterPage} />
                             <ReactRouterDOM.Route exact path="/create" component={CreateQueuePage} />
                             <ReactRouterDOM.Route exact path="/myprofile" component={UserProfile} />
-                            <ReactRouterDOM.Route exact path="/chat/:id" component={ChatPage} />
+                            {/*<ReactRouterDOM.Route exact path="/chat/:id" component={ChatPage} />*/}
                             <ReactRouterDOM.Route exact path="/search" component={SearchPage} />
                           </div>
                         </div>

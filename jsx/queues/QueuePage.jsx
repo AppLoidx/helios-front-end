@@ -48,6 +48,7 @@ class QueuePageContent extends React.Component {
                 <div className="lh-100">
                     <h6 className="ml-3 mb-0 text-black lh-100">{this.state.queueName}</h6>
                 </div>
+                <a href={"#chat/" + this.props.queueName} className="text-right float-right ml-auto">Чат <i className="fa fa-comments"></i></a>
             </div>
 
   <div className="my-3 p-3 bg-white rounded shadow-sm">

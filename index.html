@@ -1,54 +1,134 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Helios</title>
-    <script src="react/react.js"></script>
-    <script src="react/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/4.3.1/react-router-dom.min.js"></script>
-
-
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">    
-    <!-- Local Bootstrap Css -->
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-        <!-- Font Awesome JS -->
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-    
-
-    <link rel="stylesheet" href="style/sidebar/style.css">
-    <link rel="stylesheet" href="style/sign-in/style.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
 </head>
-<body style='padding-top: 0'>
-    <div id="contentReact" class="bg-light w-100"></div>
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-    <script type="text/javascript" src="./js/bundle.js"></script>
-    
-    <div class="modal fade" id="sendModal" tabindex="-1" role="dialog" aria-labelledby="sendModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="sendModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Sending Request
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
+
+<body id="page-top">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Helios</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler float-right" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div
+                class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#">начать пользоваться</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#features">Возможности</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#contact">Контакты</a></li>
+                </ul>
         </div>
         </div>
-        
+    </nav>
+    <header class="masthead" style="background:url('assets/img/bg-pattern.png'), linear-gradient(to left, #7b4397, #dc2430);height:100%;">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-7 my-auto">
+                    <div class="mx-auto header-content" style="font-family: 'Blogger Sans Light','Muli','Catamaran','Lato',sans-serif;">
+                        <h1 class="mb-5" style="font-family: 'Lobster', cursive;">Helios - сервис для создания очередей на лабораторные работы</h1><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="helios.html">начать пользоваться!</a></div>
+                </div>
+                <div class="col-lg-5 my-auto d-none d-sm-block">
+                    <div class="device-container">
+                        <div class="device-mockup iphone6_plus portrait white">
+                            <div class="device" style="background-image:url('assets/img/iphone_6_plus_white_port.png');">
+                                <div class="screen"><img class="img-fluid" src="assets/img/helios-screen-2.jpg" alt=""></div>
+                                <div class="button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="iphone-mockup"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h2>Тратьте меньше времени на очередь</h2>
+                <p class="text-muted">Воспользуйтесь функционалом предоставляемым сервисом Helios</p>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 my-auto">
+                    <div class="device-container">
+                        <div class="device-mockup iphone6_plus portrait white">
+                            <div class="device" style="background-image:url('assets/img/iphone_6_plus_white_port.png');">
+                                <div class="screen"><img class="img-fluid" src="assets/img/helios-screen-1.jpg" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 my-auto">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="feature-item"><i class="icon-screen-smartphone text-primary"></i>
+                                    <h3 style="font-family: 'Helvetica',sans-serif;">Адаптивность</h3>
+                                    <p class="text-muted">Пользуйтесь очередью с любого устройства</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="feature-item"><i class="icon-camera text-primary icon-lock"></i>
+                                    <h3 style="font-family: 'Helvetica',sans-serif;">Закрытые очереди</h3>
+                                    <p class="text-muted">Создавайте закрытые очереди лишь для своей группы</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="feature-item"><i class="icon-present text-primary icon-refresh"></i>
+                                    <h3 style="font-family: 'Helvetica',sans-serif;">Меняйтесь местами</h3>
+                                    <p class="text-muted">Если вам неудобно подходить в заданное время, то просто поменяйтесь мастами</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="feature-item"><i class="icon-lock-open text-primary icon-globe"></i>
+                                    <h3 style="font-family: 'Helvetica',sans-serif;">Open Source</h3>
+                                    <p class="text-muted">Внесите свой вклад в развитие проекта</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cta" style="background-image:url('assets/img/bg-cta.jpg');">
+        <div class="cta-content">
+            <div class="container">
+                <h2 style="font-size: 40px;">Меньше ожиданий - больше времени на подготовку</h2><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="#contact">Попробовать</a></div>
+        </div>
+        <div class="overlay"></div>
+    </section>
+    <section id="contact" class="contact bg-primary">
+        <div class="container">
+            <h2><span>We&nbsp;</span><i class="fa fa-heart"></i><span>&nbsp;open source</span></h2>
+            <ul class="list-inline list-social">
+                <li class="list-inline-item social-twitter"><a href="https://github.com/AppLoidx/helios-server" style="background-color: black;"><i class="fa fa-github"></i></a></li>
+                <li class="list-inline-item social-facebook"><a href="#"><i class="fa fa-vk"></i></a></li>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>© Arthur Kupriyanov 2019</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="report/index.html">Нашли баг?</a></li>
+                <li class="list-inline-item"><a href="https://github.com/AppLoidx/helios-server">Контрибуция</a></li>
+                <li class="list-inline-item"><a href="faq/index.html">FAQ</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="assets/js/new-age.js"></script>
 </body>
+
 </html>

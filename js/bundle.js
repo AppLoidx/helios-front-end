@@ -250,10 +250,10 @@ class RegisterPage extends React.Component {
                             password: this.state.password
                         },
 
-                        success: function (resp) {
+                        success: [function (resp) {
                             this.setState({ "sendingRequest": false });
                             alert("We have response : " + resp);
-                        }
+                        }]
 
                     });
                     return;
@@ -23650,7 +23650,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

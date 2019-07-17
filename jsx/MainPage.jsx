@@ -1,4 +1,5 @@
-const React = require('react')
+const React = require('react');
+
 class MainPage extends React.Component {
 
     
@@ -16,4 +17,4 @@ class MainPageContent extends React.Component {
     }
 }
 
-module.exports = MainPage
+module.exports = MainPage;

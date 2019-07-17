@@ -1,2 +1,4 @@
-# helios-front-end
+# Helios Front End
 Front for helios web app with ReactJS
+
+![](https://github.com/AppLoidx/helios-front-end/blob/master/resources/preview/preview-introduction-page.png)

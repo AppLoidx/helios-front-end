@@ -1,5 +1,6 @@
 module.exports = {
   entry: './jsx/App.jsx',
+  mode: "development",
   output: {
     path: __dirname + '/js/',
     filename: 'bundle.js'
@@ -10,7 +11,7 @@ module.exports = {
    reasons: true
   },
   module: {
-    loaders: [
+    rules: [
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       {
         test: /\.jsx?$/,
@@ -19,4 +20,4 @@ module.exports = {
       }
     ]
   }
-}
+};

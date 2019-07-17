@@ -1,89 +1,69 @@
-require('./../../style/chat/chat.css')
+require("./../../style/chat/chat.css")
 const React = require('react')
-const MessageIn = require('./MessageIn.jsx')
-const MessageOut = require('./MessageOut.jsx')
-const Message = require('./Message.jsx')
 
-class Chat extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = {"messages" : []}
-		this.formatAMPM = this.formatAMPM.bind(this)
-		this.insertChat = this.insertChat.bind(this)
+class Chat extends React.Component{
+	// componentDidMount(
+	// 	function () {
+	// 	    var Message;
+	// 	    Message = function (arg) {
+	// 	        this.text = arg.text, this.message_side = arg.message_side;
+	// 	        this.draw = function (_this) {
+	// 	            return function () {
+	// 	                var $message;
+	// 	                $message = $($('.message_template').clone().html());
+	// 	                $message.addClass(_this.message_side).find('.text').html(_this.text);
+	// 	                $('.messages').append($message);
+	// 	                return setTimeout(function () {
+	// 	                    return $message.addClass('appeared');
+	// 	                }, 0);
+	// 	            };
+	// 	        }(this);
+	// 	        return this;
+	// 	    };
+	// 	    $(function () {
+	// 	        var getMessageText, message_side, sendMessage;
+	// 	        message_side = 'right';
+	// 	        getMessageText = function () {
+	// 	            var $message_input;
+	// 	            $message_input = $('.message_input');
+	// 	            return $message_input.val();
+	// 	        };
+	// 	        sendMessage = function (text) {
+	// 	            var $messages, message;
+	// 	            if (text.trim() === '') {
+	// 	                return;
+	// 	            }
+	// 	            $('.message_input').val('');
+	// 	            $messages = $('.messages');
+	// 	            message_side = message_side === 'left' ? 'right' : 'left';
+	// 	            message = new Message({
+	// 	                text: text,
+	// 	                message_side: message_side
+	// 	            });
+	// 	            message.draw();
+	// 	            return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
+	// 	        };
+	// 	        $('.send_message').click(function (e) {
+	// 	            return sendMessage(getMessageText());
+	// 	        });
+	// 	        $('.message_input').keyup(function (e) {
+	// 	            if (e.which === 13) {
+	// 	                return sendMessage(getMessageText());
+	// 	            }
+	// 	        });
+	// 	        sendMessage('Hello Philip! :)');
+	// 	        setTimeout(function () {
+	// 	            return sendMessage('Hi Sandy! How are you?');
+	// 	        }, 1000);
+	// 	        return setTimeout(function () {
+	// 	            return sendMessage('I\'m fine, thank you!');
+	// 	        }, 2000);
+	// 	    });
+	// 	}.call(this);)
+
+	render(){
+		return (
+			<div>Empty</div>
+			)
 	}
-
-
-formatAMPM(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-}            
-
-//-- No use time. It is a javaScript effect.
-insertChat(who, text){
-    var control = "";
-    var date = this.formatAMPM(new Date());
-    
-    if (who == "me"){
-        
-        control = <Message text={text} date={"12:06"} />                    
-    }else{
-        control = <Message text={text} date={"11:09"} author={"another"} />   
-    }
-
-            let oldMessages = this.state.messages;
-            oldMessages.push(control)
-            this.setState({"messages": oldMessages})
 }
-
-resetChat(){
-    $("ul").empty();
-}
-
-
-
-
-componentDidMount(){
-	$("#chat-text-input").on("keyup", function(e){
-    if (e.which == 13){
-        var text = $("#chat-text-input").val();
-        if (text !== ""){
-            this.insertChat("me", text);              
-            $('#chat-text-input').val('');
-        }
-    }
-	}.bind(this));
-	this.resetChat();
-	this.insertChat("me", "Hello Tom...");  
-	this.insertChat("you", "Hi, Pablo");
-	this.insertChat("me", "What would you like to talk about today?");
-	this.insertChat("you", "Tell me a joke");
-	this.insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!");
-	this.insertChat("you", "LOL");
-}
-    render() {
-        return (
-
-            <div>
-                <ul className="ul-chat">
-                	{this.state.messages.map((x,i) => {return <li style={{"width" : "100%"}} key={i}>{x}</li>})}
-                </ul>
-                <div>
-                    <div className="msj-rta macro" style={{"margin" : "auto"}}>                        
-                        <div className="text-chat text-r" style={{"background":"whitesmoke !important"}}>
-                            <input className="mytext input-chat" id="chat-text-input"placeholder="Type a message"/>
-                        </div> 
-                    </div> 
-                </div>
-            </div>
-            
-            )
-    }
-}
-
-module.exports = Chat

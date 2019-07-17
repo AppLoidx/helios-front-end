@@ -41,6 +41,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
+    "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "webpack": "^2.2.0-rc"

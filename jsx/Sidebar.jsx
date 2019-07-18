@@ -1,43 +1,38 @@
-const React = require('react')
-const QueueLink = require('./queues/QueueLink.jsx')
+const React = require('react');
+const QueueLink = require('./queues/QueueLink.jsx');
 
 class Sidebar extends React.Component {
     constructor(props){
         super(props);
         this.state = {"queues" : [], "loading" : true, "username" : "", "logged" : false};
         this.fetchQueues = this.fetchQueues.bind(this);
-    }
-    componentDidMount(){
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-        });
+
+
     }
 
     componentDidMount(){
-    
+
         this.setState({loading: true});
         fetch('http://localhost:8080/mavenserver_war/api/user?session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw')
         .then( response => response.json()).then(
-            resp => 
+            resp =>
             {
                 console.log(resp['user']);
                 let fullname = resp['user']['firstName'] + " " + resp['user']['lastName'];
                 this.setState({
-                    "queues" : resp['queues'], 
-                    "loading" : false, 
+                    "queues" : resp['queues'],
+                    "loading" : false,
                     "username": fullname,
                     "logged" : true})
             })
         .catch(err => console.log(err));
-        
+
+
     }
 
     fetchQueues(){
         fetch('http://localhost:8080/mavenserver_war/api/user?session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw')
-        .then( response => response.json()).then(resp => 
+        .then( response => response.json()).then(resp =>
             this.setState({"queues" : resp['queues'], "loading" : false}));
     }
 
@@ -54,11 +49,11 @@ class Sidebar extends React.Component {
             </div>
 
             <ul className="list-unstyled components">
-                
-                <li ><a href="#/myprofile">Мой профиль</a></li>
+
+                <li ><a href="#/myprofile" className={"sidebar-link"}>Мой профиль</a></li>
                 <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" onClick={this.fetchQueues}>Мои очереди</a>
-                    <ul className="collapse list-unstyled" id="homeSubmenu">
+                    <ul className="collapse list-unstyled sidebar-link" id="homeSubmenu">
                         <li><QueueLink link={"#/queue/test"} name="Тестовая очередь" /></li>
                         {this.state.loading?(<li className="justify-content-center">Loading data...</li>)
                                             :
@@ -66,11 +61,11 @@ class Sidebar extends React.Component {
                         }
                     </ul>
                 </li>
-                <li><a href="#/search">Присоедениться</a></li>
-                <li><a href="#/create">Создать</a></li>
+                <li><a href="#/search" className={"sidebar-link"}>Присоедениться</a></li>
+                <li><a href="#/create" className={"sidebar-link"}>Создать</a></li>
                 <li>{this.state.logged?
                     <p>{this.state.username}</p>:
-                    <a href="#/signin">Войти</a>
+                    <a href="#/signin" className={"sidebar-link"}>Войти</a>
                 }
                 </li>
             </ul>
@@ -78,9 +73,9 @@ class Sidebar extends React.Component {
 
         <div id="content">
             <button type="button" id="sidebarCollapse" className="navbar-btn bg-transparent">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span/>
+                <span/>
+                <span/>
             </button>
             {this.props.content}
         </div>
@@ -89,4 +84,4 @@ class Sidebar extends React.Component {
         }
 }
 
-module.exports = Sidebar
+module.exports = Sidebar;

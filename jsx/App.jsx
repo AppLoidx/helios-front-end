@@ -17,10 +17,15 @@ class ContentPage extends React.Component {
     componentDidMount(){
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+            $('.sidebar-link').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
         });
-        });
+
     }
     
     render(){
@@ -50,4 +55,4 @@ ReactDOM.render(
     <ContentPage/>
     ,
     document.getElementById('contentReact')
-)
+);

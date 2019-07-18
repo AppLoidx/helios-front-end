@@ -1,4 +1,4 @@
-const React = require('react')
+const React = require('react');
 
 class ResultQueueLink extends React.Component {
 	render(){
@@ -28,4 +28,4 @@ class ResultQueueLink extends React.Component {
 	}
 }
 
-module.exports = ResultQueueLink
+module.exports = ResultQueueLink;

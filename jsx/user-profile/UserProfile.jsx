@@ -1,6 +1,6 @@
-const React = require('react')
-const UserCard = require('./UserCard.jsx')
-const UserDashboard = require('./UserDashboard.jsx')
+const React = require('react');
+const UserCard = require('./UserCard.jsx');
+const UserDashboard = require('./UserDashboard.jsx');
 
 class UserProfile extends React.Component {
 
@@ -18,4 +18,4 @@ class UserProfile extends React.Component {
     }
 }
 
-module.exports = UserProfile
+module.exports = UserProfile;

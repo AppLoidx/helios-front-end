@@ -1,6 +1,6 @@
-const React = require('react')
-const SearchBar = require('./SearchBar.jsx')
-const SearchResult = require('./SearchResult.jsx')
+const React = require('react');
+const SearchBar = require('./SearchBar.jsx');
+const SearchResult = require('./SearchResult.jsx');
 
 class SearchPage extends React.Component {
 	render(){
@@ -19,4 +19,4 @@ class SearchPage extends React.Component {
 	}
 }
 
-module.exports = SearchPage
+module.exports = SearchPage;

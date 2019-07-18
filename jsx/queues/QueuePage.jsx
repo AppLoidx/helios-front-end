@@ -1,6 +1,6 @@
-const React = require('react')
-const Sidebar = require('./../Sidebar.jsx')
-const QueueUser = require('./QueueUser.jsx')
+const React = require('react');
+const Sidebar = require('./../Sidebar.jsx');
+const QueueUser = require('./QueueUser.jsx');
 
 class QueuePage extends React.Component {
 //   componentDidMount(){
@@ -87,4 +87,4 @@ class QueuePageContent extends React.Component {
     }
 }
 
-module.exports = QueuePage
+module.exports = QueuePage;

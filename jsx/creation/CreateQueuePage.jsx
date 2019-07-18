@@ -156,7 +156,7 @@ class CreateQueuePageContent extends React.Component {
                     <input type="text" id="queuePassword" className={"form-control "+this.state.passwordClass} name="Password" value={this.state.password} placeholder="Пароль очереди" onChange={this.handlePasswordInput} required/>
                 </div>
             :
-            <span></span>}
+            <div></div>}
 
             <p>
             <button className={"btn btn-primary " + this.state.submitButtonClass} type="button" data-toggle="collapse" data-target={this.state.collapseTarget} aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>

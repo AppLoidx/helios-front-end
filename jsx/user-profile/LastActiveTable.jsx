@@ -1,4 +1,4 @@
-const React = require('react')
+const React = require('react');
 
 class LastActiveTable extends React.Component {
     render(){
@@ -31,4 +31,4 @@ class LastActiveTable extends React.Component {
     }
 }
 
-module.exports = LastActiveTable
+module.exports = LastActiveTable;

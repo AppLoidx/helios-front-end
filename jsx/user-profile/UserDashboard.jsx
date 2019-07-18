@@ -1,5 +1,5 @@
-const React = require('react')
-const LastActiveTable  = require('./LastActiveTable.jsx')
+const React = require('react');
+const LastActiveTable  = require('./LastActiveTable.jsx');
 class UserDashboard extends React.Component {
     render() {
         return (
@@ -9,7 +9,7 @@ class UserDashboard extends React.Component {
                     <li className="nav-item">
                         <a className="nav-link active" href="">Последняя активность</a>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <a className="nav-link" href="">Диалог</a>
                     </li>
                     </ul>
@@ -22,4 +22,4 @@ class UserDashboard extends React.Component {
     }
 }
 
-module.exports = UserDashboard
+module.exports = UserDashboard;

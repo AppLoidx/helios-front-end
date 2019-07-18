@@ -1,4 +1,4 @@
-const React = require('react')
+const React = require('react');
 
 class SearchBar extends React.Component {
 	render(){
@@ -22,4 +22,4 @@ class SearchBar extends React.Component {
 	}
 }
 
-module.exports = SearchBar
+module.exports = SearchBar;

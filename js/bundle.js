@@ -115,6 +115,10 @@ class ContentPage extends React.Component {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
+            $('.sidebar-link').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
         });
     }
 
@@ -342,14 +346,6 @@ class Sidebar extends React.Component {
         this.state = { "queues": [], "loading": true, "username": "", "logged": false };
         this.fetchQueues = this.fetchQueues.bind(this);
     }
-    componentDidMount() {
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-        });
-    }
 
     componentDidMount() {
 
@@ -397,7 +393,7 @@ class Sidebar extends React.Component {
                         null,
                         React.createElement(
                             'a',
-                            { href: '#/myprofile' },
+                            { href: '#/myprofile', className: "sidebar-link" },
                             '\u041C\u043E\u0439 \u043F\u0440\u043E\u0444\u0438\u043B\u044C'
                         )
                     ),
@@ -411,7 +407,7 @@ class Sidebar extends React.Component {
                         ),
                         React.createElement(
                             'ul',
-                            { className: 'collapse list-unstyled', id: 'homeSubmenu' },
+                            { className: 'collapse list-unstyled sidebar-link', id: 'homeSubmenu' },
                             React.createElement(
                                 'li',
                                 null,
@@ -435,7 +431,7 @@ class Sidebar extends React.Component {
                         null,
                         React.createElement(
                             'a',
-                            { href: '#/search' },
+                            { href: '#/search', className: "sidebar-link" },
                             '\u041F\u0440\u0438\u0441\u043E\u0435\u0434\u0435\u043D\u0438\u0442\u044C\u0441\u044F'
                         )
                     ),
@@ -444,7 +440,7 @@ class Sidebar extends React.Component {
                         null,
                         React.createElement(
                             'a',
-                            { href: '#/create' },
+                            { href: '#/create', className: "sidebar-link" },
                             '\u0421\u043E\u0437\u0434\u0430\u0442\u044C'
                         )
                     ),
@@ -457,7 +453,7 @@ class Sidebar extends React.Component {
                             this.state.username
                         ) : React.createElement(
                             'a',
-                            { href: '#/signin' },
+                            { href: '#/signin', className: "sidebar-link" },
                             '\u0412\u043E\u0439\u0442\u0438'
                         )
                     )
@@ -672,7 +668,7 @@ class CreateQueuePageContent extends React.Component {
                     'div',
                     { className: 'form-group' },
                     React.createElement('input', { type: 'text', id: 'queuePassword', className: "form-control " + this.state.passwordClass, name: 'Password', value: this.state.password, placeholder: '\u041F\u0430\u0440\u043E\u043B\u044C \u043E\u0447\u0435\u0440\u0435\u0434\u0438', onChange: this.handlePasswordInput, required: true })
-                ) : React.createElement('span', null),
+                ) : React.createElement('div', null),
                 React.createElement(
                     'p',
                     null,
@@ -1452,7 +1448,7 @@ class UserDashboard extends React.Component {
                     ),
                     React.createElement(
                         'li',
-                        { 'class': 'nav-item' },
+                        { className: 'nav-item' },
                         React.createElement(
                             'a',
                             { className: 'nav-link', href: '' },

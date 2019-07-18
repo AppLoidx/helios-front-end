@@ -1,5 +1,5 @@
-const React = require('react')
-const ResultQueueLink = require('./ResultQueueLink.jsx')
+const React = require('react');
+const ResultQueueLink = require('./ResultQueueLink.jsx');
 
 class SearchResult extends React.Component {
 	render(){
@@ -22,4 +22,4 @@ class SearchResult extends React.Component {
 	}
 }
 
-module.exports = SearchResult
+module.exports = SearchResult;

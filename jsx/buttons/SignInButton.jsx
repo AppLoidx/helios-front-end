@@ -1,4 +1,4 @@
-const React = require('react')
+const React = require('react');
 
 class SignInButton extends React.Component {
     render(){
@@ -8,7 +8,7 @@ class SignInButton extends React.Component {
                 Войти
                 </a>
 
-<div className="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+<div className="modal fade" id="signInModal" tabIndex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
   <div className="modal-dialog" role="document">
     <div className="modal-content">
       <div className="modal-header">
@@ -32,4 +32,4 @@ class SignInButton extends React.Component {
     }
 }
 
-module.exports = SignInButton
+module.exports = SignInButton;

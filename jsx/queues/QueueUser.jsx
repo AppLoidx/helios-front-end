@@ -1,4 +1,4 @@
-const React = require('react')
+const React = require('react');
 
 class QueueUser extends React.Component {
     render(){
@@ -27,4 +27,4 @@ class QueueUser extends React.Component {
     }
 }
 
-module.exports = QueueUser
+module.exports = QueueUser;

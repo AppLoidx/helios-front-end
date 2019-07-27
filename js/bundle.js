@@ -669,6 +669,29 @@ class CreateQueuePageContent extends React.Component {
                     { className: 'form-group' },
                     React.createElement('input', { type: 'text', id: 'queuePassword', className: "form-control " + this.state.passwordClass, name: 'Password', value: this.state.password, placeholder: '\u041F\u0430\u0440\u043E\u043B\u044C \u043E\u0447\u0435\u0440\u0435\u0434\u0438', onChange: this.handlePasswordInput, required: true })
                 ) : React.createElement('div', null),
+                this.state.auto ? React.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    React.createElement(
+                        'label',
+                        { htmlFor: 'autoTimeSelect' },
+                        '\u0427\u0430\u0441\u0442\u043E\u0442\u0430 \u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u0438'
+                    ),
+                    React.createElement(
+                        'select',
+                        { className: 'form-control', id: 'autoTimeSelect' },
+                        React.createElement(
+                            'option',
+                            { defaultChecked: true },
+                            '\u041A\u0430\u0436\u0434\u044B\u0435 \u0434\u0432\u0435 \u043D\u0435\u0434\u0435\u043B\u0438'
+                        ),
+                        React.createElement(
+                            'option',
+                            null,
+                            '\u041A\u0430\u0436\u0434\u0443\u044E \u043D\u0435\u0434\u0435\u043B\u044E'
+                        )
+                    )
+                ) : React.createElement('div', null),
                 React.createElement(
                     'p',
                     null,

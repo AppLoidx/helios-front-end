@@ -154,9 +154,20 @@ class CreateQueuePageContent extends React.Component {
             {this.state.private?
                 <div className="form-group">
                     <input type="text" id="queuePassword" className={"form-control "+this.state.passwordClass} name="Password" value={this.state.password} placeholder="Пароль очереди" onChange={this.handlePasswordInput} required/>
+
+
                 </div>
             :
             <div></div>}
+
+            {this.state.auto?
+                <div className="form-group">
+                    <label htmlFor="autoTimeSelect">Частота генерации</label>
+                    <select className="form-control" id="autoTimeSelect">
+                        <option defaultChecked={true}>Каждые две недели</option>
+                        <option>Каждую неделю</option>
+                    </select>
+                </div>:<div></div>}
 
             <p>
             <button className={"btn btn-primary " + this.state.submitButtonClass} type="button" data-toggle="collapse" data-target={this.state.collapseTarget} aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>

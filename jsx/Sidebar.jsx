@@ -65,7 +65,7 @@ class Sidebar extends React.Component {
                 <li><a href={"#/create"} className={"sidebar-link"}>Создать</a></li>
                 <li>{this.state.logged?
                     <p>{this.state.username}</p>:
-                    <a href={"#/signin"} className={"sidebar-link"}>Войти</a>
+                    <a href={"/external/login.html"} className={"sidebar-link"}>Войти</a>
                 }
                 </li>
             </ul>

@@ -13,7 +13,7 @@ class Sidebar extends React.Component {
     componentDidMount(){
 
         this.setState({loading: true});
-        fetch('http://localhost:8080/mavenserver_war/api/user?session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw')
+        fetch('http://localhost:8080/api/user')
         .then( response => response.json()).then(
             resp =>
             {
@@ -31,7 +31,7 @@ class Sidebar extends React.Component {
     }
 
     fetchQueues(){
-        fetch('http://localhost:8080/mavenserver_war/api/user?session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw')
+        fetch('http://localhost:8080/api/user')
         .then( response => response.json()).then(resp =>
             this.setState({"queues" : resp['queues'], "loading" : false}));
     }
@@ -50,9 +50,9 @@ class Sidebar extends React.Component {
 
             <ul className="list-unstyled components">
 
-                <li ><a href="#/myprofile" className={"sidebar-link"}>Мой профиль</a></li>
+                <li ><a href={"#/myprofile"} className={"sidebar-link"}>Мой профиль</a></li>
                 <li>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" onClick={this.fetchQueues}>Мои очереди</a>
+                    <a href={"#homeSubmenu"} data-toggle="collapse" aria-expanded="false" onClick={this.fetchQueues}>Мои очереди</a>
                     <ul className="collapse list-unstyled sidebar-link" id="homeSubmenu">
                         <li><QueueLink link={"#/queue/test"} name="Тестовая очередь" /></li>
                         {this.state.loading?(<li className="justify-content-center">Loading data...</li>)
@@ -61,11 +61,11 @@ class Sidebar extends React.Component {
                         }
                     </ul>
                 </li>
-                <li><a href="#/search" className={"sidebar-link"}>Присоедениться</a></li>
-                <li><a href="#/create" className={"sidebar-link"}>Создать</a></li>
+                <li><a href={"#/search"} className={"sidebar-link"}>Присоедениться</a></li>
+                <li><a href={"#/create"} className={"sidebar-link"}>Создать</a></li>
                 <li>{this.state.logged?
                     <p>{this.state.username}</p>:
-                    <a href="#/signin" className={"sidebar-link"}>Войти</a>
+                    <a href={"#/signin"} className={"sidebar-link"}>Войти</a>
                 }
                 </li>
             </ul>

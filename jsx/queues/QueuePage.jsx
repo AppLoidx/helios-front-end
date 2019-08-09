@@ -25,7 +25,7 @@ class QueuePageContent extends React.Component {
     }
 
     componentDidMount(){
-        fetch ('http://localhost:8080/mavenserver_war/api/queue?queueName=' + this.props.queueName)
+        fetch ('http://localhost:8080/api/queue?queueName=' + this.props.queueName)
         .then(resp => resp.json())
         .then(resp =>
           this.setState({"queueName" : resp['fullname']})

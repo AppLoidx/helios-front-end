@@ -2,14 +2,7 @@ const React = require('react');
 const RoundedSpinner = require('./../util/RoundedSpinner.jsx');
 
 class CreateQueuePage extends React.Component {
-    // componentDidMount(){
-    //     $(document).ready(function () {
-    //         $('#sidebarCollapse').on('click', function () {
-    //         $('#sidebar').toggleClass('active');
-    //         $(this).toggleClass('active');
-    //     });
-    //     });
-    // }
+
     render(){
         return <CreateQueuePageContent/>
     }
@@ -42,11 +35,11 @@ class CreateQueuePageContent extends React.Component {
                             ,"queueNameForCollapse" : this.state.fullname});
 
         // TODO: add generation type
-
+        let password = this.state.private?"password="+this.state.password+"&":"";
         fetch("http://localhost:8080/api/queue?"
         + "queue_name=" + this.state.queueName + "&"
         + "fullname=" + this.state.fullname + "&"
-        + this.state.private?"password="+this.state.password+"&":"", {"method" : "POST"})
+        + password, {"method" : "POST"})
         .then(response => {
         
             if (response.ok){

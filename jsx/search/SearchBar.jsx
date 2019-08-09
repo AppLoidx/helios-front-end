@@ -14,7 +14,7 @@ class SearchBar extends React.Component {
                     </div>
                     <br/>
                     <div className="col-sm-3 d-sm-none row no-gutters align-items-center">
-                        <button className="btn-sm btn-primary mx-auto col-4 mt-2" type="submit"><i className="fas fa-search h5 text-body"></i></button>
+                        <button className="btn-sm btn-primary mx-auto col-4 mt-2" type="button" onClick={this.props.onSearchButtonClick}><i className="fas fa-search h5 text-body"></i></button>
                     </div>
                 </div>
             </form>

@@ -40,10 +40,13 @@ class CreateQueuePageContent extends React.Component {
         console.log("sending");
         this.setState({"sending" : true, "collapseTarget" : "", "collapseComponentId" : "collapseSendOpened"
                             ,"queueNameForCollapse" : this.state.fullname});
-        fetch("http://localhost:8080/mavenserver_war/api/queue?"
-        + "queueName=" + this.state.queueName + "&"
+
+        // TODO: add generation type
+
+        fetch("http://localhost:8080/api/queue?"
+        + "queue_name=" + this.state.queueName + "&"
         + "fullname=" + this.state.fullname + "&"
-        + "session=MTIzS3Vwcml5YW5vdi0xNDQ1NTQwMzc1c2FsdDQw", {"method" : "POST"})
+        + this.state.private?"password="+this.state.password+"&":"", {"method" : "POST"})
         .then(response => {
         
             if (response.ok){

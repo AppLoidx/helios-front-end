@@ -6,8 +6,6 @@ class Sidebar extends React.Component {
         super(props);
         this.state = {"queues" : [], "loading" : true, "username" : "", "logged" : false};
         this.fetchQueues = this.fetchQueues.bind(this);
-
-
     }
 
     componentDidMount(){
@@ -18,7 +16,7 @@ class Sidebar extends React.Component {
             resp =>
             {
                 console.log(resp['user']);
-                let fullname = resp['user']['firstName'] + " " + resp['user']['lastName'];
+                let fullname = resp['user']['first_name'] + " " + resp['user']['last_name'];
                 this.setState({
                     "queues" : resp['queues'],
                     "loading" : false,

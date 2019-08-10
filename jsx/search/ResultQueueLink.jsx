@@ -4,11 +4,28 @@ const Spinner = require('./../util/RoundedSpinner.jsx');
 class ResultQueueLink extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {sendingReq: false};
+		this.state = {sendingReq: false, joinButtonAdditionalClass : ""};
 		this.onJoinButtonClick = this.onJoinButtonClick.bind(this);
+	}
+	componentDidMount(){
+		fetch("http://localhost:8080/api/user")
+			.then(resp => resp.json())
+			.then(data => {
+				let queues = data["queues_member"];
+				if (queues !== undefined){
+					for (let que of queues){
+						console.log(que[0] + " === " + this.props.shortName);
+						if (que[0] === this.props.shortName){
+							this.setState({joinButtonAdditionalClass : "btn-secondary"})
+						}
+					}
+				}
+			})
+
 	}
 
 	onJoinButtonClick(){
+		if (this.state.joinButtonAdditionalClass === "btn-secondary") return;
 		this.setState({sendingReq: true});
 		fetch("http://localhost:8080/api/queue?queue_name=" + this.props.shortName, {method: "put"})
 			.then(resp => {
@@ -29,7 +46,7 @@ class ResultQueueLink extends React.Component {
 	                  <strong className="text-gray-dark">{this.props.name}</strong>
 
 				  	<div className="dropdown show dropleft">
-						{this.state.sendingReq?<Spinner/>:<button onClick={this.onJoinButtonClick} className="btn-sm btn-primary mr-3" >Присоедениться</button>}
+						{this.state.sendingReq?<Spinner/>:<button onClick={this.onJoinButtonClick} className={"btn-sm btn-primary mr-3 " + this.state.joinButtonAdditionalClass} >Присоедениться</button>}
 
 	        </div>
 	                </div>

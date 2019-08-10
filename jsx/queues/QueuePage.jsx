@@ -1,16 +1,7 @@
 const React = require('react');
-const Sidebar = require('./../Sidebar.jsx');
 const QueueUser = require('./QueueUser.jsx');
 
 class QueuePage extends React.Component {
-//   componentDidMount(){
-//     $(document).ready(function () {
-//         $('#sidebarCollapse').on('click', function () {
-//         $('#sidebar').toggleClass('active');
-//         $(this).toggleClass('active');
-//     });mdc
-//     });
-// }
 
   render(){
     return <QueuePageContent queueName={this.props.match.params.id} />
@@ -24,20 +15,16 @@ class QueuePageContent extends React.Component {
         this.state = {"queueName" : this.props.queueName, "users" : []}
     }
 
-    componentDidMount(){
-        fetch ('http://localhost:8080/api/queue?queueName=' + this.props.queueName)
+    componentWillReceiveProps(newProps){
+        console.log("Fetching queue name : " + newProps.queueName);
+        fetch ('http://localhost:8080/api/queue?queue_name=' + newProps.queueName)
         .then(resp => resp.json())
-        .then(resp =>
-          this.setState({"queueName" : resp['fullname']})
-          ).catch(err => this.setState({"queueName" : "Не удалось загрузить очередь"}))
-    } 
-    
-    componentWillReceiveProps(){
-      fetch ('http://localhost:8080/mavenserver_war/api/queue?queueName=' + this.props.queueName)
-        .then(resp => resp.json())
-        .then(resp =>
-          this.setState({"queueName" : resp['fullname']})
-          ).catch(err => this.setState({"queueName" : "Не удалось загрузить очередь"}))
+        .then(resp => {
+            this.setState({users : resp["members"],
+                            queueName : resp["fullname"]});
+            }
+
+        ).catch(err => this.setState({"queueName" : "Не удалось загрузить очередь"}))
     }
 
     render(){
@@ -78,9 +65,7 @@ class QueuePageContent extends React.Component {
 
   <div className="my-3 p-3 bg-white rounded shadow-sm">
     <h6 className="border-bottom border-gray pb-2 mb-0">Участники очереди</h6>
-    <QueueUser username="@guildin" fullname="Гурин Евгений"/>
-    <QueueUser username="@ifelseelif" fullname="Колоколов Артем"/>
-    <QueueUser username="@sardann" fullname="Григорьева Сардаана"/>
+      {this.state.users.map((x,i) => { return <QueueUser username={x["username"]} fullname={x["first_name"] + " " + x["last_name"]}/>})}
   </div>
 </main>
         )

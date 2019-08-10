@@ -39,7 +39,7 @@ class CreateQueuePageContent extends React.Component {
         fetch("http://localhost:8080/api/queue?"
         + "queue_name=" + this.state.queueName + "&"
         + "fullname=" + this.state.fullname + "&"
-        + password, {"method" : "POST"})
+        + password, {"method" : "post"})
         .then(response => {
         
             if (response.ok){

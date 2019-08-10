@@ -1,6 +1,7 @@
 const React = require('react');
 const SearchBar = require('./SearchBar.jsx');
 const SearchResult = require('./SearchResult.jsx');
+const ResultQueueLink = require('./ResultQueueLink.jsx');
 
 class SearchPage extends React.Component {
 	constructor(props){
@@ -15,7 +16,7 @@ class SearchPage extends React.Component {
 		fetch("http://localhost:8080/api/check?check=queue_match&queue_name=" + this.state.inputVal)
 			.then(resp => resp.json())
 			.then(data => {
-				this.setState({data : data, searching: false, loaded: true})
+				this.setState({data : data.map((x,i) => <ResultQueueLink shortName={x[0]} name={x[1]} />), searching: false, loaded: true})
 			})
 			.catch(err => {
 				console.log(err);

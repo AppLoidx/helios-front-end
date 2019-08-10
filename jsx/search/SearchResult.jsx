@@ -9,7 +9,7 @@ class SearchResult extends React.Component {
     			<h6 className="border-bottom border-gray pb-2 mb-0">Найдено:</h6>
     			<ul className={"list-group"}>
 					{this.props.loaded?
-	    				this.props.data.map((x,i) => {return <li key={i} className="list-group-item">x</li>})
+	    				this.props.data.map((x,i) => {return <li key={i} className="list-group-item">{x}</li>})
 	    				:
 	    				this.props.searching?<li className="mx-auto list-group-item border-0"><RoundedSpinner/></li>
 	    				:

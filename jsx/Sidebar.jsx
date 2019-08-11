@@ -1,5 +1,6 @@
 const React = require('react');
 const QueueLink = require('./queues/QueueLink.jsx');
+const Spinner = require('./util/RoundedSpinner.jsx');
 
 class Sidebar extends React.Component {
     constructor(props){
@@ -11,7 +12,7 @@ class Sidebar extends React.Component {
     componentDidMount(){
 
         this.setState({loading: true});
-        fetch('http://localhost:8080/api/user')
+        fetch('api/user')
         .then( response => response.json()).then(
             resp =>
             {
@@ -29,7 +30,7 @@ class Sidebar extends React.Component {
     }
 
     fetchQueues(){
-        fetch('http://localhost:8080/api/user')
+        fetch('api/user')
         .then( response => response.json()).then(resp =>
             this.setState({"queues" : resp['queues'], "loading" : false}));
     }
@@ -52,8 +53,7 @@ class Sidebar extends React.Component {
                 <li>
                     <a href={"#homeSubmenu"} data-toggle="collapse" aria-expanded="false" onClick={this.fetchQueues}>Мои очереди</a>
                     <ul className="collapse list-unstyled sidebar-link" id="homeSubmenu">
-                        <li><QueueLink link={"#/queue/test"} name="Тестовая очередь" /></li>
-                        {this.state.loading?(<li className="justify-content-center">Loading data...</li>)
+                        {this.state.loading?(<li className="justify-content-center mx-auto"><Spinner /></li>)
                                             :
                         this.state.queues.map((i, k) => {return <li key={i[0]}><QueueLink link={"#/queue/" + i[0]} name={i[1]}/></li>})
                         }

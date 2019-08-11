@@ -8,7 +8,7 @@ class ResultQueueLink extends React.Component {
 		this.onJoinButtonClick = this.onJoinButtonClick.bind(this);
 	}
 	componentDidMount(){
-		fetch("http://localhost:8080/api/user")
+		fetch("api/user")
 			.then(resp => resp.json())
 			.then(data => {
 				let queues = data["queues_member"];
@@ -27,7 +27,7 @@ class ResultQueueLink extends React.Component {
 	onJoinButtonClick(){
 		if (this.state.joinButtonAdditionalClass === "btn-secondary") return;
 		this.setState({sendingReq: true});
-		fetch("http://localhost:8080/api/queue?queue_name=" + this.props.shortName, {method: "put"})
+		fetch("api/queue?queue_name=" + this.props.shortName, {method: "put"})
 			.then(resp => {
 				if (resp.status === 200){
 					document.location.href = "#/queue/" + this.props.shortName;

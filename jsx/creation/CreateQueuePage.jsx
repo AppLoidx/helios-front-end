@@ -36,7 +36,7 @@ class CreateQueuePageContent extends React.Component {
 
         // TODO: add generation type
         let password = this.state.private?"password="+this.state.password+"&":"";
-        fetch("http://localhost:8080/api/queue?"
+        fetch("api/queue?"
             + "queue_name=" + this.state.queueName + "&"
             + "fullname=" + this.state.fullname + "&"
             + password, {"method" : "post"})
@@ -69,7 +69,7 @@ class CreateQueuePageContent extends React.Component {
         }
         this.setState({"queueName" : event.target.value});
 
-        fetch("http://localhost:8080/api/check?check=queue_exist&queue_name=" + event.target.value)
+        fetch("api/check?check=queue_exist&queue_name=" + event.target.value)
             .then(resp => resp.json())
             .then(data => {
                 if (data["exist"] === true){

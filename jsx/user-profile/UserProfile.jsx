@@ -9,7 +9,7 @@ class UserProfile extends React.Component {
 
     }
     componentDidMount(){
-        fetch("http://localhost:8080/api/user")
+        fetch("api/user")
             .then(resp => resp.json())
             .then(data => {
                 this.setState({fetchingUserInfo : false, username: data["user"]["username"],

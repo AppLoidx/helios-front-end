@@ -13,7 +13,7 @@ class SearchPage extends React.Component {
 
 	onSearchButtonClick(){
 		this.setState({searching : true, loaded: false, searched : true});
-		fetch("http://localhost:8080/api/check?check=queue_match&queue_name=" + this.state.inputVal)
+		fetch("api/check?check=queue_match&queue_name=" + this.state.inputVal)
 			.then(resp => resp.json())
 			.then(data => {
 				this.setState({data : data.map((x,i) => <ResultQueueLink shortName={x[0]} name={x[1]} />), searching: false, loaded: true})

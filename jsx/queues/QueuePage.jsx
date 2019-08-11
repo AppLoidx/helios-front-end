@@ -14,10 +14,19 @@ class QueuePageContent extends React.Component {
         super (props);
         this.state = {"queueName" : this.props.queueName, "users" : []}
     }
+    componentDidMount(){
+        fetch ('api/queue?queue_name=' + this.props.queueName)
+            .then(resp => resp.json())
+            .then(resp => {
+                    this.setState({users : resp["members"],
+                        queueName : resp["fullname"]});
+                }
 
+            ).catch(err => this.setState({"queueName" : "Не удалось загрузить очередь"}))
+    }
     componentWillReceiveProps(newProps){
         console.log("Fetching queue name : " + newProps.queueName);
-        fetch ('http://localhost:8080/api/queue?queue_name=' + newProps.queueName)
+        fetch ('api/queue?queue_name=' + newProps.queueName)
         .then(resp => resp.json())
         .then(resp => {
             this.setState({users : resp["members"],

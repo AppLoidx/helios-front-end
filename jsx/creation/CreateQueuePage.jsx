@@ -30,11 +30,8 @@ class CreateQueuePageContent extends React.Component {
         if (this.state.submitButtonClass === "disabled" || (this.state.private && this.state.password === "")){
             return;
         }
-        console.log("sending");
         this.setState({"sending" : true, "collapseTarget" : "", "collapseComponentId" : "collapseSendOpened"
                             ,"queueNameForCollapse" : this.state.fullname});
-
-        // TODO: add generation type
         let password = this.state.private?"password="+this.state.password+"&":"";
         fetch("api/queue?"
             + "queue_name=" + this.state.queueName + "&"

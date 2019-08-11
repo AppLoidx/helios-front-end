@@ -13,10 +13,15 @@ class Sidebar extends React.Component {
 
         this.setState({loading: true});
         fetch('api/user')
-        .then( response => response.json()).then(
+
+        .then( response => {
+            if (response.status === 400 || response.status === 401){
+                document.location.href = "/external/login.html";
+            }
+            return response.json()
+        }).then(
             resp =>
             {
-                console.log(resp['user']);
                 let fullname = resp['user']['first_name'] + " " + resp['user']['last_name'];
                 this.setState({
                     "queues" : resp['queues'],
@@ -62,7 +67,10 @@ class Sidebar extends React.Component {
                 <li><a href={"#/search"} className={"sidebar-link"}>Присоедениться</a></li>
                 <li><a href={"#/create"} className={"sidebar-link"}>Создать</a></li>
                 <li>{this.state.logged?
-                    <p>{this.state.username}</p>:
+                    <p><div className={"d-flex justify-content-between"}>
+                        <span>{this.state.username}</span>
+                        <a href="/api/logout"><i className={"fa fa-sign-out-alt"}></i></a>
+                    </div></p>:
                     <a href={"/external/login.html"} className={"sidebar-link"}>Войти</a>
                 }
                 </li>

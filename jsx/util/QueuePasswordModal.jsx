@@ -35,11 +35,11 @@ class QueuePasswordModal extends React.Component {
             <Modal {...this.props} size="lg" aria-labelledby="password-modal-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title id="password-modal-vcenter">
-                        Окна ввода пароля
+                        Окно ввода пароля
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>Очередь {this.props.fullName} имеет пароль. Введите его, чтобы войти в нее</h4>
+                    <h4>Очередь {this.props.fullName} имеет пароль. <br/>Введите его, чтобы войти в нее</h4>
                     <form action="" className={"mx-auto"}>
                         <label htmlFor="#password-modal-input">Пароль: </label>
                         <input className={"mx-auto"} type="password" id={"password-modal-input"} onChange={this.onPasswordChange}/>

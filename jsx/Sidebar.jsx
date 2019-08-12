@@ -67,10 +67,10 @@ class Sidebar extends React.Component {
                 <li><a href={"#/search"} className={"sidebar-link"}>Присоедениться</a></li>
                 <li><a href={"#/create"} className={"sidebar-link"}>Создать</a></li>
                 <li>{this.state.logged?
-                    <p><div className={"d-flex justify-content-between"}>
-                        <span>{this.state.username}</span>
+                    <div className={"d-flex justify-content-between py-1"}>
+                        <p className={"py-0 mb-0 mt-1"}>{this.state.username}</p>
                         <a href="/api/logout"><i className={"fa fa-sign-out-alt"}></i></a>
-                    </div></p>:
+                    </div>:
                     <a href={"/external/login.html"} className={"sidebar-link"}>Войти</a>
                 }
                 </li>

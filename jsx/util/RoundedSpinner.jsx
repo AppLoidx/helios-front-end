@@ -7,7 +7,7 @@ class RoundedSpinner extends React.Component {
 
     render(){
         return (
-            <div className={"spinner-border"} role="status">
+            <div className={"spinner-border " + this.props.className} role="status">
                 <span className="sr-only">Loading...</span>
             </div>
         )

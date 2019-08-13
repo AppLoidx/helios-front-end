@@ -19,10 +19,22 @@ class CreateQueuePageContent extends React.Component {
         this.handlePasswordInput = this.handlePasswordInput.bind(this);
         this.privateCheckClick = this.privateCheckClick.bind(this);
         this.autoCheckClick = this.autoCheckClick.bind(this);
-        this.state = {"sending" : false, "successful" : false, "fullname" : "", "queueName" : "",
-                            "inputNameClass" : "", "submitButtonClass" : "disabled", "collapseTarget" : "",
-                        "collapseComponentId" : "collapseSend", "queueNameForCollapse": "",
-                        "auto" : false, "private" : false, "password" : "", "passwordClass" : ""}
+        this.handleWeekSelect = this.handleWeekSelect.bind(this);
+        this.state = {
+            "sending" : false,
+            "successful" : false,
+            "fullname" : "",
+            "queueName" : "",
+            "inputNameClass" : "",
+            "submitButtonClass" : "disabled",
+            "collapseTarget" : "",
+            "collapseComponentId" : "collapseSend", "queueNameForCollapse": "",
+            "auto" : false,
+            "private" : false,
+            "password" : "",
+            "passwordClass" : "",
+            "generationType": "two_week"
+        }
 
     }
 
@@ -33,10 +45,11 @@ class CreateQueuePageContent extends React.Component {
         this.setState({"sending" : true, "collapseTarget" : "", "collapseComponentId" : "collapseSendOpened"
                             ,"queueNameForCollapse" : this.state.fullname});
         let password = this.state.private?"password="+this.state.password+"&":"";
+        let auto = this.state.auto?"&generation_type="+this.state.generationType:"";
         fetch("api/queue?"
             + "queue_name=" + this.state.queueName + "&"
             + "fullname=" + this.state.fullname + "&"
-            + password, {"method" : "post"})
+            + password + auto, {"method" : "post"})
         .then(response => {
         
             if (response.ok){
@@ -101,8 +114,6 @@ class CreateQueuePageContent extends React.Component {
         }
 
         this.setState({"password" : event.target.value});
-
-
     }
 
     privateCheckClick(event){
@@ -116,7 +127,11 @@ class CreateQueuePageContent extends React.Component {
 
     autoCheckClick(event){
         this.setState({"auto" : event.target.checked});
+    }
 
+    handleWeekSelect(event){
+        console.log(event.target.value);
+        this.setState({"generationType" : event.target.value});
     }
 
     render(){
@@ -165,9 +180,9 @@ class CreateQueuePageContent extends React.Component {
             {this.state.auto?
                 <div className="form-group">
                     <label htmlFor="autoTimeSelect">Частота генерации</label>
-                    <select className="form-control" id="autoTimeSelect">
-                        <option defaultChecked={true}>Каждые две недели</option>
-                        <option>Каждую неделю</option>
+                    <select className="form-control" id="autoTimeSelect" onChange={this.handleWeekSelect}>
+                        <option value={"two_week"} defaultChecked={true}>Каждые две недели</option>
+                        <option value={"one_week"}>Каждую неделю</option>
                     </select>
                 </div>:<div></div>}
 

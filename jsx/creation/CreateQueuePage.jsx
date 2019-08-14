@@ -140,7 +140,7 @@ class CreateQueuePageContent extends React.Component {
         <form className="form-signin">
             <div className="text-center mb-4">
                 <h1 className="display mb-3 font-weight-normal">HELIOS</h1>
-                <p>Если вы не знаете что делать, смотрите <a href="#" className='text-primary'>Документацию</a></p>
+                <p>Если вы не знаете что делать, смотрите <a href="external/wiki/queue-creation.html" className='text-primary'>Документацию</a></p>
             </div>
 
             <div className="form-group">
@@ -154,7 +154,7 @@ class CreateQueuePageContent extends React.Component {
             <div className = "row justify-content-center justify-content-between ml-2">
                 <div className="form-check form-group col-auto">
                     <input className="form-check-input" type="checkbox" value="" id="privateCheck" onClick={this.privateCheckClick}/>
-                    <label className="form-check-label" htmlFor="privateCheck">Закрытая</label>
+                    <label className="form-check-label" htmlFor="privateCheck">Приватная</label>
                     <span className={"ml-1"}>
                         <i className={"fa fa-question-circle"} data-toggle={"tooltip"} title={"Очередь с паролью"} />
                     </span>

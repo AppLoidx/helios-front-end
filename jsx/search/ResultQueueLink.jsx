@@ -5,22 +5,11 @@ const ModalWindow = require('./../util/QueuePasswordModal.jsx');
 class ResultQueueLink extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {sendingReq: false, joinButtonAdditionalClass : "", showModal : false, privateQueue : false, lockIcon: ""};
+		this.state = {sendingReq: false, showModal : false, privateQueue : false, lockIcon: ""};
 		this.onJoinButtonClick = this.onJoinButtonClick.bind(this);
 	}
 	componentDidMount(){
-		fetch("api/user")
-			.then(resp => resp.json())
-			.then(data => {
-				let queues = data["queues_member"];
-				if (queues !== undefined){
-					for (let que of queues){
-						if (que[0] === this.props.shortName){
-							this.setState({joinButtonAdditionalClass : "btn-secondary"})
-						}
-					}
-				}
-			})
+
 		fetch("api/check?check=queue_private&queueName=" + this.props.shortName)
 			.then(resp => resp.json())
 			.then(data => {
@@ -61,7 +50,7 @@ class ResultQueueLink extends React.Component {
 						<strong className="text-gray-dark">{this.props.name + " " + this.state.lockIcon}</strong>
 
 				  	<div className="dropdown show dropleft">
-						{this.state.sendingReq?<Spinner/>:<button onClick={this.onJoinButtonClick} className={"btn-sm btn-primary mr-3 " + this.state.joinButtonAdditionalClass} >Присоедениться</button>}
+						{this.state.sendingReq?<Spinner/>:<button onClick={this.onJoinButtonClick} className={"btn-sm btn-primary mr-3 " + this.props.joinButtonAdditionalClass} >Присоедениться</button>}
 
 	        </div>
 	                </div>

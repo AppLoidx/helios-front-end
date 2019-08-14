@@ -140,7 +140,7 @@ class CreateQueuePageContent extends React.Component {
         <form className="form-signin">
             <div className="text-center mb-4">
                 <h1 className="display mb-3 font-weight-normal">HELIOS</h1>
-                <p>Если вы не знаете что делать, смотрите <a href="external/wiki/queue-creation.html" className='text-primary'>Документацию</a></p>
+                <p>Если вы не знаете что делать, смотрите <a href="https://apploidx.github.io/helios-doc/wiki/usage/queue-creation.html" className='text-primary'>Документацию</a></p>
             </div>
 
             <div className="form-group">

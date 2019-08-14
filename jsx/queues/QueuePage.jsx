@@ -80,7 +80,7 @@ class QueuePageContent extends React.Component {
                       } else return "";
                   })}
                 <small className="d-block text-right mt-3">
-                  <a onClick={()=> this.setState({showAllNotifications: true})}>Все обновления</a>
+                  <a onClick={()=> this.setState({showAllNotifications: true})} style={{cursor: 'pointer'}}>Все обновления</a>
                 </small>
               </div>
 

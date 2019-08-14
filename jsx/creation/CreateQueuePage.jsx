@@ -1,5 +1,6 @@
 const React = require('react');
 const RoundedSpinner = require('./../util/RoundedSpinner.jsx');
+const PriorityPickModal = require('./PriorityPickModal.jsx');
 
 class CreateQueuePage extends React.Component {
 
@@ -20,6 +21,8 @@ class CreateQueuePageContent extends React.Component {
         this.privateCheckClick = this.privateCheckClick.bind(this);
         this.autoCheckClick = this.autoCheckClick.bind(this);
         this.handleWeekSelect = this.handleWeekSelect.bind(this);
+        this.handleDaySelect = this.handleDaySelect.bind(this);
+
         this.state = {
             "sending" : false,
             "successful" : false,
@@ -33,7 +36,9 @@ class CreateQueuePageContent extends React.Component {
             "private" : false,
             "password" : "",
             "passwordClass" : "",
-            "generationType": "two_week"
+            "generationType": "two_week",
+            "generationDay" : "monday",
+            "showPriorityModal" : false
         }
 
     }
@@ -130,8 +135,11 @@ class CreateQueuePageContent extends React.Component {
     }
 
     handleWeekSelect(event){
-        console.log(event.target.value);
         this.setState({"generationType" : event.target.value});
+    }
+
+    handleDaySelect(event){
+        this.setState({"generationDay" : event.target.value});
     }
 
     render(){
@@ -178,19 +186,41 @@ class CreateQueuePageContent extends React.Component {
             <div></div>}
 
             {this.state.auto?
+                <div>
                 <div className="form-group">
                     <label htmlFor="autoTimeSelect">Частота генерации</label>
                     <select className="form-control" id="autoTimeSelect" onChange={this.handleWeekSelect}>
                         <option value={"two_week"} defaultChecked={true}>Каждые две недели</option>
                         <option value={"one_week"}>Каждую неделю</option>
                     </select>
+                </div>
+                <div className="form-group mt-1">
+                    <label htmlFor="autoDaySelect">День недели генерации</label>
+                    <select className={"form-control"} id="autoDaySelect" onChange={this.handleDaySelect}>
+                        <option value="monday" defaultChecked={true}>Понедельник</option>
+                        <option value="tuesday">Вторник</option>
+                        <option value="wednesday">Среда</option>
+                        <option value="thursday">Четверг</option>
+                        <option value="friday">Пятница</option>
+                        <option value="saturday">Суббота</option>
+                        <option value="sunday">Воскресенье</option>
+                    </select>
+                </div>
+
                 </div>:<div></div>}
 
             <p>
-            <button className={"btn btn-primary " + this.state.submitButtonClass} type="button" data-toggle="collapse" data-target={this.state.collapseTarget} aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>
-                Создать
-            </button>
+                <button className={"btn btn-outline-secondary mr-1"} type="button" onClick={() => this.setState({showPriorityModal: true})}>
+                    Настройка приоритетов
+                </button>
+                <button className={"btn btn-primary float-right " + this.state.submitButtonClass} type="button" data-toggle="collapse" data-target={this.state.collapseTarget} aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>
+                    Создать
+                </button>
+
             </p>
+
+            <PriorityPickModal onHide={() => this.setState({showPriorityModal : false})} show={this.state.showPriorityModal}/>
+
             <div className="collapse" id={this.state.collapseComponentId}>
                 <div className="card card-body text-center">
                     {this.state.sending?<div><p>Создание очереди</p><RoundedSpinner/></div>

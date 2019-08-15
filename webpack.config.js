@@ -1,8 +1,11 @@
 module.exports = {
   entry: './jsx/App.jsx',
-  mode: "development",
+  mode: "production",
   output: {
-    path: __dirname + '/js/',
+    path:
+        '/java/helios-backend/src/main/resources/static/js'
+        // __dirname + '/js/'
+    ,
     filename: 'bundle.js'
   },
   devtool: '#sourcemap',

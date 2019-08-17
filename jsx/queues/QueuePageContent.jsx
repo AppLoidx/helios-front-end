@@ -16,53 +16,45 @@ class QueuePageContent extends React.Component {
             allNotice: [],
             showSettingsModal: false};
         this.onSettingsClick = this.onSettingsClick.bind(this);
+        this.fetchQueues = this.fetchQueues.bind(this);
+    }
+
+    fetchQueues(props){
+        fetch ('api/queue?queue_name=' + props.queueName)
+            .then(resp => {
+                if (resp.status === 404){
+                    this.setState({"queueName" : "Очередь с именем " + props.name + " не найдена", requestingData: false});
+                    return ;
+                }
+                return resp.json()
+            })
+            .then(resp => {
+                    this.setState({
+                        users: resp["members"],
+                        queueName: resp["fullname"]
+                    });
+                    let data = [];
+                    for (let notice of resp["notifications"]) {
+                        console.log(notice["message"]);
+                        data.push(<Media author={"Система"} message={notice["message"]}/>)
+                    }
+                    this.setState({allNotice: data, requestingData: false});
+                }
+
+
+            ).catch(err => {
+            console.log(err);
+            this.setState({"queueName" : "Не удалось загрузить очередь", requestingData: false})
+        })
     }
 
     componentDidMount(){
         this.setState({requestingData : true});
-        fetch ('api/queue?queue_name=' + this.props.queueName)
-            .then(resp => resp.json())
-            .then(resp => {
-                    this.setState({
-                        users: resp["members"],
-                        queueName: resp["fullname"]
-                    });
-                    let data = [];
-                    for (let notice of resp["notifications"]) {
-                        console.log(notice["message"]);
-                        data.push(<Media author={"Система"} message={notice["message"]}/>)
-                    }
-                    this.setState({allNotice: data, requestingData: false});
-                }
-
-
-            ).catch(err => {
-            console.log(err);
-            this.setState({"queueName" : "Не удалось загрузить очередь", requestingData: false})
-        })
+        this.fetchQueues(this.props);
     }
     componentWillReceiveProps(newProps){
         this.setState({requestingData : true, queueName: newProps.queueName});
-        fetch ('api/queue?queue_name=' + newProps.queueName)
-            .then(resp => resp.json())
-            .then(resp => {
-                    this.setState({
-                        users: resp["members"],
-                        queueName: resp["fullname"]
-                    });
-
-                    let data = [];
-                    console.log(resp["notifications"]);
-                    for (let notice of resp["notifications"]) {
-                        console.log(notice["message"]);
-                        data.push(<Media author={"Система"} message={notice["message"]}/>)
-                    }
-                    this.setState({allNotice: data, requestingData: false});
-                }
-            ).catch(err => {
-            console.log(err);
-            this.setState({"queueName" : "Не удалось загрузить очередь", requestingData: false})
-        })
+        this.fetchQueues(newProps);
     }
 
     onSettingsClick(){
@@ -104,7 +96,11 @@ class QueuePageContent extends React.Component {
                 <AllMedia show={this.state.showAllNotifications} onHide={() => this.setState({showAllNotifications: false})}
                           data = {this.state.allNotice}/>
 
-                          <QueueSettingsModal show={this.state.showSettingsModal} onHide={() => this.setState({showSettingsModal : false})} title={this.state.queueName}/>
+                          <QueueSettingsModal
+                              queueName={this.props.queueName}
+                              show={this.state.showSettingsModal}
+                              onHide={() => this.setState({showSettingsModal : false})}
+                              title={this.state.queueName}/>
             </main>
         )
     }

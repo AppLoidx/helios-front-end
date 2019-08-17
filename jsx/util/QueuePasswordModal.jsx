@@ -32,20 +32,19 @@ class QueuePasswordModal extends React.Component {
 
     render() {
         return(
-            <Modal {...this.props} size="lg" aria-labelledby="password-modal-vcenter" centered>
+            <Modal {...this.props} size="md" aria-labelledby="password-modal-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title id="password-modal-vcenter">
-                        Окно ввода пароля
+                        {this.props.fullName}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {this.state.sendingReq?<RoundedSpinner className={"mx-auto"}/>:
                     <div>
-                        Очередь {this.props.fullName} имеет пароль. <br/>Введите его, чтобы войти в нее<br/>
+                        Введите пароль для входа в приватную очередь:<br/>
                         {this.state.successful?"":<p className={"text-danger"}>Неверный пароль</p>}
-                        <form action="" className={"mx-auto justify-content-center"}>
-                            <label htmlFor="#password-modal-input">Пароль: </label>
-                            <input className={"mx-auto"} type="password" id={"password-modal-input"} onChange={this.onPasswordChange}/>
+                        <form action="" className={"mx-auto justify-content-center text-center"}>
+                            <input className={"ml-2 mt-2 text-center rounded " + (this.state.successful?"":"border-danger")} type="password" id={"password-modal-input"} onChange={this.onPasswordChange}/>
                         </form>
                     </div>}
 

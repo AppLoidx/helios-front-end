@@ -21,8 +21,11 @@ class ContentPage extends React.Component {
                 $(this).toggleClass('active');
             });
             $('.sidebar-link').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    $('#sidebar').toggleClass('active');
+                    $('#sidebarCollapse').toggleClass('active');
+                }
+
             });
         });
 

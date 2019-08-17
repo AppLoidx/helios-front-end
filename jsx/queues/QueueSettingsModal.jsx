@@ -6,7 +6,28 @@ const ConfirmModal = require('./../util/ConfirmModal.jsx');
 class QueueSettingsModal extends React.Component {
     constructor(props){
         super(props);
-        this.state = {showDeleteConfirm: false}
+        this.state = {showDeleteConfirm: false, deleteConfirmSendingRequest: false,
+        deleteConfirmMessage : "Вы уверены, что хотите удалить очередь?"};
+        this.onDeleteAccept = this.onDeleteAccept.bind(this);
+    }
+
+    onDeleteAccept(){
+        this.setState({deleteConfirmSendingRequest: true});
+        fetch("api/queue?target=QUEUE&queue_name=" + this.props.queueName, {method: "delete"})
+            .then(resp => {
+                if (resp.status === 200){
+                    this.setState({showDeleteConfirm: false, deleteConfirmSendingRequest: false});
+                    document.location.href = "/helios.html#/search"
+                } else {
+                    console.log("fail: " + resp.status);
+                    this.setState({showDeleteConfirm: false, deleteConfirmSendingRequest: false});
+                }
+            }).catch(err => {
+                console.log(err);
+                this.setState({
+                    deleteConfirmSendingRequest: false,
+                    deleteConfirmMessage: "Произошла ошибка. Повторите попытку позже"});
+        });
     }
 
     render(){
@@ -28,7 +49,12 @@ class QueueSettingsModal extends React.Component {
                     <Button onClick={this.props.onHide} className={"btn-primary"}>Закрыть</Button>
                 </Modal.Footer>
 
-                <ConfirmModal show={this.state.showDeleteConfirm} onHide={() => this.setState({showDeleteConfirm : false})} message={"Вы уверены, что хотите удалить очередь?"}/>
+                <ConfirmModal sendingrequest={
+                            this.state.deleteConfirmSendingRequest?1:0}
+                              show={this.state.showDeleteConfirm}
+                              onHide={() => this.setState({showDeleteConfirm : false})}
+                              message={this.state.deleteConfirmMessage}
+                                accept = {() => this.onDeleteAccept()} decline={() => this.setState({showDeleteConfirm: false})}/>
             </Modal>
         )
     }

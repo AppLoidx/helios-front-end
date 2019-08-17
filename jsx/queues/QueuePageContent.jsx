@@ -3,13 +3,19 @@ const QueueUser = require('./QueueUser.jsx');
 const Media = require('./QueueNotification.jsx');
 const AllMedia = require('./QueueAllNotificationsModal.jsx');
 const Spinner = require('./../util/GrowingSpinner.jsx');
+const QueueSettingsModal = require('./QueueSettingsModal.jsx');
 
 class QueuePageContent extends React.Component {
 
     constructor(props){
         super (props);
-        this.state = {"requestingData" : false,"queueName" : this.props.queueName, "users" : [], showAllNotifications: false, allNotice: []}
-        this.handleNewUserMessage = this.handleNewUserMessage.bind(this);
+        this.state = {"requestingData" : false,
+            "queueName" : this.props.queueName,
+            "users" : [],
+            showAllNotifications: false,
+            allNotice: [],
+            showSettingsModal: false};
+        this.onSettingsClick = this.onSettingsClick.bind(this);
     }
 
     componentDidMount(){
@@ -17,16 +23,18 @@ class QueuePageContent extends React.Component {
         fetch ('api/queue?queue_name=' + this.props.queueName)
             .then(resp => resp.json())
             .then(resp => {
-                    this.setState({users : resp["members"],
-                        queueName : resp["fullname"]});
+                    this.setState({
+                        users: resp["members"],
+                        queueName: resp["fullname"]
+                    });
                     let data = [];
-                    for (let notice of resp["notifications"]){
+                    for (let notice of resp["notifications"]) {
                         console.log(notice["message"]);
                         data.push(<Media author={"Система"} message={notice["message"]}/>)
                     }
-                    this.setState({allNotice : data});
-                    this.setState({requestingData: false})
+                    this.setState({allNotice: data, requestingData: false});
                 }
+
 
             ).catch(err => {
             console.log(err);
@@ -34,7 +42,7 @@ class QueuePageContent extends React.Component {
         })
     }
     componentWillReceiveProps(newProps){
-        console.log("Fetching queue name : " + newProps.queueName);
+        this.setState({requestingData : true, queueName: newProps.queueName});
         fetch ('api/queue?queue_name=' + newProps.queueName)
             .then(resp => resp.json())
             .then(resp => {
@@ -49,16 +57,16 @@ class QueuePageContent extends React.Component {
                         console.log(notice["message"]);
                         data.push(<Media author={"Система"} message={notice["message"]}/>)
                     }
-                    this.setState({allNotice: data});
+                    this.setState({allNotice: data, requestingData: false});
                 }
             ).catch(err => {
             console.log(err);
-            this.setState({"queueName" : "Не удалось загрузить очередь"})
+            this.setState({"queueName" : "Не удалось загрузить очередь", requestingData: false})
         })
     }
 
-    handleNewUserMessage(newMessage){
-        console.log(`New message incoming! ${newMessage}`);
+    onSettingsClick(){
+        this.setState({showSettingsModal : true});
     }
 
     render(){
@@ -69,7 +77,8 @@ class QueuePageContent extends React.Component {
                     <div className="lh-100">
                         <h6 className="ml-3 mb-0 text-black lh-100">{this.state.queueName}</h6>
                     </div>
-                    <a href={"#chat/" + this.props.queueName} className="text-right float-right ml-auto">Чат <i className="fa fa-comments"></i></a>
+                    <button className={"btn btn-link text-right float-right ml-auto"} style={{textDecoration : 'none'}} onClick={this.onSettingsClick}>Управление <i className="fa fa-cog"></i></button>
+                    <a href={"#chat/" + this.props.queueName} className="text-right float-right">Чат <i className="fa fa-comments"></i></a>
                 </div>
 
                 <div className="my-3 p-3 bg-white rounded shadow-sm">
@@ -94,6 +103,8 @@ class QueuePageContent extends React.Component {
 
                 <AllMedia show={this.state.showAllNotifications} onHide={() => this.setState({showAllNotifications: false})}
                           data = {this.state.allNotice}/>
+
+                          <QueueSettingsModal show={this.state.showSettingsModal} onHide={() => this.setState({showSettingsModal : false})} title={this.state.queueName}/>
             </main>
         )
     }

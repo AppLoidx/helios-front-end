@@ -14,7 +14,7 @@ class MainPageContent extends React.Component {
         return <div className="mx-auto">
             <h3 className='display-4 mx-auto text-center mt-5'>Здесь что-то должно было быть...</h3>
             <div className={"mx-auto text-center"}>
-                <img className="img-fluid" src="assets/img/menhera-witch.jpg" alt=""/>
+                <img className="img-fluid" src="assets/img/menhera-witch.png" alt=""/>
             </div>
         </div>
     }

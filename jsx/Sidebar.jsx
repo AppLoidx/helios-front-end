@@ -1,6 +1,8 @@
 const React = require('react');
 const QueueLink = require('./queues/QueueLink.jsx');
 const Spinner = require('./util/RoundedSpinner.jsx');
+require('./../style/sidebar/style.css');
+
 
 class Sidebar extends React.Component {
     constructor(props){

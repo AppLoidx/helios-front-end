@@ -4,6 +4,7 @@ const Media = require('./QueueNotification.jsx');
 const AllMedia = require('./QueueAllNotificationsModal.jsx');
 const Spinner = require('./../util/GrowingSpinner.jsx');
 const QueueSettingsModal = require('./QueueSettingsModal.jsx');
+const Chat = require('../chat/Chat.jsx');
 
 class QueuePageContent extends React.Component {
 
@@ -29,8 +30,17 @@ class QueuePageContent extends React.Component {
                 return resp.json()
             })
             .then(resp => {
+                let members = resp["members"];
+
+                let usersMap = new Map();
+                let usersList = [];
+                members.map(u => usersMap.set(u.id, u));
+                for (let sequenceVal of resp["queue_sequence"]){
+                    usersList.push(usersMap.get(sequenceVal));
+                }
+
                     this.setState({
-                        users: resp["members"],
+                        users: usersList,
                         queueName: resp["fullname"]
                     });
                     let data = [];
@@ -69,8 +79,8 @@ class QueuePageContent extends React.Component {
                     <div className="lh-100">
                         <h6 className="ml-3 mb-0 text-black lh-100">{this.state.queueName}</h6>
                     </div>
-                    <button className={"btn btn-link text-right float-right ml-auto"} style={{textDecoration : 'none'}} onClick={this.onSettingsClick}>Управление <i className="fa fa-cog"></i></button>
-                    <a href={"#chat/" + this.props.queueName} className="text-right float-right">Чат <i className="fa fa-comments"></i></a>
+                    <button className={"btn btn-link text-right float-right ml-auto"} style={{textDecoration : 'none'}} onClick={this.onSettingsClick}><span className={"d-none d-md-inline"}>Управление </span><i className="fa fa-cog"></i></button>
+                    <a href={"#chat/" + this.props.queueName} className="text-right float-right"><span className={"d-none d-md-inline"}>Чат </span><i className="fa fa-comments"></i></a>
                 </div>
 
                 <div className="my-3 p-3 bg-white rounded shadow-sm">
@@ -89,8 +99,17 @@ class QueuePageContent extends React.Component {
                 <div className="my-3 p-3 bg-white rounded shadow-sm">
                     <h6 className="border-bottom border-gray pb-2 mb-0">Участники очереди</h6>
 
-                    {this.state.requestingData?<div className={"text-center mt-3"}><Spinner/></div>:
-                        this.state.users.map((x,i) => { return <QueueUser username={x["username"]} fullname={x["first_name"] + " " + x["last_name"]}/>})}
+                    {this.state.requestingData ?
+                        <div className={"text-center mt-3"}><Spinner/></div>
+                        :
+                        <ul>
+                            {this.state.users.map((x, i) => {
+                                return <li style={{listStyle: 'none'}} key={x["id"]}><QueueUser username={x["username"]}
+                                                                                                fullname={x["first_name"] + " " + x["last_name"]}/>
+                                </li>
+                            })}
+                        </ul>
+                    }
                 </div>
 
                 <AllMedia show={this.state.showAllNotifications} onHide={() => this.setState({showAllNotifications: false})}
@@ -101,6 +120,8 @@ class QueuePageContent extends React.Component {
                               show={this.state.showSettingsModal}
                               onHide={() => this.setState({showSettingsModal : false})}
                               title={this.state.queueName}/>
+
+                              <Chat chatname = {this.state.queueName}/>
             </main>
         )
     }

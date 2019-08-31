@@ -1,6 +1,7 @@
 const React = require('react');
 const RoundedSpinner = require('./../util/RoundedSpinner.jsx');
 const PriorityPickModal = require('./PriorityPickModal.jsx');
+require('./../../style/form/main.css');
 
 class CreateQueuePage extends React.Component {
 

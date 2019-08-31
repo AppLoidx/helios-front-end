@@ -10,6 +10,12 @@ class SearchPage extends React.Component {
 		this.onSearchButtonClick = this.onSearchButtonClick.bind(this);
 		this.onInputChange = this.onInputChange.bind(this);
 		this.isExistQueue = this.isExistQueue.bind(this);
+		$(document).bind("keypress", e => {
+			if (e.keyCode === 13) {
+				e.preventDefault();
+				this.onSearchButtonClick();
+			}
+		});
 	}
 	componentDidMount(){
 		fetch("api/user")

@@ -5,7 +5,6 @@ const ReactRouterDOM = require('react-router-dom');
 
 const MainPage = require('./MainPage.jsx');
 const QueuePage = require('./queues/QueuePage.jsx');
-const SignInPage = require('./sign-in/SignIn.jsx');
 const RegisterPage = require('./RegisterPage.jsx');
 const CreateQueuePage = require('./creation/CreateQueuePage.jsx');
 const UserProfile = require('./user-profile/UserProfile.jsx');
@@ -40,7 +39,6 @@ class ContentPage extends React.Component {
                           <div >
                             <ReactRouterDOM.Route exact path="/" component={MainPage}/>
                             <ReactRouterDOM.Route exact path="/queue/:id" component={QueuePage}/>
-                            <ReactRouterDOM.Route exact path="/signin" component={SignInPage} />
                             <ReactRouterDOM.Route exact path="/register" component={RegisterPage} />
                             <ReactRouterDOM.Route exact path="/create" component={CreateQueuePage} />
                             <ReactRouterDOM.Route exact path="/myprofile" component={UserProfile} />

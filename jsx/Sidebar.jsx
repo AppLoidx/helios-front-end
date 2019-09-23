@@ -1,7 +1,9 @@
 const React = require('react');
 const QueueLink = require('./queues/QueueLink.jsx');
 const Spinner = require('./util/RoundedSpinner.jsx');
+
 require('./../style/sidebar/style.css');
+
 
 
 class Sidebar extends React.Component {
@@ -18,7 +20,7 @@ class Sidebar extends React.Component {
 
         .then( response => {
             if (response.status === 400 || response.status === 401){
-                document.location.href = "/external/login.html";
+                // document.location.href = "/external/login.html";
             }
             return response.json()
         }).then(
@@ -43,12 +45,18 @@ class Sidebar extends React.Component {
 
     fetchQueues(){
         fetch('api/user')
-        .then( response => response.json()).then(resp =>{
-            let queues = resp['queues'];
-            queues.sort(function(a, b) {
-                return a[0] === b[0] ? a > b : a[0] > b[0]
-            });
-            this.setState({"queues" : queues, "loading" : false, queuesEmpty : queues.length === 0,});
+            .then( response => {
+                if (response.status === 400 || response.status === 401){
+                    // document.location.href = "/external/login.html";
+                }
+                return response.json()
+            })
+            .then(resp =>{
+                let queues = resp['queues'];
+                queues.sort(function(a, b) {
+                    return a[0] === b[0] ? a > b : a[0] > b[0]
+                });
+                this.setState({"queues" : queues, "loading" : false, queuesEmpty : queues.length === 0,});
     })
     }
 
@@ -72,7 +80,7 @@ class Sidebar extends React.Component {
                     <ul className="collapse list-unstyled sidebar-link" id="homeSubmenu">
                         {this.state.loading?(<li className="justify-content-center mx-auto text-center"><Spinner /></li>)
                                             :
-                        this.state.queuesEmpty?<li className="justify-content-center mx-auto text-center">Пусто</li>:this.state.queues.map((i, k) => {return <li key={k}><QueueLink link={"#/queue/" + i[0]} name={i[1]}/></li>})
+                        this.state.queuesEmpty?<li className="justify-content-center mx-auto text-center">Пусто</li>:this.state.queues.map((i, k) => {return <li key={k}><QueueLink link={"#/queue/" + i["short_name"]} name={i["fullname"]}/></li>})
                         }
                     </ul>
                 </li>
@@ -99,6 +107,8 @@ class Sidebar extends React.Component {
         </div>
         </div>
         )
+
+
         }
 }
 

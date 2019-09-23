@@ -42,7 +42,6 @@ class ContentPage extends React.Component {
                             <ReactRouterDOM.Route exact path="/register" component={RegisterPage} />
                             <ReactRouterDOM.Route exact path="/create" component={CreateQueuePage} />
                             <ReactRouterDOM.Route exact path="/myprofile" component={UserProfile} />
-                            {/*<ReactRouterDOM.Route exact path="/chat/:id" component={ChatPage} />*/}
                             <ReactRouterDOM.Route exact path="/search" component={SearchPage} />
                           </div>
                         </div>

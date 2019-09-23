@@ -1,6 +1,6 @@
 const React = require('react');
 
-class LastActiveTable extends React.Component {
+class TableElement extends React.Component {
     render(){
         return (
             <div>
@@ -31,4 +31,4 @@ class LastActiveTable extends React.Component {
     }
 }
 
-module.exports = LastActiveTable;
+module.exports = TableElement;

@@ -4,14 +4,16 @@ const SRC = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   entry: ['./jsx/App.jsx'],
-  mode: "development",
+  mode: "production",
   output: {
     path:
         '/java/helios-backend/src/main/resources/static'
-        // __dirname + '/js/'
+        // __dirname
     ,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+      chunkFilename: "[name].bundle.js"
   },
+
   devtool: '#sourcemap',
   stats: {
    colors: true,
@@ -41,6 +43,10 @@ module.exports = {
         test: /\.mp3$/,
         include: SRC,
         loader: 'file-loader'
+      },
+      {
+        test: /\.bundle\.js$/,
+        use: 'bundle-loader'
       }
 
     ]

@@ -15,14 +15,18 @@ class QueuePageContent extends React.Component {
             "users" : [],
             showAllNotifications: false,
             allNotice: [],
-            showSettingsModal: false};
+            showSettingsModal: false,
+            username: undefined};
         this.onSettingsClick = this.onSettingsClick.bind(this);
-        this.fetchQueues = this.fetchQueues.bind(this);
+        this.fetchQueue = this.fetchQueue.bind(this);
     }
 
-    fetchQueues(props){
+    fetchQueue(props){
         fetch ('api/queue?queue_name=' + props.queueName)
             .then(resp => {
+                if (resp.status === 401){
+                    window.location.href = "/external/login.html";
+                }
                 if (resp.status === 404){
                     this.setState({"queueName" : "Очередь с именем " + props.name + " не найдена", requestingData: false});
                     return ;
@@ -31,7 +35,6 @@ class QueuePageContent extends React.Component {
             })
             .then(resp => {
                 let members = resp["members"];
-
                 let usersMap = new Map();
                 let usersList = [];
                 members.map(u => usersMap.set(u.id, u));
@@ -60,11 +63,19 @@ class QueuePageContent extends React.Component {
 
     componentDidMount(){
         this.setState({requestingData : true});
-        this.fetchQueues(this.props);
+        this.fetchQueue(this.props);
+
+        fetch("/api/user")
+            .then(resp => resp.json())
+            .then(res => {
+                this.setState({username : res['user']['username']})
+            })
+            .catch(e => console.log(e));
+
     }
     componentWillReceiveProps(newProps){
         this.setState({requestingData : true, queueName: newProps.queueName});
-        this.fetchQueues(newProps);
+        this.fetchQueue(newProps);
     }
 
     onSettingsClick(){
@@ -80,7 +91,6 @@ class QueuePageContent extends React.Component {
                         <h6 className="ml-3 mb-0 text-black lh-100">{this.state.queueName}</h6>
                     </div>
                     <button className={"btn btn-link text-right float-right ml-auto"} style={{textDecoration : 'none'}} onClick={this.onSettingsClick}><span className={"d-none d-md-inline"}>Управление </span><i className="fa fa-cog"></i></button>
-                    <a href={"#chat/" + this.props.queueName} className="text-right float-right"><span className={"d-none d-md-inline"}>Чат </span><i className="fa fa-comments"></i></a>
                 </div>
 
                 <div className="my-3 p-3 bg-white rounded shadow-sm">
@@ -102,11 +112,13 @@ class QueuePageContent extends React.Component {
                     {this.state.requestingData ?
                         <div className={"text-center mt-3"}><Spinner/></div>
                         :
-                        <ul>
+                        <ul className={"pl-0"}>
                             {this.state.users.map((x, i) => {
                                 return <li style={{listStyle: 'none'}} key={x["id"]}><QueueUser username={x["username"]}
-                                                                                                fullname={x["first_name"] + " " + x["last_name"]}/>
+                                                                                                fullname={x["first_name"] + " " + x["last_name"]}
+                                                                                                queuename={this.props.queueName}/>
                                 </li>
+
                             })}
                         </ul>
                     }
@@ -121,7 +133,7 @@ class QueuePageContent extends React.Component {
                               onHide={() => this.setState({showSettingsModal : false})}
                               title={this.state.queueName}/>
 
-                              <Chat chatname = {this.state.queueName}/>
+                              <Chat chatname = {this.state.queueName} queuename = {this.props.queueName} username={this.state.username}/>
             </main>
         )
     }

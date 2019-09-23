@@ -1,7 +1,7 @@
 const React = require('react');
 const Modal = require('react-bootstrap/Modal.js');
 const InputForm = require('./PriorityInputForm.jsx');
-const Button = require('react-bootstrap/Button.js');
+const Button = require('react-bootstrap/Modal.js');
 
 class PriorityPickModal extends React.Component {
     constructor(props){

@@ -64,7 +64,8 @@ class CreateQueuePageContent extends React.Component {
                 this.setState({"successful" : false})
             }
 
-            this.setState({"sending" : false})
+            this.setState({"sending" : false});
+            window.location.reload();
         }
         
         ).catch(err => {
@@ -196,7 +197,6 @@ class CreateQueuePageContent extends React.Component {
                     </select>
                 </div>
                 <div className="form-group mt-1">
-                    <label htmlFor="autoDaySelect">День недели генерации</label>
                     <select className={"form-control"} id="autoDaySelect" onChange={this.handleDaySelect}>
                         <option value="monday" defaultChecked={true}>Понедельник</option>
                         <option value="tuesday">Вторник</option>
@@ -211,7 +211,7 @@ class CreateQueuePageContent extends React.Component {
                 </div>:<div></div>}
 
             <p>
-                <button className={"btn btn-outline-secondary mr-1"} type="button" onClick={() => this.setState({showPriorityModal: true})}>
+                <button className={"btn btn-outline-secondary mr-1 mr-sm-0"} type="button" onClick={() => this.setState({showPriorityModal: true})}>
                     Настройка приоритетов
                 </button>
                 <button className={"btn btn-primary float-right " + this.state.submitButtonClass} type="button" data-toggle="collapse" data-target={this.state.collapseTarget} aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>

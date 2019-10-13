@@ -13,14 +13,12 @@ class UserCard extends React.Component {
                 />
                 <i className="fa fa-cog position-absolute background-cog" style={{top : "165px", left: "92%", opacity: "0.5" }}></i>
                 <div className="card-body">
-                    <img src="https://i.ibb.co/kq5Dw0X/b-Sj-OKLy-Wyw.jpg" className="img-fluid img-thumbnail rounded-circle mx-auto mt-4 position-absolute" style={{top: "100px"}} alt="..." width={"100px"} height={"100px"}/>
-                    <h3 className="card-title mt-4">
-                        {/*{this.props.fullname}*/}
-                        Arthur Kupriyanov
-                    </h3>
+                    <img src={this.props.userImgUrl} className="img-fluid img-thumbnail rounded-circle mx-auto mt-4 position-absolute" style={{top: "100px"}} alt="..." width={"100px"} height={"100px"}/>
+                    <h4 className="card-title mt-4">
+                        {this.props.fullname}
+                    </h4>
                     <h5 className="text-muted">
-                        {/*{this.props.username}*/}
-                        @apploidxxx
+                        {this.props.username}
                     </h5>
 
                     <div className={"socials"}>
@@ -31,10 +29,7 @@ class UserCard extends React.Component {
                     </div>
                     <div className={"badges"}>
                         <h5>
-                            <div className="badge badge-success">Beta Tester</div>
-                            <div className="badge badge-warning">Teacher</div>
-                            <div className="badge badge-danger">Developer</div>
-                            <div className="badge badge-secondary">Head</div>
+                            <div className="badge badge-success">Newbee</div>
                         </h5>
                     </div>
 

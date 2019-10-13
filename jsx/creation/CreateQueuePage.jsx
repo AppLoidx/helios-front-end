@@ -59,13 +59,14 @@ class CreateQueuePageContent extends React.Component {
         .then(response => {
         
             if (response.ok){
-                this.setState({"successful" : true})
+                this.setState({"successful" : true});
+                window.location.reload();
             } else {
                 this.setState({"successful" : false})
             }
 
             this.setState({"sending" : false});
-            window.location.reload();
+
         }
         
         ).catch(err => {
@@ -211,7 +212,7 @@ class CreateQueuePageContent extends React.Component {
                 </div>:<div></div>}
 
             <p>
-                <button className={"btn btn-outline-secondary mr-1 mr-sm-0"} type="button" onClick={() => this.setState({showPriorityModal: true})}>
+                <button className={"btn btn-outline-secondary"} type="button" onClick={() => this.setState({showPriorityModal: true})}>
                     Настройка приоритетов
                 </button>
                 <button className={"btn btn-primary float-right " + this.state.submitButtonClass} type="button" data-toggle="collapse" data-target={this.state.collapseTarget} aria-expanded="false" aria-controls="collapseSend" onClick={this.sendRequest}>

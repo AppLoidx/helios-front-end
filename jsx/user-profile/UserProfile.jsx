@@ -6,7 +6,12 @@ const UserNotesTable = require('./UserNotesTable.jsx');
 class UserProfile extends React.Component {
     constructor(props){
         super(props);
-        this.state = {fetchingUserInfo : true, username : "loading...", fullname: "loading...", errorOccurred : false, swapRequests: []}
+        this.state = {fetchingUserInfo : true,
+            username : "loading...",
+            fullname: "loading...",
+            errorOccurred : false,
+            swapRequests: [],
+            userImgUrl: "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}
 
     }
     componentDidMount(){
@@ -16,6 +21,7 @@ class UserProfile extends React.Component {
                 this.setState({ fetchingUserInfo : false,
                                 username: data["user"]["username"],
                                 fullname : data["user"]["first_name"] +" " + data["user"]["last_name"],
+                                userImgUrl : (data["user"]["contact_details"]["img"]===null?"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg":data["user"]["contact_details"]["img"]),
                                 swapRequests: data["swap_requests"]});
             })
             .catch( err => {
@@ -33,6 +39,7 @@ class UserProfile extends React.Component {
                         <UserCard
                             username={this.state.username}
                             fullname={this.state.fullname}
+                            userImgUrl={this.state.userImgUrl}
                         />
                     </div>
 

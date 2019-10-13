@@ -20,7 +20,7 @@ class Sidebar extends React.Component {
 
         .then( response => {
             if (response.status === 400 || response.status === 401){
-                // document.location.href = "/external/login.html";
+                document.location.href = "/api/auth";
             }
             return response.json()
         }).then(
@@ -47,7 +47,7 @@ class Sidebar extends React.Component {
         fetch('api/user')
             .then( response => {
                 if (response.status === 400 || response.status === 401){
-                    // document.location.href = "/external/login.html";
+                    document.location.href = "/api/auth";
                 }
                 return response.json()
             })
@@ -91,7 +91,7 @@ class Sidebar extends React.Component {
                         <p className={"py-0 mb-0 mt-1"}>{this.state.username}</p>
                         <a href="/api/logout"><i className={"fa fa-sign-out-alt"}></i></a>
                     </div>:
-                    <a href={"/external/login.html"} className={"sidebar-link"}>Войти</a>
+                    <a href={"/api/auth"} className={"sidebar-link"}>Войти</a>
                 }
                 </li>
             </ul>

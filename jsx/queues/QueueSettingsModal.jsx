@@ -17,21 +17,27 @@ class QueueSettingsModal extends React.Component {
     onShuffleClick(){
         this.setState({shuffleModalSendingRequest: true});
 
-            fetch("api/queue/" + this.props.queueName +"?action=shuffle", {method: "put"})
-                .then(resp => {
-                    if (resp.status === 200){
-                        this.setState({showShuffleModal: false, shuffleModalSendingRequest: false});
-                        document.location.href = "/helios.html#/queue/" + this.props.queueName;
-                    } else {
-                        console.log("fail: " + resp.status);
-                        this.setState({showShuffleModal: false, shuffleModalSendingRequest: false});
-                    }
-                }).catch(err => {
-                console.log(err);
-                this.setState({
-                    shuffleModalSendingRequest: false,
-                    shuffleModalMessage: "Произошла ошибка. Повторите попытку позже"});
-            });
+        fetch("api/queue/" + this.props.queueName +"?action=shuffle", {method: "put"})
+            .then(resp => {
+                if (resp.status === 200){
+                    this.setState({showShuffleModal: false, shuffleModalSendingRequest: false});
+                    window.location.reload();
+                } else if (resp.status === 403){
+                    this.setState({shuffleModalMessage: "У вас недостаточно прав", shuffleModalSendingRequest: false});
+                    this.onShuffleClick = () => {this.setState({showShuffleModal : false})};    // TODO: maybe do this better ? :)
+                }
+                else {
+                    console.log("fail: " + resp.status);
+                    this.setState({
+                        shuffleModalSendingRequest: false,
+                        shuffleModalMessage: "Произошла ошибка. Повторите попытку позже"});
+                }
+            }).catch(err => {
+            console.log(err);
+            this.setState({
+                shuffleModalSendingRequest: false,
+                shuffleModalMessage: "Произошла ошибка. Повторите попытку позже"});
+        });
     }
 
     onDeleteAccept(){

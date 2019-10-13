@@ -48,8 +48,13 @@ class QueuePageContent extends React.Component {
                     });
                     let data = [];
                     for (let notice of resp["notifications"]) {
-                        console.log(notice["message"]);
-                        data.push(<Media author={"Система"} message={notice["message"]}/>)
+                        let creationDate = new Date(notice["creation_date"]);
+                        const DATE = creationDate.getDate();
+                        const MONTH = creationDate.toLocaleString('default', {month: 'short'});
+                        const HOURS = creationDate.getHours();
+                        const MINUTES = creationDate.getMinutes();
+                        const SECONDS = creationDate.getSeconds();
+                        data.push(<Media author={(notice["author"]==null?"Система":notice["author"])} time={`${HOURS}:${MINUTES}:${SECONDS} ${DATE} ${MONTH}`} message={notice["message"]}/>)
                     }
                     this.setState({allNotice: data, requestingData: false});
                 }
@@ -107,7 +112,13 @@ class QueuePageContent extends React.Component {
                 </div>
 
                 <div className="my-3 p-3 bg-white rounded shadow-sm">
-                    <h6 className="border-bottom border-gray pb-2 mb-0">Участники очереди</h6>
+                    <div className={"text-secondary"}>
+                        Количество участников: {this.state.users.length}
+                    </div>
+                    <h6 className="border-bottom border-gray pb-2 mb-0">
+                        Участники очереди
+                    </h6>
+
 
                     {this.state.requestingData ?
                         <div className={"text-center mt-3"}><Spinner/></div>
@@ -116,7 +127,8 @@ class QueuePageContent extends React.Component {
                             {this.state.users.map((x, i) => {
                                 return <li style={{listStyle: 'none'}} key={x["id"]}><QueueUser username={x["username"]}
                                                                                                 fullname={x["first_name"] + " " + x["last_name"]}
-                                                                                                queuename={this.props.queueName}/>
+                                                                                                queuename={this.props.queueName}
+                                                                                                imgUrl={x["contact_details"]["img"]===null?"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg":x["contact_details"]["img"]}/>
                                 </li>
 
                             })}
@@ -133,7 +145,7 @@ class QueuePageContent extends React.Component {
                               onHide={() => this.setState({showSettingsModal : false})}
                               title={this.state.queueName}/>
 
-                              <Chat chatname = {this.state.queueName} queuename = {this.props.queueName} username={this.state.username}/>
+                              {/*<Chat chatname = {this.state.queueName} queuename = {this.props.queueName} username={this.state.username}/>*/}
             </main>
         )
     }

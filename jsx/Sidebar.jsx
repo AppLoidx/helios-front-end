@@ -1,6 +1,7 @@
 const React = require('react');
 const QueueLink = require('./queues/QueueLink.jsx');
 const Spinner = require('./util/RoundedSpinner.jsx');
+const logo = require('./../style/sidebar/helios-white-logo.png');
 
 require('./../style/sidebar/style.css');
 
@@ -66,9 +67,8 @@ class Sidebar extends React.Component {
 
         <nav id="sidebar">
             <div className="sidebar-header">
-                <h3 className="display-4">
-
-                <span className="text-light">HELIOS</span>
+                <h3 className="text-center">
+                    <img src={logo} className="img-fluid col-6" data-aos="flip-right"/>
                 </h3>
             </div>
 
@@ -82,6 +82,8 @@ class Sidebar extends React.Component {
                                             :
                         this.state.queuesEmpty?<li className="justify-content-center mx-auto text-center">Пусто</li>:this.state.queues.map((i, k) => {return <li key={k}><QueueLink link={"#/queue/" + i["short_name"]} name={i["fullname"]}/></li>})
                         }
+
+                        <li><QueueLink link={"#/queue/" + "example"} name={"Example Queue"}/></li>
                     </ul>
                 </li>
                 <li><a href={"#/search"} className={"sidebar-link"}>Присоединиться</a></li>

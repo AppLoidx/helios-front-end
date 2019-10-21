@@ -65,8 +65,8 @@ class SearchPage extends React.Component {
 				<br/>
 				<div className="row justify-content-center">
 					<div className="col-12 col-md-12 col-lg-10">
-					   <SearchBar onSearchButtonClick={this.onSearchButtonClick} onInputChange={this.onInputChange}/>
-					   <SearchResult loaded={this.state.loaded} searching={this.state.searching} data={this.state.data} searched={this.state.searched}/>
+					   <div data-aos="slide-up" data-aos-duration="800"><SearchBar onSearchButtonClick={this.onSearchButtonClick} onInputChange={this.onInputChange}/></div>
+					   <div data-aos="slide-up" data-aos-duration="1100"><SearchResult loaded={this.state.loaded} searching={this.state.searching} data={this.state.data} searched={this.state.searched}/></div>
 					</div>
 				</div>
 			</div>

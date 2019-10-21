@@ -4,11 +4,11 @@ const SRC = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   entry: ['./jsx/App.jsx'],
-  mode: "production",
+  mode: "development",
   output: {
     path:
-        '/java/helios-backend/src/main/resources/static'
-        // __dirname
+        // '/java/helios-backend/src/main/resources/static'
+        __dirname
     ,
     filename: 'bundle.js',
       chunkFilename: "[name].bundle.js"
@@ -26,6 +26,17 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
         loaders: ['babel-loader']
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,

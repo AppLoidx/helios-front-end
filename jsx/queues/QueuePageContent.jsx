@@ -4,19 +4,21 @@ const Media = require('./QueueNotification.jsx');
 const AllMedia = require('./QueueAllNotificationsModal.jsx');
 const Spinner = require('./../util/GrowingSpinner.jsx');
 const QueueSettingsModal = require('./QueueSettingsModal.jsx');
-const Chat = require('../chat/Chat.jsx');
+// const Chat = require('../chat/Chat.jsx');
 
 class QueuePageContent extends React.Component {
 
     constructor(props){
         super (props);
-        this.state = {"requestingData" : false,
-            "queueName" : this.props.queueName,
-            "users" : [],
+        this.state = {
+            requestingData      : false,
+            queueName           : this.props.queueName,
+            users               : [],
             showAllNotifications: false,
-            allNotice: [],
-            showSettingsModal: false,
-            username: undefined};
+            allNotice           : [],
+            showSettingsModal   : false,
+            username            : undefined
+        };
         this.onSettingsClick = this.onSettingsClick.bind(this);
         this.fetchQueue = this.fetchQueue.bind(this);
     }
@@ -49,7 +51,7 @@ class QueuePageContent extends React.Component {
                     let data = [];
                     for (let notice of resp["notifications"]) {
                         let creationDate = new Date(notice["creation_date"]);
-                        const DATE = creationDate.getDate();
+                        const DATE  = creationDate.getDate();
                         const MONTH = creationDate.toLocaleString('default', {month: 'short'});
                         const HOURS = creationDate.getHours();
                         const MINUTES = creationDate.getMinutes();
@@ -90,7 +92,7 @@ class QueuePageContent extends React.Component {
     render(){
         return (
             <main role="main" className="container">
-                <div className="d-flex align-items-center p-3 my-3 bg-purple rounded shadow-sm">
+                <div className="d-flex align-items-center p-3 my-3 bg-purple rounded shadow-sm" data-aos='slide-up'>
                     <i className="fa fa-users fa-2x" aria-hidden="true"></i>
                     <div className="lh-100">
                         <h6 className="ml-3 mb-0 text-black lh-100">{this.state.queueName}</h6>
@@ -98,7 +100,7 @@ class QueuePageContent extends React.Component {
                     <button className={"btn btn-link text-right float-right ml-auto"} style={{textDecoration : 'none'}} onClick={this.onSettingsClick}><span className={"d-none d-md-inline"}>Управление </span><i className="fa fa-cog"></i></button>
                 </div>
 
-                <div className="my-3 p-3 bg-white rounded shadow-sm">
+                <div className="my-3 p-3 bg-white rounded shadow-sm" data-aos-duration='800' data-aos='slide-up'>
                     <h6 className="border-bottom border-gray pb-2 mb-0">Последние обновления</h6>
                     {this.state.requestingData?<div className={"text-center mt-3"}><Spinner/></div>:
                         this.state.allNotice.map((x,i) => {
@@ -111,7 +113,7 @@ class QueuePageContent extends React.Component {
                     </small>
                 </div>
 
-                <div className="my-3 p-3 bg-white rounded shadow-sm">
+                <div className="my-3 p-3 bg-white rounded shadow-sm" data-aos='fade-up' data-aos-duration='900'>
                     <div className={"text-secondary"}>
                         Количество участников: {this.state.users.length}
                     </div>
@@ -125,15 +127,60 @@ class QueuePageContent extends React.Component {
                         :
                         <ul className={"pl-0"}>
                             {this.state.users.map((x, i) => {
-                                return <li style={{listStyle: 'none'}} key={x["id"]}><QueueUser username={x["username"]}
+                                return <li style={{listStyle: 'none'}} key={x["id"]} data-aos={"slide-up"}><QueueUser username={x["username"]}
                                                                                                 fullname={x["first_name"] + " " + x["last_name"]}
                                                                                                 queuename={this.props.queueName}
                                                                                                 imgUrl={x["contact_details"]["img"]===null?"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg":x["contact_details"]["img"]}/>
                                 </li>
 
                             })}
+
+                            <li style={{listStyle: 'none'}} data-aos={"flip-down"} data-aos-duration='800'>
+                            <QueueUser username={"Nikcname"}
+                                                                                                fullname={"first_name" + " " + "last_name"}
+                                                                                                queuename={this.props.queueName}
+                                                                                                imgUrl={"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
+                            </li>                            
+                            <li style={{listStyle: 'none'}} data-aos={"flip-down"} data-aos-duration='800'>
+                            <QueueUser username={"Nikcname"}
+                                                                                                fullname={"first_name" + " " + "last_name"}
+                                                                                                queuename={this.props.queueName}
+                                                                                                imgUrl={"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
+                            </li>                            
+                            <li style={{listStyle: 'none'}} data-aos={"flip-down"} data-aos-duration='800'>
+                            <QueueUser username={"Nikcname"}
+                                                                                                fullname={"first_name" + " " + "last_name"}
+                                                                                                queuename={this.props.queueName}
+                                                                                                imgUrl={"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
+                            </li>                            
+                            <li style={{listStyle: 'none'}} data-aos={"flip-down"} data-aos-duration='800'>
+                            <QueueUser username={"Nikcname"}
+                                                                                                fullname={"first_name" + " " + "last_name"}
+                                                                                                queuename={this.props.queueName}
+                                                                                                imgUrl={"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
+                            </li>                            
+                            <li style={{listStyle: 'none'}} data-aos={"flip-down"} data-aos-duration='800'>
+                            <QueueUser username={"Nikcname"}
+                                                                                                fullname={"first_name" + " " + "last_name"}
+                                                                                                queuename={this.props.queueName}
+                                                                                                imgUrl={"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
+                            </li>                            
+                            <li style={{listStyle: 'none'}} data-aos={"flip-down"} data-aos-duration='800'>
+                            <QueueUser username={"Nikcname"}
+                                                                                                fullname={"first_name" + " " + "last_name"}
+                                                                                                queuename={this.props.queueName}
+                                                                                                imgUrl={"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
+                            </li>                            
+                            <li style={{listStyle: 'none'}} data-aos={"flip-down"} data-aos-duration='800'>
+                            <QueueUser username={"Nikcname"}
+                                                                                                fullname={"first_name" + " " + "last_name"}
+                                                                                                queuename={this.props.queueName}
+                                                                                                imgUrl={"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
+                            </li>                            
+                            
                         </ul>
                     }
+
                 </div>
 
                 <AllMedia show={this.state.showAllNotifications} onHide={() => this.setState({showAllNotifications: false})}

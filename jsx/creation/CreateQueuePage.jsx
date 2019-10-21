@@ -211,7 +211,7 @@ class CreateQueuePageContent extends React.Component {
 
                 </div>:<div></div>}
 
-            <p>
+            <div className={"form-group d-flex justify-content-between"}>
                 <button className={"btn btn-outline-secondary"} type="button" onClick={() => this.setState({showPriorityModal: true})}>
                     Настройка приоритетов
                 </button>
@@ -219,11 +219,11 @@ class CreateQueuePageContent extends React.Component {
                     Создать
                 </button>
 
-            </p>
+            </div>
 
             <PriorityPickModal onHide={() => this.setState({showPriorityModal : false})} show={this.state.showPriorityModal}/>
 
-            <div className="collapse" id={this.state.collapseComponentId}>
+            <div className="form-group collapse" id={this.state.collapseComponentId}>
                 <div className="card card-body text-center">
                     {this.state.sending?<div><p>Создание очереди</p><RoundedSpinner/></div>
                     :

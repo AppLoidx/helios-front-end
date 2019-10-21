@@ -11,6 +11,8 @@ const UserProfile = require('./user-profile/UserProfile.jsx');
 const Sidebar = require('./Sidebar.jsx');
 const SearchPage = require('./search/SearchPage.jsx');
 
+require('./../style/_variables.scss');
+
 class ContentPage extends React.Component {
 
     componentDidMount(){

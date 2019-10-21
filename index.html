@@ -5,28 +5,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Helios</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&display=swap" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
-    <link rel="stylesheet" href="assets/css/untitled.css">
-    <style>
-        .nav-item > a{
-            color: #7b4397 !important;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <link rel="apple-touch-icon" sizes="144x144" href="meta/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="meta/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="meta/favicon-16x16.png">
+    <link rel="manifest" href="meta/site.webmanifest">
+    <link rel="mask-icon" href="meta/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#603cba">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 
 <body id="page-top">
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top" style="background-color: white" id="mainNav">
-        <div class="container"><a class="navbar-brand js-scroll-trigger"  style="color: #7b4397" href="#page-top">Helios</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler float-right" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Helios</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler float-right" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div
                 class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#">начать пользоваться</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#page-top">начать пользоваться</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#features">Возможности</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#contact">Контакты</a></li>
                 </ul>
@@ -38,10 +43,10 @@
             <div class="row h-100">
                 <div class="col-lg-7 my-auto">
                     <div class="mx-auto header-content" style="font-family: 'Blogger Sans Light','Muli','Catamaran','Lato',sans-serif;">
-                        <h1 class="mb-5" style="font-family: 'Lobster', cursive;">Helios - сервис для создания очередей на лабораторные работы</h1><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="helios.html">начать пользоваться!</a></div>
+                        <h1 class="mb-5" style="font-family: 'Lobster', cursive;">Helios - сервис для создания очередей на лабораторные работы</h1><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="/api/auth" data-aos="flip-up" data-aos-delay="1000" data-aos-duration="800">начать пользоваться!</a></div>
                 </div>
                 <div class="col-lg-5 my-auto d-none d-sm-block">
-                    <div class="device-container">
+                    <div class="device-container" data-aos="fade-up" data-aos-duration="1300">
                         <div class="device-mockup iphone6_plus portrait white">
                             <div class="device" style="background-image:url('assets/img/iphone_6_plus_white_port.png');">
                                 <div class="screen"><img class="img-fluid" src="assets/img/helios-screen-2.jpg" alt=""></div>
@@ -63,7 +68,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 my-auto">
-                    <div class="device-container">
+                    <div class="device-container" data-aos-duration="1800" data-aos="fade-right">
                         <div class="device-mockup iphone6_plus portrait white">
                             <div class="device" style="background-image:url('assets/img/iphone_6_plus_white_port.png');">
                                 <div class="screen"><img class="img-fluid" src="assets/img/helios-screen-1.jpg" alt=""></div>
@@ -75,27 +80,27 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="feature-item"><i class="icon-screen-smartphone text-primary"></i>
-                                    <h3 style="font-family: 'Helvetica',sans-serif;">Адаптивность</h3>
-                                    <p class="text-muted">Пользуйтесь очередью с любого устройства</p>
+                                <div class="feature-item"><i data-aos="fade-up" data-aos-duration="1500" class="icon-screen-smartphone text-primary"></i>
+                                    <h3 style="font-family: 'Helvetica',sans-serif;" data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="900">Адаптивность</h3>
+                                    <p class="text-muted" data-aos="fade-up" data-aos-duration="1500">Пользуйтесь очередью с любого устройства</p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="feature-item"><i class="icon-camera text-primary icon-lock"></i>
-                                    <h3 style="font-family: 'Helvetica',sans-serif;">Закрытые очереди</h3>
-                                    <p class="text-muted">Создавайте закрытые очереди лишь для своей группы</p>
+                                <div class="feature-item"><i data-aos="fade-up" data-aos-duration="1500" class="icon-camera text-primary icon-lock"></i>
+                                    <h3 style="font-family: 'Helvetica',sans-serif;" data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="900">Приватные очереди</h3>
+                                    <p class="text-muted" data-aos="fade-up" data-aos-duration="1500">Создавайте приватные очереди лишь для своей группы</p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="feature-item"><i class="icon-present text-primary icon-refresh"></i>
-                                    <h3 style="font-family: 'Helvetica',sans-serif;">Меняйтесь местами</h3>
-                                    <p class="text-muted">Если вам неудобно подходить в заданное время, то просто поменяйтесь местами</p>
+                                <div class="feature-item"><i data-aos="fade-up" data-aos-duration="1500" class="icon-present text-primary icon-refresh"></i>
+                                    <h3 style="font-family: 'Helvetica',sans-serif;" data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="900">Меняйтесь местами</h3>
+                                    <p class="text-muted" data-aos="fade-up" data-aos-duration="1500">Если вам неудобно подходить в заданное время, то просто поменяйтесь местами</p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="feature-item"><i class="icon-lock-open text-primary icon-globe"></i>
-                                    <h3 style="font-family: 'Helvetica',sans-serif;">Open Source</h3>
-                                    <p class="text-muted">Внесите свой вклад в развитие проекта</p>
+                                <div class="feature-item"><i data-aos="fade-up" data-aos-duration="1500" class="icon-lock-open text-primary icon-globe"></i>
+                                    <h3 style="font-family: 'Helvetica',sans-serif;" data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="900">Open Source</h3>
+                                    <p class="text-muted" data-aos="fade-up" data-aos-duration="1500">Внесите свой вклад в развитие проекта</p>
                                 </div>
                             </div>
                         </div>
@@ -104,19 +109,37 @@
             </div>
         </div>
     </section>
+
+    <section>
+        <div class="section-heading text-center">
+            <h2>Создавайте очереди</h2>
+            <p class="text-muted">Различные виды очередей для каждого случая</p>
+            <hr>
+        </div>
+        <div class="row text-center" style="margin: 0px;">
+            <div class="col-auto text-center justify-content-center m-auto row" style="padding: 0px;margin: 0px;width: 1188px;height: 548px;">
+                <img class="hover-screenshot img-fluid border rounded-0 shadow-lg float-left"                                                            data-aos="fade-up" data-aos-delay="" data-aos-duration="1200" src="assets/img/chrome_Qnv1jWt8xw.png" style="margin: 40px;" height="220px" width="314px">
+                <img class="hover-screenshot img-fluid border rounded-0 shadow-lg d-none d-sm-block" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1200" src="assets/img/HT35mkC1VB.png" style="margin: 40px;" width="314px" height="220px">
+                <img class="hover-screenshot img-fluid border rounded-0 shadow-lg  d-none d-sm-block"   data-aos="fade-up" data-aos-delay="600" data-aos-duration="1200" src="assets/img/boAnjIvRQx.png" style="margin: 40px;" width="314px" height="220px">
+            </div>
+        </div>
+
+    </section>
+
     <section class="cta" style="background-image:url('assets/img/bg-cta.jpg');">
         <div class="cta-content">
             <div class="container">
-                <h2 style="font-size: 40px;">Меньше ожиданий - больше времени на подготовку</h2><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="#contact">Попробовать</a></div>
+                <h2 style="font-size: 40px;" data-aos="fade-right" data-aos-delay="500" data-aos-duration="600">Меньше ожиданий - больше времени на подготовку</h2><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="#contact" data-aos="flip-up" data-aos-delay="900" data-aos-duration="800">Попробовать</a></div>
         </div>
         <div class="overlay"></div>
     </section>
+
     <section id="contact" class="contact bg-primary">
         <div class="container">
             <h2><span>We&nbsp;</span><i class="fa fa-heart"></i><span>&nbsp;open source</span></h2>
             <ul class="list-inline list-social">
-                <li class="list-inline-item social-twitter"><a href="https://github.com/AppLoidx/helios-server" style="background-color: black;"><i class="fa fa-github"></i></a></li>
-                <li class="list-inline-item social-facebook"><a href="#"><i class="fa fa-vk"></i></a></li>
+                <li class="list-inline-item social" data-aos="flip-down" data-aos-delay="800"                data-aos-duration="500"><a href="https://github.com/AppLoidx/helios-server" style="background-color: black;"><i class="fa fa-github"></i></a></li>
+                <li class="list-inline-item social-facebook social" data-aos="flip-down" data-aos-delay="800" data-aos-duration="500"><a href="#"><i class="fa fa-vk"></i></a></li>
             </ul>
         </div>
     </section>
@@ -133,7 +156,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
     <script src="assets/js/new-age.js"></script>
+
+    <script>
+        AOS.init();
+    </script>
+
+    <script>
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 76 and later from showing the mini-infobar
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            showInstallPromotion();
+        });
+    </script>
 </body>
 
 </html>

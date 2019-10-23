@@ -1,8 +1,8 @@
 const React = require('react');
 
 class PriorityInputForm extends React.Component {
-    render(){
-        return(
+    render() {
+        return (
             <div className="row mt-1" id={this.props.formId}>
                 <div className="col-8">
                     <input type="text" className="form-control" placeholder="Критерий"/>
@@ -10,7 +10,8 @@ class PriorityInputForm extends React.Component {
                 <div className="col-3">
                     <input type="text" className="form-control" placeholder="Приоритет"/>
                 </div>
-                <button className={"btn btn-link col-1 text-danger"} onClick={this.props.onDelete}><i className={"fa fa-trash"}></i></button>
+                <button className={"btn btn-link col-1 text-danger"} onClick={this.props.onDelete}><i
+                    className={"fa fa-trash"}></i></button>
             </div>
         )
     }

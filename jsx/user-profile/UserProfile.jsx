@@ -8,45 +8,48 @@ const UserNotesTable = require('./UserNotesTable.jsx');
 require('./../../style/user-profile/carousel-colors.css');
 
 
-
 class UserProfile extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            fetchingUserInfo : true,
-            username : "loading...",
+            fetchingUserInfo: true,
+            username: "loading...",
             fullname: "loading...",
-            errorOccurred : false,
+            errorOccurred: false,
             swapRequests: [],
-            userImgUrl: "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}
+            userImgUrl: "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"
+        }
 
     }
-    componentDidMount(){
+
+    componentDidMount() {
         fetch("api/user")
             .then(resp => resp.json())
             .then(data => {
-                this.setState({ fetchingUserInfo : false,
-                                username: data["user"]["username"],
-                                fullname : data["user"]["first_name"] + " " + data["user"]["last_name"],
-                                userImgUrl : (data["user"]["contact_details"]["img"]===null?"https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg":data["user"]["contact_details"]["img"]),
-                                swapRequests: data["swap_requests"]});
+                this.setState({
+                    fetchingUserInfo: false,
+                    username: data["user"]["username"],
+                    fullname: data["user"]["first_name"] + " " + data["user"]["last_name"],
+                    userImgUrl: (data["user"]["contact_details"]["img"] === null ? "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg" : data["user"]["contact_details"]["img"]),
+                    swapRequests: data["swap_requests"]
+                });
             })
-            .catch( err => {
-                this.setState({ errorOccurred : true});
+            .catch(err => {
+                this.setState({errorOccurred: true});
                 console.log("error" + err);
 
             })
     }
 
-    render (){
+    render() {
         return (
             <div>
-                <div className = "justify-content-between col-12 mx-auto">
-                    <div className = "col-md-4 col-sm-8 col-12 mx-auto">
+                <div className="justify-content-between col-12 mx-auto">
+                    <div className="col-md-4 col-sm-8 col-12 mx-auto">
                         <UserCard
-                            username  = {this.state.username}
-                            fullname  = {this.state.fullname}
-                            userImgUrl= {this.state.userImgUrl}
+                            username={this.state.username}
+                            fullname={this.state.fullname}
+                            userImgUrl={this.state.userImgUrl}
                         />
                     </div>
                     <Carousel style={{minHeight: '1000px'}} interval={null}>
@@ -56,13 +59,13 @@ class UserProfile extends React.Component {
                             </div>
 
                         </Carousel.Item>
-                        <Carousel.Item >
+                        <Carousel.Item>
                             <div className={"col-8 mx-auto mt-4"}>
-                                <UserDashboard />
+                                <UserDashboard/>
                             </div>
 
                         </Carousel.Item>
-                        <Carousel.Item >
+                        <Carousel.Item>
                             <div className={"col-8 mx-auto mt-4"}><UserNotesTable/></div>
 
                         </Carousel.Item>

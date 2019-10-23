@@ -67,10 +67,10 @@ const timelineData = [
     }
 ];
 
-const TimelineItem = ({ data }) => (
+const TimelineItem = ({data}) => (
     <div className="timeline-item">
         <div className="timeline-item-content">
-            <span className="tag  w-100 text-center mb-1" style={{ background: data.category.color }}>
+            <span className="tag  w-100 text-center mb-1" style={{background: data.category.color}}>
                 {data.category.tag}
             </span>
             <time>{data.date}</time>
@@ -84,7 +84,7 @@ const TimelineItem = ({ data }) => (
                     {data.link.text}
                 </a>
             )}
-            <span className="circle" />
+            <span className="circle"/>
         </div>
     </div>
 );
@@ -94,7 +94,7 @@ const Timeline = () =>
         <div>
             <div className="timeline-container">
                 {timelineData.map((data, idx) => (
-                    <TimelineItem data={data} key={idx} />
+                    <TimelineItem data={data} key={idx}/>
                 ))}
             </div>
             <div className={"mx-auto text-center mt-2"}>
@@ -105,4 +105,4 @@ const Timeline = () =>
 
     );
 
-module.exports=Timeline;
+module.exports = Timeline;

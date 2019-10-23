@@ -4,9 +4,9 @@ const QueuePageContent = require('./QueuePageContent.jsx');
 
 class QueuePage extends React.Component {
 
-  render(){
-    return <QueuePageContent queueName={this.props.match.params.id} />
-  }
+    render() {
+        return <QueuePageContent queueName={this.props.match.params.id}/>
+    }
 }
 
 module.exports = QueuePage;

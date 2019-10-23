@@ -15,14 +15,14 @@ require('./../style/_variables.scss');
 
 class ContentPage extends React.Component {
 
-    componentDidMount(){
+    componentDidMount() {
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
             $('.sidebar-link').on('click', function () {
-                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                     $('#sidebar').toggleClass('active');
                     $('#sidebarCollapse').toggleClass('active');
                 }
@@ -31,23 +31,23 @@ class ContentPage extends React.Component {
         });
 
     }
-    
-    render(){
+
+    render() {
         return (
             <div>
                 <Sidebar content={
                     <ReactRouterDOM.HashRouter>
                         <div>
-                          <div >
-                            <ReactRouterDOM.Route exact path="/" component={MainPage}/>
-                            <ReactRouterDOM.Route exact path="/queue/:id" component={QueuePage}/>
-                            <ReactRouterDOM.Route exact path="/register" component={RegisterPage} />
-                            <ReactRouterDOM.Route exact path="/create" component={CreateQueuePage} />
-                            <ReactRouterDOM.Route exact path="/myprofile" component={UserProfile} />
-                            <ReactRouterDOM.Route exact path="/search" component={SearchPage} />
-                          </div>
+                            <div>
+                                <ReactRouterDOM.Route exact path="/" component={MainPage}/>
+                                <ReactRouterDOM.Route exact path="/queue/:id" component={QueuePage}/>
+                                <ReactRouterDOM.Route exact path="/register" component={RegisterPage}/>
+                                <ReactRouterDOM.Route exact path="/create" component={CreateQueuePage}/>
+                                <ReactRouterDOM.Route exact path="/myprofile" component={UserProfile}/>
+                                <ReactRouterDOM.Route exact path="/search" component={SearchPage}/>
+                            </div>
                         </div>
-                      </ReactRouterDOM.HashRouter>} />
+                    </ReactRouterDOM.HashRouter>}/>
             </div>
         )
     }

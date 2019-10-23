@@ -1,5 +1,5 @@
 const React = require('react');
-const TableElement  = require('./TableElement.jsx');
+const TableElement = require('./TableElement.jsx');
 const Table = require('react-bootstrap/Table.js');
 
 class UserNotesTable extends React.Component {
@@ -22,7 +22,10 @@ class UserNotesTable extends React.Component {
                 <tr>
                     <td>Николаев В.В</td>
                     <td>Некорректный UI</td>
-                    <td className={"text-center"}><button className={"btn btn-link col-1 text-primary"} ><i className={"fa fa-file-alt"}></i></button></td>
+                    <td className={"text-center"}>
+                        <button className={"btn btn-link col-1 text-primary"}><i className={"fa fa-file-alt"}></i>
+                        </button>
+                    </td>
                     <td>Программирование</td>
                     <td>02.09.2019</td>
                 </tr>
@@ -30,14 +33,20 @@ class UserNotesTable extends React.Component {
                 <tr>
                     <td>Гаврилов А.В</td>
                     <td>Promise в JS</td>
-                    <td className={"text-center"}><button className={"btn btn-link col-1 text-primary"} ><i className={"fa fa-file-alt"}></i></button></td>
+                    <td className={"text-center"}>
+                        <button className={"btn btn-link col-1 text-primary"}><i className={"fa fa-file-alt"}></i>
+                        </button>
+                    </td>
                     <td>Программирование Веб-приложений</td>
                     <td>01.09.2019</td>
                 </tr>
                 <tr>
-                    <td >Николаев В.В</td>
-                    <td >Многопоточность</td>
-                    <td className={"text-center"}><button className={"btn btn-link col-1 text-primary"} ><i className={"fa fa-file-alt"}></i></button></td>
+                    <td>Николаев В.В</td>
+                    <td>Многопоточность</td>
+                    <td className={"text-center"}>
+                        <button className={"btn btn-link col-1 text-primary"}><i className={"fa fa-file-alt"}></i>
+                        </button>
+                    </td>
                     <td>Программирование</td>
                     <td>19.09.2019</td>
                 </tr>

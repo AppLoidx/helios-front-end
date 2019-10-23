@@ -1,5 +1,5 @@
 const React = require('react');
-const TableElement  = require('./TableElement.jsx');
+const TableElement = require('./TableElement.jsx');
 const Table = require('react-bootstrap/Table.js');
 
 class UserDashboard extends React.Component {
@@ -26,36 +26,42 @@ class UserDashboard extends React.Component {
                     <td>Arthur Kupriyanov <span className={"text-secondary"}>@apploidxxx</span></td>
                     <td className={"text-center"}><span className={"text-success"}>Принят</span></td>
                     <td className={"text-center"}>
-                        <td><span >1</span></td>
+                        <td><span>1</span></td>
                         <td><i className={"fa fa-exchange-alt text-success mx-1"}></i></td>
                         <td><span>5</span></td>
                     </td>
                     <td className={"text-center"}>02.09.2019</td>
-                    <td className={"text-center"}><button className={"btn btn-link col-1 text-danger"} ><i className={"fa fa-trash"}></i></button></td>
+                    <td className={"text-center"}>
+                        <button className={"btn btn-link col-1 text-danger"}><i className={"fa fa-trash"}></i></button>
+                    </td>
                 </tr>
                 <tr>
                     <td>P3212</td>
                     <td>Eniseev Artem <span className={"text-secondary"}>@kraken</span></td>
                     <td className={"text-center"}><span className={"text-danger"}>Отказан</span></td>
                     <td className={"text-center"}>
-                        <td><span >4</span></td>
+                        <td><span>4</span></td>
                         <td><i className={"fa fa-exchange-alt text-success mx-1"}></i></td>
                         <td><span>12</span></td>
                     </td>
                     <td className={"text-center"}>22.08.2019</td>
-                    <td className={"text-center"}><button className={"btn btn-link col-1 text-danger"} ><i className={"fa fa-trash"}></i></button></td>
+                    <td className={"text-center"}>
+                        <button className={"btn btn-link col-1 text-danger"}><i className={"fa fa-trash"}></i></button>
+                    </td>
                 </tr>
                 <tr>
-                    <td >Доп к Николаеву</td>
-                    <td >Иванов Евгений <span className={"text-secondary"}>@SHA-256</span></td>
+                    <td>Доп к Николаеву</td>
+                    <td>Иванов Евгений <span className={"text-secondary"}>@SHA-256</span></td>
                     <td className={"text-center"}><span className={"text-warning"}>Рассматривается</span></td>
                     <td className={"text-center"}>
-                        <td><span >9</span></td>
+                        <td><span>9</span></td>
                         <td><i className={"fa fa-exchange-alt text-success mx-1"}></i></td>
                         <td><span>14</span></td>
                     </td>
                     <td className={"text-center"}>01.08.2019</td>
-                    <td className={"text-center"}><button className={"btn btn-link col-1 text-danger"} ><i className={"fa fa-trash"}></i></button></td>
+                    <td className={"text-center"}>
+                        <button className={"btn btn-link col-1 text-danger"}><i className={"fa fa-trash"}></i></button>
+                    </td>
                 </tr>
                 </tbody>
             </Table>

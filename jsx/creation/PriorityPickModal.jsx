@@ -4,25 +4,25 @@ const InputForm = require('./PriorityInputForm.jsx');
 const Button = require('react-bootstrap/Modal.js');
 
 class PriorityPickModal extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {forms : [], fromIds: 0};
+        this.state = {forms: [], fromIds: 0};
         this.onDelete = this.onDelete.bind(this);
         this.addPriority = this.addPriority.bind(this);
     }
 
-    onDelete(event){
+    onDelete(event) {
         $("#" + event.currentTarget.parentNode.id).remove();
     }
 
-    addPriority(){
+    addPriority() {
         let stateForms = this.state.forms;
         let id = this.state.fromIds;
         stateForms.push(<InputForm formId={"priority_input_form_" + id} onDelete={this.onDelete}/>);
-        this.setState({forms : stateForms, formIds : id + 1});
+        this.setState({forms: stateForms, formIds: id + 1});
     }
 
-    render(){
+    render() {
         return (
             <Modal {...this.props} size="lg" aria-labelledby="queue-all-notice-modal-vcenter" centered>
                 <Modal.Header closeButton>
@@ -32,7 +32,7 @@ class PriorityPickModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <InputForm formId={"priority_input_formx1"} onDelete={this.onDelete}/>
-                    <InputForm formId={"priority_input_formx2" } onDelete={this.onDelete}/>
+                    <InputForm formId={"priority_input_formx2"} onDelete={this.onDelete}/>
                     <InputForm formId={"priority_input_formx3"} onDelete={this.onDelete}/>
                     {/*{this.state.forms.map((x, i) => <li key={x.id} style={{listStyle: 'none'}}>{x}</li>)}*/}
 

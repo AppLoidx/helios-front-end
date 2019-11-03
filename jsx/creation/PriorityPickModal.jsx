@@ -7,18 +7,18 @@ class PriorityPickModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {forms: [], fromIds: 0};
-        this.onDelete = this.onDelete.bind(this);
+        PriorityPickModal.onDelete = PriorityPickModal.onDelete.bind(this);
         this.addPriority = this.addPriority.bind(this);
     }
 
-    onDelete(event) {
+    static onDelete(event) {
         $("#" + event.currentTarget.parentNode.id).remove();
     }
 
     addPriority() {
         let stateForms = this.state.forms;
         let id = this.state.fromIds;
-        stateForms.push(<InputForm formId={"priority_input_form_" + id} onDelete={this.onDelete}/>);
+        stateForms.push(<InputForm formId={"priority_input_form_" + id} onDelete={PriorityPickModal.onDelete}/>);
         this.setState({forms: stateForms, formIds: id + 1});
     }
 
@@ -31,9 +31,9 @@ class PriorityPickModal extends React.Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <InputForm formId={"priority_input_formx1"} onDelete={this.onDelete}/>
-                    <InputForm formId={"priority_input_formx2"} onDelete={this.onDelete}/>
-                    <InputForm formId={"priority_input_formx3"} onDelete={this.onDelete}/>
+                    <InputForm formId={"priority_input_formx1"} onDelete={PriorityPickModal.onDelete}/>
+                    <InputForm formId={"priority_input_formx2"} onDelete={PriorityPickModal.onDelete}/>
+                    <InputForm formId={"priority_input_formx3"} onDelete={PriorityPickModal.onDelete}/>
                     {/*{this.state.forms.map((x, i) => <li key={x.id} style={{listStyle: 'none'}}>{x}</li>)}*/}
 
                     <button className={"btn btn-link"} onClick={this.addPriority}>Добавить критерий приоритета</button>

@@ -10,6 +10,7 @@ const CreateQueuePage = require('./creation/CreateQueuePage.jsx');
 const UserProfile = require('./user-profile/UserProfile.jsx');
 const Sidebar = require('./Sidebar.jsx');
 const SearchPage = require('./search/SearchPage.jsx');
+const ProfileSettingsPage = require('./user-profile-settings/UserProfileSettingsPage.jsx');
 
 require('./../style/_variables.scss');
 
@@ -34,7 +35,6 @@ class ContentPage extends React.Component {
 
     render() {
         return (
-            <div>
                 <Sidebar content={
                     <ReactRouterDOM.HashRouter>
                         <div>
@@ -45,10 +45,10 @@ class ContentPage extends React.Component {
                                 <ReactRouterDOM.Route exact path="/create" component={CreateQueuePage}/>
                                 <ReactRouterDOM.Route exact path="/myprofile" component={UserProfile}/>
                                 <ReactRouterDOM.Route exact path="/search" component={SearchPage}/>
+                                <ReactRouterDOM.Route exact path="/profile-settings" component={ProfileSettingsPage}/>
                             </div>
                         </div>
                     </ReactRouterDOM.HashRouter>}/>
-            </div>
         )
     }
 }

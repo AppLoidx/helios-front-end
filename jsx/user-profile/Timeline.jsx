@@ -3,69 +3,18 @@ const Button = require('react-bootstrap/Button.js');
 
 require('./../../style/user-profile/timeline.css');
 
-const timelineData = [
-    {
-        text: 'Поменялся местами с @Aujiko',
-        date: 'Sep 25 2019 12:45',
-        category: {
-            tag: 'Обмен мест',
-            color: '#FFDB14'
-        },
-        link: {
-            url: '#',
-            text: 'Посмотреть очередь'
-        }
-    },
-    {
-        text: 'Комментарий от Николаева В.В',
-        date: 'March 04 2019',
-        category: {
-            tag: 'Комментарий',
-            color: '#e17b77'
-        },
-        link: {
-            url: '#',
-            text: 'Посмотреть'
-        }
-    },
-    {
-        text: 'Поменялся местами с @ifelseelif',
-        date: 'March 04 2019',
-        category: {
-            tag: 'Обмен мест',
-            color: '#FFDB14'
-        },
-        link: {
-            url: '#',
-            text: 'Посмотреть очередь'
-        }
-    },
-    {
-        text: 'Вступил в очередь "P3212 Письмак"',
-        date: 'Jan 05 2019',
-        category: {
-            tag: 'Очередь',
-            color: '#018f69'
-        },
-        link: {
-            url:
-                '#',
-            text: 'Посмотреть очередь'
-        }
-    },
-    {
-        text: 'Создал очередь "P3212 Письмак"',
-        date: 'Jan 05 2019',
-        category: {
-            tag: 'Очередь',
-            color: '#018f69'
-        },
-        link: {
-            url: '#',
-            text: 'Посмотреть очередь'
-        }
-    }
-];
+
+function getFormattedTime(dateISO) {
+    let a = dateISO.split(/[^0-9]/);
+    let creationDate = new Date(Date.UTC(a[0], a[1] - 1, a[2], a[3], a[4], a[5]));
+
+    const DATE = creationDate.getDate();
+    const MONTH = creationDate.toLocaleString('default', {month: 'short'});
+    const HOURS = creationDate.getHours();
+    const MINUTES = creationDate.getMinutes();
+    const SECONDS = creationDate.getSeconds();
+    return `${HOURS}:${MINUTES}:${SECONDS} ${DATE} ${MONTH}`;
+}
 
 const TimelineItem = ({data}) => (
     <div className="timeline-item">
@@ -73,7 +22,7 @@ const TimelineItem = ({data}) => (
             <span className="tag  w-100 text-center mb-1" style={{background: data.category.color}}>
                 {data.category.tag}
             </span>
-            <time>{data.date}</time>
+            <time>{getFormattedTime(data.date)}</time>
             <p>{data.text}</p>
             {data.link && (
                 <a
@@ -89,20 +38,26 @@ const TimelineItem = ({data}) => (
     </div>
 );
 
-const Timeline = () =>
-    timelineData.length > 0 && (
-        <div>
-            <div className="timeline-container">
-                {timelineData.map((data, idx) => (
-                    <TimelineItem data={data} key={idx}/>
-                ))}
-            </div>
-            <div className={"mx-auto text-center mt-2"}>
-                <Button variant="outline-dark">Посмотреть предыдущие</Button>
-            </div>
+class Timeline extends React.Component {
+    render() {
+        return (
+            this.props.data.length > 0 && (
+                <div>
+                    <div className="timeline-container">
+                        {this.props.data.map((data, idx) => (
+                            <TimelineItem data={data} key={idx}/>
+                        ))}
+                    </div>
+                    <div className={"mx-auto text-center mt-2"}>
+                        <Button variant="outline-dark">Посмотреть предыдущие</Button>
+                    </div>
 
-        </div>
+                </div>
 
-    );
+            )
+        )
+    }
+}
+
 
 module.exports = Timeline;

@@ -51,6 +51,7 @@ class QueueSettingsModal extends React.Component {
             .then(resp => {
                 if (resp.status === 200) {
                     this.setState({showDeleteConfirm: false, deleteConfirmSendingRequest: false});
+                    window.location.reload();
                     document.location.href = "/helios.html#/search"
                 } else {
                     console.log("fail: " + resp.status);

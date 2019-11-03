@@ -1,9 +1,8 @@
 const React = require('react');
 const UserCard = require('./UserCard.jsx');
-const Time = require('./Timeline.jsx');
-const Carousel = require('react-bootstrap/Carousel.js');
-const UserDashboard = require('./UserDashboard.jsx');
-const UserNotesTable = require('./UserNotesTable.jsx');
+const Tables = require('./Tables.jsx');
+const Cards = require('./Cards.jsx');
+const Navbar = require('./ProfileNavbar.jsx');
 
 require('./../../style/user-profile/carousel-colors.css');
 
@@ -17,7 +16,8 @@ class UserProfile extends React.Component {
             fullname: "loading...",
             errorOccurred: false,
             swapRequests: [],
-            userImgUrl: "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"
+            userImgUrl: "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg",
+            timeline: []
         }
 
     }
@@ -38,38 +38,35 @@ class UserProfile extends React.Component {
                 this.setState({errorOccurred: true});
                 console.log("error" + err);
 
-            })
+            });
+
+        fetch("api/timeline")
+            .then(resp => resp.json())
+            .then(data => this.setState({timeline: data.reverse()}))
+            .catch(err => console.log(err));
     }
 
     render() {
         return (
             <div>
-                <div className="justify-content-between col-12 mx-auto">
-                    <div className="col-md-4 col-sm-8 col-12 mx-auto">
+
+                <Navbar/>
+
+                <div className="justify-content-between col-12 mx-auto d-flex flex-column flex-md-row">
+                    <div className="col-sm-3 col-md-4 mx-auto d-flex" data-aos={"fade-down"}>
                         <UserCard
                             username={this.state.username}
                             fullname={this.state.fullname}
                             userImgUrl={this.state.userImgUrl}
                         />
                     </div>
-                    <Carousel style={{minHeight: '1000px'}} interval={null}>
-                        <Carousel.Item>
-                            <div className={"mt-4"}>
-                                <Time/>
-                            </div>
-
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <div className={"col-8 mx-auto mt-4"}>
-                                <UserDashboard/>
-                            </div>
-
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <div className={"col-8 mx-auto mt-4"}><UserNotesTable/></div>
-
-                        </Carousel.Item>
-                    </Carousel>
+                    <div className="d-none d-lg-block col-md-8 col-9 " data-aos={"fade-left"}>
+                        <Tables timelineData={this.state.timeline}/>
+                    </div>
+                    <div className="d-flex d-lg-none mt-3 text-center " data-aos={"fade-up"}>
+                        <h3>Timeline</h3>
+                        <Cards data={this.state.timeline}/>
+                    </div>
                 </div>
 
             </div>

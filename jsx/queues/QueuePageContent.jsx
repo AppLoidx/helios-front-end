@@ -5,6 +5,7 @@ const AllMedia = require('./QueueAllNotificationsModal.jsx');
 const Spinner = require('./../util/GrowingSpinner.jsx');
 const QueueSettingsModal = require('./QueueSettingsModal.jsx');
 
+
 // const Chat = require('../chat/Chat.jsx');
 
 class QueuePageContent extends React.Component {
@@ -18,10 +19,12 @@ class QueuePageContent extends React.Component {
             showAllNotifications: false,
             allNotice: [],
             showSettingsModal: false,
-            username: undefined
+            username: undefined,
+            cursored: false
         };
         this.onSettingsClick = this.onSettingsClick.bind(this);
         this.fetchQueue = this.fetchQueue.bind(this);
+        this.onPassButtonClick = this.onPassButtonClick.bind(this);
     }
 
     fetchQueue(props) {
@@ -50,11 +53,14 @@ class QueuePageContent extends React.Component {
 
                     this.setState({
                         users: usersList,
-                        queueName: resp["fullname"]
+                        queueName: resp["fullname"],
+                        cursored: usersList[0]['username'] === this.state.username
                     });
                     let data = [];
                     for (let notice of resp["notifications"]) {
-                        let creationDate = new Date(notice["creation_date"]);
+                        let a = notice["creation_date"].split(/[^0-9]/);
+                        let creationDate = new Date(Date.UTC(a[0], a[1] - 1, a[2], a[3], a[4], a[5]));
+
                         const DATE = creationDate.getDate();
                         const MONTH = creationDate.toLocaleString('default', {month: 'short'});
                         const HOURS = creationDate.getHours();
@@ -74,14 +80,14 @@ class QueuePageContent extends React.Component {
 
     componentDidMount() {
         this.setState({requestingData: true});
-        this.fetchQueue(this.props);
-
         fetch("/api/user")
             .then(resp => resp.json())
             .then(res => {
                 this.setState({username: res['user']['username']})
             })
             .catch(e => console.log(e));
+
+        this.fetchQueue(this.props);
 
     }
 
@@ -92,6 +98,20 @@ class QueuePageContent extends React.Component {
 
     onSettingsClick() {
         this.setState({showSettingsModal: true});
+    }
+
+    onPassButtonClick() {
+        if (this.state.cursored) {
+            fetch("api/queue/" + this.props.queueName)
+                .then(resp => {
+                    if (resp.status === 200) {
+                        this.fetchQueue(this.props);
+                    } else {
+                        // TODO: rewrite from alert to text on page :)
+                        alert("Здесь мне пока лень, но и не знаю куда его статвить. Ошибка " + resp.status);
+                    }
+                })
+        }
     }
 
     render() {
@@ -111,7 +131,7 @@ class QueuePageContent extends React.Component {
                     <h6 className="border-bottom border-gray pb-2 mb-0">Последние обновления</h6>
                     {this.state.requestingData ? <div className={"text-center mt-3"}><Spinner/></div> :
                         this.state.allNotice.map((x, i) => {
-                            if (i < 4) {
+                            if (i < 3) {
                                 return <li key={i} style={{listStyle: 'none'}} data-aos="flip-up">{x}</li>;
                             } else return "";
                         })}
@@ -122,12 +142,21 @@ class QueuePageContent extends React.Component {
                 </div>
 
                 <div className="my-3 p-3 bg-white rounded shadow-sm" data-aos='fade-up' data-aos-duration='900'>
-                    <div className={"text-secondary"}>
-                        Количество участников: {this.state.users.length}
+                    <div className={"border-bottom justify-content-between d-flex flex-column flex-md-row mr-md-2"}>
+                        <div>
+                            <div className={"text-secondary"}>
+                                Количество участников: {this.state.users.length}
+                            </div>
+                            <h6 className=" border-gray pb-2 mb-0">
+                                Участники очереди
+                            </h6>
+                        </div>
+
+                        <button onClick={this.onPassButtonClick}
+                                className={"btn col-md-1 mr-md-2 d-inline mb-2 " + (this.state.cursored ? "btn-success" : "btn-secondary")}>
+                            <i className={"fa fa-check-circle"}></i>Прошел
+                        </button>
                     </div>
-                    <h6 className="border-bottom border-gray pb-2 mb-0">
-                        Участники очереди
-                    </h6>
 
 
                     {this.state.requestingData ?
@@ -135,7 +164,7 @@ class QueuePageContent extends React.Component {
                         :
                         <ul className={"pl-0"}>
                             {this.state.users.map((x, i) => {
-                                return <li style={{listStyle: 'none'}} key={x["id"]} data-aos={"flip-up"}><QueueUser
+                                return <li style={{listStyle: 'none'}} key={x["id"]}><QueueUser
                                     username={x["username"]}
                                     fullname={x["first_name"] + " " + x["last_name"]}
                                     queuename={this.props.queueName}

@@ -5,16 +5,11 @@ class UserCard extends React.Component {
     render() {
         return (
             <div className="card mx-auto">
-                <img
 
-                    src="https://i.ibb.co/mDw05GC/blue-sea-small-island-landscape-nature-background-27109-5.jpg"
-                    alt=""
-                    className={"card-img-top"}
-                />
+                <img src={this.props.userImgUrl}
+                     className="img-fluid img-thumbnail rounded-circle mx-auto mt-4 w-50"
+                      alt="..."/>
                 <div className="card-body">
-                    <img src={this.props.userImgUrl}
-                         className="img-fluid img-thumbnail rounded-circle mx-auto mt-4 position-absolute"
-                         style={{top: "100px"}} alt="..." width={"100px"} height={"100px"}/>
                     <h4 className="card-title mt-4">
                         {this.props.fullname}
                     </h4>
@@ -50,7 +45,7 @@ class UserCard extends React.Component {
                     </div>
                     <div className={"badges"}>
                         <h5>
-                            <div className="badge badge-danger">Developer</div>
+                            <div className="badge badge-success">Teapot</div>
                         </h5>
                     </div>
 

@@ -9,7 +9,6 @@ class SearchPage extends React.Component {
         this.state = {loaded: false, searching: false, data: [], inputVal: "", searched: false, queuesMember: []};
         this.onSearchButtonClick = this.onSearchButtonClick.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
-        this.isExistQueue = this.isExistQueue.bind(this);
         $(document).bind("keypress", e => {
             if (e.keyCode === 13) {
                 e.preventDefault();
@@ -20,7 +19,7 @@ class SearchPage extends React.Component {
 
     onSearchButtonClick() {
         this.setState({searching: true, loaded: false, searched: true});
-        fetch("search/queue?queue_name=" + this.state.inputVal)
+        fetch("api/search/queue?queue_name=" + this.state.inputVal)
             .then(resp => resp.json())
             .then(data => {
                 this.setState({

@@ -94,7 +94,10 @@ class Sidebar extends React.Component {
                         <li>{this.state.logged ?
                             <div className={"d-flex justify-content-between py-1"}>
                                 <p className={"py-0 mb-0 mt-1"}>{this.state.username}</p>
-                                <a href="/api/logout"><i className={"fa fa-sign-out-alt"}></i></a>
+                                <div className={"d-flex"}>
+                                    <a href="#/profile-settings"><i className={"fa fa-cog sidebar-link"}></i></a>
+                                    <a href="/api/logout"><i className={"fa fa-sign-out-alt"}></i></a>
+                                </div>
                             </div> :
                             <a href={"/api/auth"} className={"sidebar-link"}>Войти</a>
                         }

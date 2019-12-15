@@ -19,7 +19,9 @@ class QueuePasswordModal extends React.Component {
             .then(resp => {
                 if (resp.status === 200) {
                     this.setState({successful: true});
-                    document.location.href = "#/queue/" + this.props.shortName;
+                    if (this.props.onSuccess !== undefined || this.props.onSuccess !==null){
+                        this.props.onSuccess();
+                    }
                 } else if (resp.status === 403) {
                     this.setState({successful: false})
                 }
@@ -27,6 +29,8 @@ class QueuePasswordModal extends React.Component {
                 this.setState({sendingReq: false});
             })
             .catch(this.setState({sendingReq: false}))
+
+
     }
 
     onPasswordChange(e) {

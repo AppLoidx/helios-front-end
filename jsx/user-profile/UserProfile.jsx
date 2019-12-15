@@ -18,32 +18,36 @@ class UserProfile extends React.Component {
             swapRequests: [],
             userImgUrl: "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg",
             timeline: []
-        }
+        };
+
+        this.fetchUserInfo = this.fetchUserInfo.bind(this);
 
     }
 
     componentDidMount() {
-        fetch("api/user")
-            .then(resp => resp.json())
-            .then(data => {
-                this.setState({
-                    fetchingUserInfo: false,
-                    username: data["user"]["username"],
-                    fullname: data["user"]["first_name"] + " " + data["user"]["last_name"],
-                    userImgUrl: (data["user"]["contact_details"]["img"] === null ? "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg" : data["user"]["contact_details"]["img"]),
-                    swapRequests: data["swap_requests"]
-                });
-            })
-            .catch(err => {
-                this.setState({errorOccurred: true});
-                console.log("error" + err);
+        if (this.props.user === null) this.setState({errorOccurred: true});
+        else this.fetchUserInfo(this.props);
 
-            });
 
         fetch("api/timeline")
             .then(resp => resp.json())
             .then(data => this.setState({timeline: data.reverse()}))
             .catch(err => console.log(err));
+    }
+
+    componentWillReceiveProps(newProps){
+        if (newProps.user === null) this.setState({errorOccurred: true});
+        else this.fetchUserInfo(newProps);
+    }
+
+    fetchUserInfo(props){
+        this.setState({
+            fetchingUserInfo: false,
+            username: props.user["user"]["username"],
+            fullname: props.user["user"]["first_name"] + " " + props.user["user"]["last_name"],
+            userImgUrl: (props.user["user"]["contact_details"]["img"] === null ? "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg" : props.user["user"]["contact_details"]["img"]),
+            swapRequests: props.user["swap_requests"]
+        });
     }
 
     render() {
@@ -53,17 +57,17 @@ class UserProfile extends React.Component {
                 <Navbar/>
 
                 <div className="justify-content-between col-12 mx-auto d-flex flex-column flex-md-row">
-                    <div className="col-sm-3 col-md-4 mx-auto d-flex" data-aos={"fade-down"}>
+                    <div className="col-sm-3 col-md-4 mx-auto d-flex" data-aos={"fade-left"} style={{maxHeight: '550px'}}>
                         <UserCard
                             username={this.state.username}
-                            fullname={this.state.fullname}
+                            fullname={this.state.fullname==null?"":this.state.fullname}
                             userImgUrl={this.state.userImgUrl}
                         />
                     </div>
-                    <div className="d-none d-lg-block col-md-8 col-9 " data-aos={"fade-left"}>
+                    <div className="d-none d-lg-block col-md-8 col-9 " data-aos={"fade-right"}>
                         <Tables timelineData={this.state.timeline}/>
                     </div>
-                    <div className="d-flex d-lg-none mt-3 text-center " data-aos={"fade-up"}>
+                    <div className="d-flex flex-column d-lg-none mt-3 text-center " data-aos={"fade-up"}>
                         <h3>Timeline</h3>
                         <Cards data={this.state.timeline}/>
                     </div>

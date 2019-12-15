@@ -21,26 +21,30 @@ class UserProfileSettingsPageContent extends React.Component {
         this.changeImageButtonClicked = this.changeImageButtonClicked.bind(this);
         this.changeUsernameButtonClicked = this.changeUsernameButtonClicked.bind(this);
         this.handleImageInput = this.handleImageInput.bind(this);
+        this.fetchUserInfo = this.fetchUserInfo.bind(this);
     }
 
     componentDidMount() {
-        fetch("api/user")
-            .then(resp => resp.json())
-            .then(data => {
-                this.setState({
-                    fetchingUserInfo: false,
-                    username: data["user"]["username"],
-                    fullname: data["user"]["first_name"] + " " + data["user"]["last_name"],
-                    userImgUrl: (data["user"]["contact_details"]["img"] === null ? "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg" : data["user"]["contact_details"]["img"]),
-                    swapRequests: data["swap_requests"]
-                });
-            })
-            .catch(err => {
-                this.setState({errorOccurred: true});
-                console.log("error" + err);
+        if (this.props.user !== null)
+        this.fetchUserInfo(this.props);
+    }
 
+    componentWillReceiveProps(newProps){
+        if (newProps.user !== null)
+        this.fetchUserInfo(newProps);
+    }
+
+    fetchUserInfo(props){
+        if (props.user !== null)
+            this.setState({
+                fetchingUserInfo: false,
+                username: props.user["user"]["username"],
+                fullname: props.user["user"]["first_name"] + " " + props.user["user"]["last_name"],
+                userImgUrl: (props.user["user"]["contact_details"]["img"] === null ? "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg" : props.user["user"]["contact_details"]["img"]),
+                swapRequests: props.user["swap_requests"]
             });
     }
+
 
     changeImageButtonClicked() {
         fetch("api/settings/" + this.state.username + `?property=img&value=${this.state.imgInput}`, {method: 'put'})

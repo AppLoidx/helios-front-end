@@ -91,6 +91,8 @@ class Sidebar extends React.Component {
                         </li>
                         <li><a href={"#/search"} className={"sidebar-link"}>Присоединиться</a></li>
                         <li><a href={"#/create"} className={"sidebar-link"}>Создать</a></li>
+                        <li><a href={"#/mygroups"} className={"sidebar-link"}>Группы</a></li>
+                        <hr/>
                         <li>{this.state.logged ?
                             <div className={"d-flex justify-content-between py-1"}>
                                 <p className={"py-0 mb-0 mt-1"}>{this.state.username}</p>

@@ -1,6 +1,5 @@
 const React = require('react');
-const UserDashboard = require('./UserDashboard.jsx');
-const UserNotesTable = require('./UserNotesTable.jsx');
+
 const Timeline = require('./Timeline.jsx');
 
 class Tables extends React.Component {
@@ -14,26 +13,6 @@ class Tables extends React.Component {
                              aria-labelledby="list-home-list">
 
                             <div className="list-group mx-auto px-0 w-100 pt-3">
-                                <a href="#collapseQueues" className="list-group-item list-group-item-action "
-                                   data-toggle="collapse" role="button" aria-expanded="false"
-                                   aria-controls="collapseProgrammingLabs">
-                                    Таблица очередей
-                                </a>
-                                <div className="collapse" id="collapseQueues">
-                                    <div className="card card-body">
-                                        <UserDashboard/>
-                                    </div>
-                                </div>
-                                <a href="#collapseComments" className="list-group-item list-group-item-action"
-                                   data-toggle="collapse" role="button" aria-expanded="false"
-                                   aria-controls="collapseProgrammingJournals">
-                                    Комментарии преподавателей
-                                </a>
-                                <div className="collapse" id="collapseComments">
-                                    <div className="card card-body">
-                                        <UserNotesTable/>
-                                    </div>
-                                </div>
 
                                 <a href="#collapseTimeline"
                                    className="list-group-item list-group-item-action" data-toggle="collapse"

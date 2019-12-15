@@ -11,10 +11,15 @@ const UserProfile = require('./user-profile/UserProfile.jsx');
 const Sidebar = require('./Sidebar.jsx');
 const SearchPage = require('./search/SearchPage.jsx');
 const ProfileSettingsPage = require('./user-profile-settings/UserProfileSettingsPage.jsx');
-
-require('./../style/_variables.scss');
+const GroupsPage = require('./groups/GroupsPage.jsx');
+const GroupsSearch = require('./groups/GroupsSearch.jsx');
 
 class ContentPage extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {user : null}
+    }
 
     componentDidMount() {
         $(document).ready(function () {
@@ -31,6 +36,16 @@ class ContentPage extends React.Component {
             });
         });
 
+        fetch('api/user')
+            .then(response => {
+                if (response.status === 400 || response.status === 401) {document.location.href = "/api/auth";}
+                return response.json()
+            })
+            .then(resp => this.setState({user : resp}))
+            .catch(err => {
+                console.log(err);
+            });
+
     }
 
     render() {
@@ -40,12 +55,14 @@ class ContentPage extends React.Component {
                         <div>
                             <div>
                                 <ReactRouterDOM.Route exact path="/" component={MainPage}/>
-                                <ReactRouterDOM.Route exact path="/queue/:id" component={QueuePage}/>
+                                <ReactRouterDOM.Route exact path="/queue/:id" render={(props) => <QueuePage {...props} user = {this.state.user} />}/>
                                 <ReactRouterDOM.Route exact path="/register" component={RegisterPage}/>
                                 <ReactRouterDOM.Route exact path="/create" component={CreateQueuePage}/>
-                                <ReactRouterDOM.Route exact path="/myprofile" component={UserProfile}/>
+                                <ReactRouterDOM.Route exact path="/myprofile" render={(props) => <UserProfile {...props} user={this.state.user}/>}/>
                                 <ReactRouterDOM.Route exact path="/search" component={SearchPage}/>
-                                <ReactRouterDOM.Route exact path="/profile-settings" component={ProfileSettingsPage}/>
+                                <ReactRouterDOM.Route exact path="/profile-settings" render={(props) => <ProfileSettingsPage {...props} user={this.state.user}/>}/>
+                                <ReactRouterDOM.Route exact path="/mygroups" render={(props) => <GroupsPage {...props} user={this.state.user}/>}/>
+                                <ReactRouterDOM.Route exact path="/groups-search" render={(props) => <GroupsSearch {...props} user={this.state.user}/>}/>
                             </div>
                         </div>
                     </ReactRouterDOM.HashRouter>}/>

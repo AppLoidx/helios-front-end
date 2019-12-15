@@ -165,19 +165,19 @@ class CreateQueuePageContent extends React.Component {
                             className='text-primary'>Документацию</a></p>
                     </div>
 
-                    <div className="form-group">
+                    <div className="form-group" data-aos={"slide-up"} data-aos-duration={800}>
                         <input type="text" id="inputName" className={"form-control " + this.state.inputNameClass}
                                placeholder="Короткое имя для ссылки" name="queueName" value={this.state.queueName}
                                onChange={this.handleNameInput} required autoFocus/>
                     </div>
 
-                    <div className="form-group">
+                    <div className="form-group"  data-aos={"slide-up"} data-aos-duration={1200}>
                         <input type="text" id="inputFullname" className="form-control" name="fullname"
                                value={this.state.fullname} placeholder="Полное имя очереди"
                                onChange={this.handleFullnameInput} required/>
                     </div>
 
-                    <div className="row justify-content-center justify-content-between ml-2">
+                    <div className="row justify-content-center justify-content-between ml-2" data-aos="flip-up" data-aos-delay={400}>
                         <div className="form-check form-group col-auto">
                             <input className="form-check-input" type="checkbox" value="" id="privateCheck"
                                    onClick={this.privateCheckClick}/>

@@ -46,7 +46,8 @@ class ResultQueueLink extends React.Component {
             <div className="media text-muted pt-3">
                 <ModalWindow show={this.state.showModal}
                              onHide={() => this.setState({showModal: false, sendingReq: false})}
-                             fullName={this.props.name} shortName={this.props.shortName}/>
+                             fullName={this.props.name} shortName={this.props.shortName}
+                            onSuccess={() => document.location.href = "#/queue/" + this.props.shortName}/>
                 <div className="media-body pb-3 mb-0 small lh-125" data-aos='flip-up'>
                     <div className="d-flex justify-content-between align-items-center w-100">
                         <strong className="text-gray-dark">{this.props.name} {this.props.isPrivate ?

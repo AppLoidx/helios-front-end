@@ -6,7 +6,7 @@ const ResultQueueLink = require('./ResultQueueLink.jsx');
 class SearchPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {loaded: false, searching: false, data: [], inputVal: "", searched: false, queuesMember: []};
+        this.state = {loaded: false, searching: false, data: [], inputVal: "", searched: false};
         this.onSearchButtonClick = this.onSearchButtonClick.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         $(document).bind("keypress", e => {

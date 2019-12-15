@@ -75,8 +75,8 @@ class QueueUser extends React.Component {
                                                                     className="dropdown-item img-fluid img-thumbnail rounded-circle"
                                                                     alt="..." width={"50px"} height={"50px"}/></div>
 
-                                <button className="dropdown-item"
-                                        onClick={() => this.setState({showSwapConfirm: true})}>Поменяться
+                                <button className="dropdown-item" onClick={() => this.setState({showSwapConfirm: true})}>
+                                    Поменяться
                                 </button>
                             </div>
                         </div>

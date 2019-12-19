@@ -50,7 +50,7 @@ class QueuePageContent extends React.Component {
         fetch('api/queue?queue_name=' + props.queueName)
             .then(resp => {
                 if (resp.status === 401) {
-                    window.location.href = "/external/login.html";
+                    window.location.href = "/api/auth";
                 }
                 if (resp.status === 404) {
                     this.setState({

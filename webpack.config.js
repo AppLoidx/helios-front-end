@@ -4,11 +4,11 @@ const SRC = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   entry: ['./jsx/App.jsx'],
-  mode: "development",
+  mode: "production",
   output: {
     path:
-        // '/java/helios-backend/src/main/resources/static'
-        __dirname
+        '/java/helios-backend/src/main/resources/static'
+        // __dirname + '/dist'
     ,
     filename: 'bundle.js',
       chunkFilename: "[name].bundle.js"

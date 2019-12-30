@@ -2,6 +2,6 @@
 {
   "presets": ["react"],
   "plugins": [
-    "emotion"
+    "emotion", "syntax-dynamic-import"
   ]
 }

@@ -1,7 +1,7 @@
-const React = require('react');
-const ConfirmModal = require('../util/ConfirmModal.jsx');
+import React from 'react';
+import ConfirmModal from '../util/ConfirmModal.jsx';
 
-class QueueUser extends React.Component {
+export default class QueueUser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +12,8 @@ class QueueUser extends React.Component {
         };
 
         this.onSwapAccept = this.onSwapAccept.bind(this);
+        this.deleteUserFromQueue = this.deleteUserFromQueue.bind(this);
+        this.isOnlyForList = this.isOnlyForList.bind(this);
     }
 
     onSwapAccept() {
@@ -54,10 +56,34 @@ class QueueUser extends React.Component {
             .catch(e => alert(e));
     };
 
+    deleteUserFromQueue(){
+        fetch(`/api/queue?queue_name=${this.props.queuename}&target=USER&username=${this.props.username}`,
+            {
+                method: 'delete'
+            }
+        )
+            .then(resp => {
+            if (resp.status === 200) {
+                this.props.onChange();
+                return false;
+            }
+            else return resp.json()
+        })
+            .then(resp => {
+                alert(resp['error'] + ": " + resp['error_description']);
+            })
+            .catch(e => console.log(e));
+    }
+
+    isOnlyForList(){
+        return (this.props.onlyForList === undefined ? false: this.props.onlyForList);
+    }
+
 
     render() {
         return (
             <div className="media text-muted pt-3">
+                {!this.isOnlyForList() && <div className={"sortable-user-handler mr-1 my-auto"}><i className={"fa fa-th"}></i></div>}
                 <span className={"mr-2"}><img src={this.props.imgUrl}
                                               className="dropdown-item img-fluid img-thumbnail rounded-circle p-0"
                                               style={{width: "40px"}} alt="..." width={"40px"} height={"40px"}/></span>
@@ -75,9 +101,11 @@ class QueueUser extends React.Component {
                                                                     className="dropdown-item img-fluid img-thumbnail rounded-circle"
                                                                     alt="..." width={"50px"} height={"50px"}/></div>
 
-                                <button className="dropdown-item" onClick={() => this.setState({showSwapConfirm: true})}>
-                                    Поменяться
-                                </button>
+                                {this.props.alreadyInQueue && <button className="dropdown-item" onClick={() => this.setState({showSwapConfirm: true})}>Поменяться</button>}
+                                {this.props.isCanManage && <button className="dropdown-item text-danger" onClick={this.deleteUserFromQueue}>
+                                    <i className={"fa fa-times mt-1"}></i> <span >Удалить</span>
+                                </button>}
+
                             </div>
                         </div>
                     </div>
@@ -101,5 +129,3 @@ class QueueUser extends React.Component {
         )
     }
 }
-
-module.exports = QueueUser;

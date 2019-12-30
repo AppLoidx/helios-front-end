@@ -1,10 +1,8 @@
-const React = require('react');
-const Content = require('./UserProfileSettingsPageContent.jsx');
+import React from 'react';
+import Content from './UserProfileSettingsPageContent.jsx';
 
-class UserProfileSettingsPage extends React.Component {
+export default class UserProfileSettingsPage extends React.Component {
     render() {
         return <Content user={this.props.user}/>
     }
 }
-
-module.exports = UserProfileSettingsPage;

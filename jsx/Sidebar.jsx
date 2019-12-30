@@ -1,15 +1,23 @@
-const React = require('react');
-const QueueLink = require('./queues/QueueLink.jsx');
-const Spinner = require('./util/RoundedSpinner.jsx');
-const logo = require('./../style/sidebar/helios-white-logo.png');
+import React from 'react';
+import QueueLink from './queues/QueueLink.jsx';
+import Spinner from './util/RoundedSpinner.jsx';
+import logo from './../style/sidebar/helios-white-logo.png';
 
-require('./../style/sidebar/style.css');
+import './../style/sidebar/style.css';
 
 
-class Sidebar extends React.Component {
+export default class Sidebar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {"queues": [], "queuesEmpty": false, "loading": true, "username": "", "logged": false};
+        this.state = {
+            "queues": [],
+            "queuesEmpty": true,
+            "loading": true, "username": "",
+            "logged": false,
+            favorites: [],
+            favoritesEmpty: true
+        };
+
         this.fetchQueues = this.fetchQueues.bind(this);
     }
 
@@ -56,8 +64,20 @@ class Sidebar extends React.Component {
                 queues.sort(function (a, b) {
                     return a[0] === b[0] ? a > b : a[0] > b[0]
                 });
-                this.setState({"queues": queues, "loading": false, queuesEmpty: queues.length === 0,});
+
+                this.setState(
+                    {
+                        queues: queues,
+                        queuesEmpty: queues.length === 0
+                    });
+
+                fetch('api/favorite')
+                    .then(resp => resp.json())
+                    .then(resp => this.setState({favorites: resp, favoritesEmpty: resp.length === 0, loading: false }))
+
             })
+
+
     }
 
     render() {
@@ -75,9 +95,9 @@ class Sidebar extends React.Component {
 
                         <li><a href={"#/myprofile"} className={"sidebar-link"}>Мой профиль</a></li>
                         <li>
-                            <a href={"#homeSubmenu"} data-toggle="collapse" aria-expanded="false"
+                            <a href={"#queues"} data-toggle="collapse" aria-expanded="false"
                                onClick={this.fetchQueues}>Мои очереди</a>
-                            <ul className="collapse list-unstyled sidebar-link" id="homeSubmenu">
+                            <ul className="collapse list-unstyled sidebar-link" id="queues">
                                 {this.state.loading ? (
                                         <li className="justify-content-center mx-auto text-center"><Spinner/></li>)
                                     :
@@ -89,7 +109,22 @@ class Sidebar extends React.Component {
                                 }
                             </ul>
                         </li>
-                        <li><a href={"#/search"} className={"sidebar-link"}>Присоединиться</a></li>
+                        <li>
+                            <a href={"#favorite"} data-toggle="collapse" aria-expanded="false"
+                               onClick={this.fetchQueues}>Закладки</a>
+                            <ul className="collapse list-unstyled sidebar-link" id="favorite">
+                                {this.state.loading ? (
+                                        <li className="justify-content-center mx-auto text-center"><Spinner/></li>)
+                                    :
+                                    this.state.favoritesEmpty ?
+                                        <li className="justify-content-center mx-auto text-center">Пусто</li> : this.state.favorites.map((i, k) => {
+                                            return <li key={k}><QueueLink link={"#/queue/" + i["queue_name"]}
+                                                                          name={i["queue_fullname"]}/></li>
+                                        })
+                                }
+                            </ul>
+                        </li>
+                        <li><a href={"#/search"} className={"sidebar-link"}>Найти</a></li>
                         <li><a href={"#/create"} className={"sidebar-link"}>Создать</a></li>
                         <li><a href={"#/mygroups"} className={"sidebar-link"}>Группы</a></li>
                         <hr/>
@@ -121,5 +156,3 @@ class Sidebar extends React.Component {
 
     }
 }
-
-module.exports = Sidebar;

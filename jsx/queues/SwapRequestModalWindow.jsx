@@ -1,8 +1,8 @@
-const React = require('react');
-const Modal = require('react-bootstrap/Modal.js');
-const Button = require('react-bootstrap/Button.js');
+import React from 'react';
+import Modal from 'react-bootstrap/Modal.js';
+import Button from 'react-bootstrap/Button.js';
 
-class SwapRequestModalWindow extends React.Component {
+export default class SwapRequestModalWindow extends React.Component {
 
     render() {
         return (

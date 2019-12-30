@@ -1,15 +1,16 @@
-const React = require('react');
-const QueueUser = require('./QueueUser.jsx');
-const Media = require('./QueueNotification.jsx');
-const AllMedia = require('./QueueAllNotificationsModal.jsx');
-const Spinner = require('./../util/GrowingSpinner.jsx');
-const QueueSettingsModal = require('./QueueSettingsModal.jsx');
-const ModalWindow = require('./../util/QueuePasswordModal.jsx');
-const TeacherPanelModal = require('./TeacherPanelModal.jsx');
+import React from 'react';
+import QueueUser from './QueueUser.jsx';
+import Media from './QueueNotification.jsx';
+import AllMedia from './QueueAllNotificationsModal.jsx';
+import Spinner from './../util/GrowingSpinner.jsx';
+import QueueSettingsModal from './QueueSettingsModal.jsx';
+import ModalWindow from './../util/QueuePasswordModal.jsx';
+import TeacherPanelModal from './TeacherPanelModal.jsx';
+import TimeUtil from './../util/TimeUtil.js';
 
-const Sortable = require('react-sortablejs');
+import Sortable from 'react-sortablejs';
 
-class QueuePageContent extends React.Component {
+export default class QueuePageContent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -29,9 +30,13 @@ class QueuePageContent extends React.Component {
             showTeacherPanel: false,
             failed: false,
 
-            currentUser : null,
-            nextUser : null
+            currentUser: null,
+            nextUser: null,
+
+            isFavorite: false,
+            sortableOldIndex: null
         };
+
         this.onSettingsClick = this.onSettingsClick.bind(this);
         this.onExitClick = this.onExitClick.bind(this);
         this.fetchQueue = this.fetchQueue.bind(this);
@@ -44,6 +49,24 @@ class QueuePageContent extends React.Component {
 
         this.fetchCurrentAndNextUser = this.fetchCurrentAndNextUser.bind(this);
         this.userPassed = this.userPassed.bind(this);
+
+        this.onClearNotifications = this.onClearNotifications.bind(this);
+        this.toggleFavorite = this.toggleFavorite.bind(this);
+        this.isFavorite = this.isFavorite.bind(this);
+
+        this.onTeacherModelHide = this.onTeacherModelHide.bind(this);
+
+        this.onSortableChange = this.onSortableChange.bind(this);
+    }
+
+    componentDidMount(){
+        this.setState({requestingData: true});
+        this.fetchQueue(this.props);
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState({requestingData: true, queueName: newProps.queueName});
+        this.fetchQueue(newProps);
     }
 
     fetchQueue(props) {
@@ -75,8 +98,10 @@ class QueuePageContent extends React.Component {
                         queueName: resp["fullname"],
                         superUsers: resp['super_users'],
                         alreadyInQueue: this.isAlreadyInQueue(),
-                        isTeacher: this.isTeacher()
+                        isTeacher: this.isTeacher(),
+                        isFavorite: this.isFavorite()
                     });
+
 
                     // we need to check isHaveAdditionalPermissions after setting state about queue
                     this.setState({
@@ -86,57 +111,67 @@ class QueuePageContent extends React.Component {
 
                     let data = [];
                     for (let notice of resp["notifications"]) {
-                        let a = notice["creation_date"].split(/[^0-9]/);
-                        let creationDate = new Date(Date.UTC(a[0], a[1] - 1, a[2], a[3], a[4], a[5]));
 
-                        const DATE = creationDate.getDate();
-                        const MONTH = creationDate.toLocaleString('default', {month: 'short'});
-                        const HOURS = creationDate.getHours();
-                        const MINUTES = creationDate.getMinutes();
-                        const SECONDS = creationDate.getSeconds();
                         data.push(<Media author={(notice["author"] == null ? "Система" : notice["author"])}
-                                         time={`${HOURS}:${MINUTES}:${SECONDS} ${DATE} ${MONTH}`}
+                                         time={TimeUtil.getFormattedTime(notice["creation_date"])}
                                          message={notice["message"]}/>)
                     }
                     this.setState({allNotice: data, requestingData: false, failed: false});
                 }
             ).catch(err => {
             console.log(err);
-            this.setState({"queueName": "Не удалось загрузить очередь", requestingData: false, failed: true})
+            this.setState({
+                "queueName": "Не удалось загрузить очередь",
+                requestingData: false,
+                failed: true,
+                users: [],
+                superUsers: [],
+                allNotice: [],
+            })
         });
     }
 
-    fetchCurrentAndNextUser(){
-        fetch (`/api/teacher/queue?queue_name=${this.props.queueName}`)
+    isFavorite() {
+        for (let queue of this.props.user['favorites']) {
+            if (queue['queue_name'] === this.props.queueName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    fetchCurrentAndNextUser() {
+        fetch(`/api/teacher/queue?queue_name=${this.props.queueName}`)
             .then(resp => {
-                if (resp.status === 200){
+                if (resp.status === 200 || resp.status === 400) {    // if queue don't have users
                     return resp.json();
                 } else {
                     alert(resp.status);
                 }
             })
             .then(response => {
-                if (response["current_users"] !== null){
-                    this.setState({currentUser: response["current_users"] })
+                if (response["current_users"] !== null) {
+                    this.setState({currentUser: response["current_users"]})
                 }
 
-                if (response['next_user'] !== null){
-                    this.setState({nextUser: response["next_user"] })
+                if (response['next_user'] !== null) {
+                    this.setState({nextUser: response["next_user"]})
                 }
             })
-            .catch( e => console.log(e));
+            .catch(e => console.log(e));
     }
 
-    userPassed(){
-        fetch (`/api/teacher/queue?queue_name=${this.props.queueName}&passed_user=${this.state.currentUser[0]['username']}`, {method: 'put'})
+    userPassed() {
+        fetch(`/api/teacher/queue?queue_name=${this.props.queueName}&passed_user=${this.state.currentUser[0]['username']}`, {method: 'put'})
             .then(resp => {
-                if (resp.status === 200){
+                if (resp.status === 200) {
                     this.fetchCurrentAndNextUser(); // fetch new user
                 } else {
                     alert(resp.status);
                 }
             })
-            .catch( e => console.log(e));
+            .catch(e => console.log(e));
     }
 
     onJoinButtonClick() {
@@ -152,13 +187,6 @@ class QueuePageContent extends React.Component {
                     }
 
                 })
-
-    }
-
-    componentDidMount() {
-        this.setState({requestingData: true});
-
-        this.fetchQueue(this.props);
 
     }
 
@@ -203,11 +231,6 @@ class QueuePageContent extends React.Component {
         return false;
     }
 
-    componentWillReceiveProps(newProps) {
-        this.setState({requestingData: true, queueName: newProps.queueName});
-        this.fetchQueue(newProps);
-    }
-
     onSettingsClick() {
         this.setState({showSettingsModal: true});
     }
@@ -221,7 +244,7 @@ class QueuePageContent extends React.Component {
                     let x = resp.json();
                     console.log("Error params: " + x);
                 } else {
-                    alert("Ошибочка! Статус: " + resp.status);
+                    alert("Минуточку! Ошибочка! Статус: " + resp.status);
                 }
             })
             .catch(e => console.log(e));
@@ -232,7 +255,8 @@ class QueuePageContent extends React.Component {
             fetch("api/queue/" + this.props.queueName)
                 .then(resp => {
                     if (resp.status === 200) {
-                        this.fetchQueue(this.props);
+                        window.location.reload();
+                        // this.fetchQueue(this.props);    // this work incorrect because it is don't update Sortable childs
                     } else {
                         // TODO: rewrite from alert to text on page :)
                         alert("Здесь мне пока лень, но и не знаю куда его статвить. Ошибка " + resp.status);
@@ -246,6 +270,56 @@ class QueuePageContent extends React.Component {
         this.fetchCurrentAndNextUser();
     }
 
+    onClearNotifications() {
+        fetch(`/api/queue/${this.props.queueName}?action=clearnotifications`, {method: 'put'})
+            .then(resp => {
+                if (resp.status === 200) {
+                    this.fetchQueue(this.props);
+                } else {
+                    console.log("Error while clear notifications: " + resp.status)
+                }
+            })
+    }
+
+    toggleFavorite() {
+        let method = this.state.isFavorite ? 'delete' : 'put';
+
+        fetch('/api/favorite?queue_name=' + this.props.queueName, {method: method})
+            .then(resp => {
+                if (resp.status === 200) {
+                    this.props.updateUser();
+                } else {
+                    console.log(resp.status);
+                }
+            })
+
+    }
+
+    onTeacherModelHide(){
+        this.setState({showTeacherPanel: false});
+        // this.fetchQueue(this.props); // don't update the Sortable child
+        window.location.reload();
+    }
+
+    onSortableChange(newIndex){
+        if (this.state.sortableOldIndex === null || this.state.sortableOldIndex === newIndex) return;
+
+        console.log("We need to move user at " + this.state.sortableOldIndex + " to " + newIndex);
+
+        fetch(`/api/insert?queue_name=${this.props.queueName}&old_index=${this.state.sortableOldIndex }&new_index=${newIndex}`, {method: 'put'})
+            .then(resp => {
+                if (resp.status !== 200){
+                    alert(resp.status);
+                } else {
+                    this.fetchQueue(this.props);
+                }
+            })
+            .catch(e => console.log(e));
+
+        this.setState({sortableOldIndex: null});
+
+    }
+
     render() {
         return (
             <main role="main" className="container">
@@ -254,7 +328,11 @@ class QueuePageContent extends React.Component {
                     <div className={"d-flex"}>
                         <i className="fa fa-users fa-2x d-none d-md-inline" aria-hidden="true"></i>
                         <div className="lh-100 d-flex flex-row">
-                            <h6 className="ml-3 mb-0 text-black lh-100 my-auto">{this.state.queueName}</h6>
+                            <h6 className="ml-3 mb-0 text-black lh-100 my-auto">{this.state.queueName}
+                                <button className={"ml-1 btn " + (this.state.isFavorite ?"btn-warning":"btn-light")} onClick={this.toggleFavorite}>
+                                        <p className={"fa fa-star"} style={{color: 'black'}}></p>
+                                </button>
+                            </h6>
                             <button onClick={this.onJoinButtonClick}
                                     className={"btn btn-success ml-2 " + ((this.state.alreadyInQueue || this.state.failed || this.state.isTeacher) ? " d-none" : " d-flex")}>
                                 <i className={"fa fa-plus-square my-auto"}></i>
@@ -268,8 +346,8 @@ class QueuePageContent extends React.Component {
                     <div className={"d-flex flex-column flex-md-row"}>
 
                         {this.state.isTeacher && <button className={"btn btn-warning text-center mx-1 my-1"}
-                                style={{textDecoration: 'none'}}
-                                onClick={this.onTakeLaboratoryClick}>
+                                                         style={{textDecoration: 'none'}}
+                                                         onClick={this.onTakeLaboratoryClick}>
                             <span className={"d-none d-md-inline"}>Принимать лабы </span>
                             <i className="fa fa-chalkboard-teacher"></i>
                         </button>}
@@ -328,50 +406,32 @@ class QueuePageContent extends React.Component {
                         <div className={"text-center mt-3"}><Spinner/></div>
                         :
                         <ul className={"pl-0"}>
+                            <Sortable
+                                options={{
+                                    animation: 150,
+                                    onStart: (evt) => {this.setState({sortableOldIndex: evt.oldIndex})},
+                                    onEnd: (evt) => {this.onSortableChange(evt.newIndex)},
+                                    sort: this.state.isTeacher,
+                                    handle : ".sortable-user-handler"
+                                }}
+
+                            >
                             {this.state.users.map((x, i) => {
                                 return <li style={{listStyle: 'none'}} key={x["id"]}><QueueUser
+                                    alreadyInQueue={this.state.alreadyInQueue}
+                                    isCanManage={this.state.isHaveAdditionalPermission || this.state.isTeacher}
                                     username={x["username"]}
                                     fullname={x["first_name"] + " " + (x["last_name"] === null ? "" : x["last_name"])}
                                     queuename={this.props.queueName}
+                                    onChange={() => this.fetchQueue(this.props)}
                                     imgUrl={x["contact_details"]["img"] === null ? "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg" : x["contact_details"]["img"]}/>
                                 </li>
 
                             })}
+                            </Sortable>
                         </ul>
                     }
 
-                    <ul className={"pl-0"}>
-                        <Sortable
-                            options={{
-                                animation: 150
-                            }}
-                        >
-
-                            <li style={{listStyle: 'none'}}><QueueUser
-                                username={"1"}
-                                fullname={"full"}
-                                queuename={this.props.queueName}
-                                imgUrl={ "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
-                            </li>
-
-                            <li style={{listStyle: 'none'}}><QueueUser
-                                username={"2"}
-                                fullname={"full"}
-                                queuename={this.props.queueName}
-                                imgUrl={ "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
-                            </li>
-
-                            <li style={{listStyle: 'none'}}><QueueUser
-                                username={"3"}
-                                fullname={"full"}
-                                queuename={this.props.queueName}
-                                imgUrl={ "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg"}/>
-                            </li>
-
-                        </Sortable>
-
-
-                    </ul>
 
                     {
                         this.state.requestingData ? "" : (this.state.users.length === 0 ?
@@ -382,13 +442,17 @@ class QueuePageContent extends React.Component {
 
                 <AllMedia show={this.state.showAllNotifications}
                           onHide={() => this.setState({showAllNotifications: false})}
-                          data={this.state.allNotice}/>
+                          data={this.state.allNotice}
+                          onClearNotifications={this.onClearNotifications}
+                />
 
                 <QueueSettingsModal
                     queueName={this.props.queueName}
                     show={this.state.showSettingsModal}
                     onHide={() => this.setState({showSettingsModal: false})}
-                    title={this.state.queueName}/>
+                    title={this.state.queueName}
+                    superUsers={this.state.superUsers}
+                />
 
 
                 <ModalWindow show={this.state.showModal}
@@ -401,16 +465,14 @@ class QueuePageContent extends React.Component {
 
                 <TeacherPanelModal
                     show={this.state.showTeacherPanel}
-                    onHide={() => this.setState({showTeacherPanel: false})}
+                    onHide={this.onTeacherModelHide}
                     teacher={this.props.user}
                     currentUsers={this.state.currentUser}
                     nextUser={this.state.nextUser}
-                    onGetUser = {this.fetchCurrentAndNextUser}
-                    onNextUser = {this.userPassed}
+                    onGetUser={this.fetchCurrentAndNextUser}
+                    onNextUser={this.userPassed}
                 />
             </main>
         )
     }
 }
-
-module.exports = QueuePageContent;

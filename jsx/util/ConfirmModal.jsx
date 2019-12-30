@@ -1,8 +1,8 @@
-const React = require('react');
-const Modal = require('react-bootstrap/Modal.js');
-const RoundedSpinner = require('./../util/RoundedSpinner.jsx');
+import React from 'react';
+import Modal from 'react-bootstrap/Modal.js';
+import RoundedSpinner from './../util/RoundedSpinner.jsx';
 
-class ConfirmModal extends React.Component {
+export default class ConfirmModal extends React.Component {
     render() {
         return (
             <Modal {...this.props} size="md" aria-labelledby="queue-all-notice-modal-vcenter" centered>
@@ -29,4 +29,3 @@ class ConfirmModal extends React.Component {
     }
 }
 
-module.exports = ConfirmModal;

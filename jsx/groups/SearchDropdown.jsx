@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class SearchDropdown extends React.Component {
+export default class SearchDropdown extends React.Component {
     render() {
         return (
             <div className="card w-100 position-absolute bg-light" style={{zIndex: 500}}>
@@ -60,5 +60,3 @@ class SearchDropdown extends React.Component {
         )
     }
 }
-
-module.exports = SearchDropdown;

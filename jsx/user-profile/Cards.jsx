@@ -1,7 +1,7 @@
-const React = require('react');
-const TimeUtil = require('./../util/TimeUtil.js');
+import React from 'react';
+import TimeUtil from './../util/TimeUtil.js';
 
-class Cards extends React.Component {
+export default class Cards extends React.Component {
     render() {
         return (
             this.props.data.map((x, i) => {
@@ -24,5 +24,3 @@ class Cards extends React.Component {
 
     }
 }
-
-module.exports = Cards;

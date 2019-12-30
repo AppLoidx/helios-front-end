@@ -1,8 +1,8 @@
-const React = require('react');
-const Spinner = require('./../util/RoundedSpinner.jsx');
-const ModalWindow = require('./../util/QueuePasswordModal.jsx');
+import React from 'react';
+import Spinner from './../util/RoundedSpinner.jsx';
+import ModalWindow from './../util/QueuePasswordModal.jsx';
 
-class ResultQueueLink extends React.Component {
+export default class ResultQueueLink extends React.Component {
 
     constructor(props) {
         super(props);
@@ -27,18 +27,7 @@ class ResultQueueLink extends React.Component {
         this.setState({sendingReq: true});
         if (this.props.isPrivate) this.setState({showModal: true});
         else
-            fetch("api/queue?queue_name=" + this.props.shortName, {method: "put"})
-                .then(resp => {
-                    if (resp.status === 200) {
-                        document.location.href = "#/queue/" + this.props.shortName;
-                    } else if (resp.status === 403) {
-                        this.setState({showModal: true})
-                    }
-
-                    this.setState({sendingReq: false});
-                })
-
-                .catch(this.setState({sendingReq: false}))
+            window.location.href = "#/queue/" + this.props.shortName;
     }
 
     render() {
@@ -48,7 +37,7 @@ class ResultQueueLink extends React.Component {
                              onHide={() => this.setState({showModal: false, sendingReq: false})}
                              fullName={this.props.name} shortName={this.props.shortName}
                             onSuccess={() => document.location.href = "#/queue/" + this.props.shortName}/>
-                <div className="media-body pb-3 mb-0 small lh-125" data-aos='flip-up'>
+                <div className="media-body pb-3 mb-0 small lh-125" >
                     <div className="d-flex justify-content-between align-items-center w-100">
                         <strong className="text-gray-dark">{this.props.name} {this.props.isPrivate ?
                             <i className={"fa fa-lock"}></i> : ""}</strong>
@@ -66,5 +55,3 @@ class ResultQueueLink extends React.Component {
         )
     }
 }
-
-module.exports = ResultQueueLink;

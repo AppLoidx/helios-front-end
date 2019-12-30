@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class PriorityInputForm extends React.Component {
+export default class PriorityInputForm extends React.Component {
     render() {
         return (
             <div className="row mt-1" id={this.props.formId}>
@@ -16,5 +16,3 @@ class PriorityInputForm extends React.Component {
         )
     }
 }
-
-module.exports = PriorityInputForm;

@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class GroupLink extends React.Component {
+export default class GroupLink extends React.Component {
     render() {
         return (
             <div className="media text-muted pt-3">
@@ -44,5 +44,3 @@ class GroupLink extends React.Component {
         )
     }
 }
-
-module.exports = GroupLink;

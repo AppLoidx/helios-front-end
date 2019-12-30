@@ -1,8 +1,8 @@
-const React = require('react');
+import React from 'react';
 
-const Timeline = require('./Timeline.jsx');
+import Timeline from './Timeline.jsx';
 
-class Tables extends React.Component {
+export default class Tables extends React.Component {
     render() {
         return (
             <div>
@@ -35,5 +35,3 @@ class Tables extends React.Component {
         )
     }
 }
-
-module.exports = Tables;

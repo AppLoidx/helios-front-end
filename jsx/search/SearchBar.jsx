@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class SearchBar extends React.Component {
+export default class SearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.onInputChange = this.onInputChange.bind(this);
@@ -39,5 +39,3 @@ class SearchBar extends React.Component {
         )
     }
 }
-
-module.exports = SearchBar;

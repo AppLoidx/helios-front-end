@@ -1,7 +1,7 @@
-const React = require('react');
-require('./../../style/user-profile/user-card.css');
+import React from 'react';
+import './../../style/user-profile/user-card.css';
 
-class UserCard extends React.Component {
+export default class UserCard extends React.Component {
     render() {
         return (
             <div className="card mx-auto">
@@ -55,5 +55,3 @@ class UserCard extends React.Component {
         )
     }
 }
-
-module.exports = UserCard;

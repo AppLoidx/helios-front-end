@@ -1,7 +1,7 @@
-const React = require('react');
-const Button = require('react-bootstrap/Button.js');
+import React from 'react';
+import Button from 'react-bootstrap/Button.js';
 
-require('./../../style/user-profile/timeline.css');
+import './../../style/user-profile/timeline.css';
 
 
 function getFormattedTime(dateISO) {
@@ -38,7 +38,7 @@ const TimelineItem = ({data}) => (
     </div>
 );
 
-class Timeline extends React.Component {
+export default class Timeline extends React.Component {
     render() {
         return (
             this.props.data.length > 0 && (
@@ -58,6 +58,3 @@ class Timeline extends React.Component {
         )
     }
 }
-
-
-module.exports = Timeline;

@@ -1,9 +1,9 @@
-const React = require('react');
-const Modal = require('react-bootstrap/Modal.js');
-const InputForm = require('./PriorityInputForm.jsx');
-const Button = require('react-bootstrap/Modal.js');
+import React from 'react';
+import Modal from 'react-bootstrap/Modal.js';
+import InputForm from './PriorityInputForm.jsx';
+import Button from 'react-bootstrap/Modal.js';
 
-class PriorityPickModal extends React.Component {
+export default class PriorityPickModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {forms: [], fromIds: 0};
@@ -45,6 +45,4 @@ class PriorityPickModal extends React.Component {
         )
     }
 
-}
-
-module.exports = PriorityPickModal;
+} 

@@ -1,8 +1,8 @@
-const React = require('react');
-const Navbar = require('./GroupsNavbar.jsx');
-const GroupsList = require('./GroupsList.jsx');
+import React from 'react';
+import Navbar from './GroupsNavbar.jsx';
+import GroupsList from './GroupsList.jsx';
 
-class GroupsPage extends React.Component {
+export default class GroupsPage extends React.Component {
     render(){
         return (
             <div>
@@ -13,5 +13,3 @@ class GroupsPage extends React.Component {
         )
     }
 }
-
-module.exports = GroupsPage;

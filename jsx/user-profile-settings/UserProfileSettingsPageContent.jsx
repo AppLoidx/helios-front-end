@@ -1,10 +1,10 @@
-const React = require('react');
-const Spinner = require('react-bootstrap/Spinner.js');
-const UserCard = require('./../user-profile/UserCard.jsx');
-const Form = require('react-bootstrap/Form.js');
-const Button = require('react-bootstrap/Button.js');
+import React from 'react';
+import Spinner from 'react-bootstrap/Spinner.js';
+import UserCard from './../user-profile/UserCard.jsx';
+import Form from 'react-bootstrap/Form.js';
+import Button from 'react-bootstrap/Button.js';
 
-class UserProfileSettingsPageContent extends React.Component {
+export default class UserProfileSettingsPageContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,13 +15,16 @@ class UserProfileSettingsPageContent extends React.Component {
             userImgUrl: "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg",
             imgInput: "",
             nicknameInput: "",
-            imgInputDescription: "Размер изображения должен быть меньше, чем 1000х1000"
+            imgInputDescription: "Размер изображения должен быть меньше, чем 1000х1000",
+            nicknameInputDescription: ""
         };
 
         this.changeImageButtonClicked = this.changeImageButtonClicked.bind(this);
         this.changeUsernameButtonClicked = this.changeUsernameButtonClicked.bind(this);
         this.handleImageInput = this.handleImageInput.bind(this);
         this.fetchUserInfo = this.fetchUserInfo.bind(this);
+
+        this.handleNicknameInput = this.handleNicknameInput.bind(this);
     }
 
     componentDidMount() {
@@ -47,6 +50,7 @@ class UserProfileSettingsPageContent extends React.Component {
 
 
     changeImageButtonClicked() {
+        if (this.state.imgInput === "") return;
         fetch("api/settings/" + this.state.username + `?property=img&value=${this.state.imgInput}`, {method: 'put'})
             .then(resp => {
                 if (resp.status === 200) {
@@ -62,11 +66,26 @@ class UserProfileSettingsPageContent extends React.Component {
     }
 
     changeUsernameButtonClicked() {
+        if (this.state.nicknameInput === "") return;
+        fetch("api/settings/" + this.state.username + `?property=username&value=${this.state.nicknameInput}`, {method: 'put'})
+            .then(resp => {
+                if (resp.status === 200) {
+                    window.location.reload();
+                }
 
+                return resp.json();
+            })
+            .then(errorData => this.setState({
+                nicknameInputDescription: <span className={"text-danger"}>Ошибка: {errorData["error_description"]}</span>
+            }));
     }
 
     handleImageInput(event) {
         this.setState({imgInput: event.target.value});
+    }
+
+    handleNicknameInput(event){
+        this.setState({nicknameInput: event.target.value});
     }
 
     render() {
@@ -86,8 +105,9 @@ class UserProfileSettingsPageContent extends React.Component {
                             <Form>
                                 <Form.Group controlId="formBasicUrl">
                                     <Form.Label>Image URL</Form.Label>
-                                    <Form.Control type="url" placeholder="paste link here"
-                                                  onChange={this.handleImageInput}/>
+                                    <Form.Control   type="url" placeholder="paste link here"
+                                                    onChange={this.handleImageInput}
+                                                    value={this.state.imgInput}/>
                                     <Form.Text className="text-muted">
                                         {this.state.imgInputDescription}
                                     </Form.Text>
@@ -99,9 +119,15 @@ class UserProfileSettingsPageContent extends React.Component {
 
                                 <Form.Group controlId="formBasicText">
                                     <Form.Label>New nickname</Form.Label>
-                                    <Form.Control type="password" placeholder="Пока не работает :("/>
+                                    <Form.Control   type="text" placeholder="Новый никнейм"
+                                                    onChange={this.handleNicknameInput}
+                                                    value={this.state.nicknameInput}
+                                    />
                                 </Form.Group>
-                                <Button variant="primary" type="button">
+                                <Form.Text className="text-muted">
+                                    {this.state.nicknameInputDescription}
+                                </Form.Text>
+                                <Button variant="primary" type="button" onClick={this.changeUsernameButtonClicked}>
                                     Сменить никнейм
                                 </Button>
                             </Form>
@@ -114,5 +140,3 @@ class UserProfileSettingsPageContent extends React.Component {
         )
     }
 }
-
-module.exports = UserProfileSettingsPageContent;

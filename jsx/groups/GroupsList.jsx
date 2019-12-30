@@ -1,7 +1,7 @@
-const React = require('react');
-const Group = require('./GroupLink.jsx');
+import React from 'react';
+import Group from './GroupLink.jsx';
 
-class GroupsList extends React.Component {
+export default class GroupsList extends React.Component {
 
     constructor(props){
         super(props);
@@ -37,5 +37,3 @@ class GroupsList extends React.Component {
         )
     }
 }
-
-module.exports = GroupsList;

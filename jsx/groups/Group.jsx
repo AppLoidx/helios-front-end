@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class Group extends React.Component {
+export default class Group extends React.Component {
 
     constructor(props){
         super(props);

@@ -1,8 +1,8 @@
-const React = require('react');
-const RoundedSpinner = require('./../util/RoundedSpinner.jsx');
+import React from 'react';
+import RoundedSpinner from './../util/RoundedSpinner.jsx';
 
 
-class SearchResult extends React.Component {
+export default class SearchResult extends React.Component {
     constructor(props) {
         super(props);
         this.state = {isEmpty: false};
@@ -32,5 +32,3 @@ class SearchResult extends React.Component {
         )
     }
 }
-
-module.exports = SearchResult;

@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class RoundedSpinner extends React.Component {
+export default class RoundedSpinner extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -13,5 +13,3 @@ class RoundedSpinner extends React.Component {
         )
     }
 }
-
-module.exports = RoundedSpinner;

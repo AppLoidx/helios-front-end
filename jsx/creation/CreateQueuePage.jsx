@@ -1,9 +1,9 @@
-const React = require('react');
-const RoundedSpinner = require('./../util/RoundedSpinner.jsx');
-const PriorityPickModal = require('./PriorityPickModal.jsx');
+import React from 'react';
+import RoundedSpinner from './../util/RoundedSpinner.jsx';
+import PriorityPickModal from './PriorityPickModal.jsx';
 require('./../../style/form/main.css');
 
-class CreateQueuePage extends React.Component {
+export default class CreateQueuePage extends React.Component {
 
     render() {
         return <CreateQueuePageContent/>
@@ -264,5 +264,3 @@ class CreateQueuePageContent extends React.Component {
 
     }
 }
-
-module.exports = CreateQueuePage;

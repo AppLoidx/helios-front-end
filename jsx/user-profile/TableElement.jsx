@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class TableElement extends React.Component {
+export default class TableElement extends React.Component {
     render() {
         return (
             <div>
@@ -30,5 +30,3 @@ class TableElement extends React.Component {
         )
     }
 }
-
-module.exports = TableElement;

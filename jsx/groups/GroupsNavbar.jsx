@@ -1,7 +1,7 @@
-const React = require('react');
-const SearchDropdown = require('./SearchDropdown.jsx');
+import React from 'react';
+import SearchDropdown from './SearchDropdown.jsx';
 
-class GroupsNavbar extends React.Component {
+export default class GroupsNavbar extends React.Component {
 
     constructor(props){
         super(props);
@@ -101,5 +101,3 @@ class GroupsNavbar extends React.Component {
         )
     }
 }
-
-module.exports = GroupsNavbar;

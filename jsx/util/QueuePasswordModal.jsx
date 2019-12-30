@@ -1,11 +1,11 @@
-const React = require('react');
+import React from 'react';
 
-const Modal = require('react-bootstrap/Modal.js');
-const Button = require('react-bootstrap/Button.js');
+import Modal from 'react-bootstrap/Modal.js';
+import Button from 'react-bootstrap/Button.js';
 
-const RoundedSpinner = require('./../util/RoundedSpinner.jsx');
+import RoundedSpinner from './../util/RoundedSpinner.jsx';
 
-class QueuePasswordModal extends React.Component {
+export default class QueuePasswordModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {password: "", successful: true, sendingReq: false};
@@ -66,5 +66,3 @@ class QueuePasswordModal extends React.Component {
         )
     }
 }
-
-module.exports = QueuePasswordModal;

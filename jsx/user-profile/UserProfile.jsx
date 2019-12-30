@@ -1,13 +1,13 @@
-const React = require('react');
-const UserCard = require('./UserCard.jsx');
-const Tables = require('./Tables.jsx');
-const Cards = require('./Cards.jsx');
-const Navbar = require('./ProfileNavbar.jsx');
+import React from 'react';
+import UserCard from './UserCard.jsx';
+import Tables from './Tables.jsx';
+import Cards from './Cards.jsx';
+import Navbar from './ProfileNavbar.jsx';
 
 require('./../../style/user-profile/carousel-colors.css');
 
 
-class UserProfile extends React.Component {
+export default class UserProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,7 +31,7 @@ class UserProfile extends React.Component {
 
         fetch("api/timeline")
             .then(resp => resp.json())
-            .then(data => this.setState({timeline: data.reverse()}))
+            .then(data => this.setState({timeline: data}))
             .catch(err => console.log(err));
     }
 
@@ -56,15 +56,15 @@ class UserProfile extends React.Component {
 
                 <Navbar/>
 
-                <div className="justify-content-between col-12 mx-auto d-flex flex-column flex-md-row">
-                    <div className="col-sm-3 col-md-4 mx-auto d-flex" data-aos={"fade-left"} style={{maxHeight: '550px'}}>
+                <div className="justify-content-between col-12 mx-auto d-flex flex-column flex-lg-row">
+                    <div className="col-sm-8 col-md-8 col-lg-4 mx-auto d-flex" data-aos={"fade-left"} style={{maxHeight: '550px'}}>
                         <UserCard
                             username={this.state.username}
                             fullname={this.state.fullname==null?"":this.state.fullname}
                             userImgUrl={this.state.userImgUrl}
                         />
                     </div>
-                    <div className="d-none d-lg-block col-md-8 col-9 " data-aos={"fade-right"}>
+                    <div className="d-none d-lg-block col-md-8 col-8 " data-aos={"fade-right"}>
                         <Tables timelineData={this.state.timeline}/>
                     </div>
                     <div className="d-flex flex-column d-lg-none mt-3 text-center " data-aos={"fade-up"}>
@@ -78,5 +78,3 @@ class UserProfile extends React.Component {
         )
     }
 }
-
-module.exports = UserProfile;

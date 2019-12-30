@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class QueueLink extends React.Component {
+export default class QueueLink extends React.Component {
     constructor(props) {
         super(props);
         this.state = {"messages": 0}
@@ -19,5 +19,3 @@ class QueueLink extends React.Component {
         )
     }
 }
-
-module.exports = QueueLink;

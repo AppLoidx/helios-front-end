@@ -1,9 +1,9 @@
-const React = require('react');
-const SearchBar = require('./SearchBar.jsx');
-const SearchResult = require('./SearchResult.jsx');
-const ResultQueueLink = require('./ResultQueueLink.jsx');
+import React from 'react';
+import SearchBar from './SearchBar.jsx';
+import SearchResult from './SearchResult.jsx';
+import ResultQueueLink from './ResultQueueLink.jsx';
 
-class SearchPage extends React.Component {
+export default class SearchPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {loaded: false, searching: false, data: [], inputVal: "", searched: false};
@@ -19,6 +19,7 @@ class SearchPage extends React.Component {
 
     onSearchButtonClick() {
         this.setState({searching: true, loaded: false, searched: true});
+
         fetch("api/search/queue?queue_name=" + this.state.inputVal)
             .then(resp => resp.json())
             .then(data => {
@@ -52,10 +53,10 @@ class SearchPage extends React.Component {
                     <div className="col-12 col-md-12 col-lg-10">
                         <div data-aos="slide-up" data-aos-duration="800"><SearchBar
                             onSearchButtonClick={this.onSearchButtonClick} onInputChange={this.onInputChange}/></div>
-                        <div data-aos="slide-up" data-aos-duration="1100"><SearchResult loaded={this.state.loaded}
-                                                                                        searching={this.state.searching}
-                                                                                        data={this.state.data}
-                                                                                        searched={this.state.searched}/>
+                        <div><SearchResult loaded={this.state.loaded}
+                                           searching={this.state.searching}
+                                           data={this.state.data}
+                                           searched={this.state.searched}/>
                         </div>
                     </div>
                 </div>
@@ -63,5 +64,3 @@ class SearchPage extends React.Component {
         )
     }
 }
-
-module.exports = SearchPage;

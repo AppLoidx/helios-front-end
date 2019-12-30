@@ -1,6 +1,6 @@
-const React = require("react");
+import React from "react";
 
-class GrowingSpinner extends React.Component {
+export default class GrowingSpinner extends React.Component {
     render() {
         return (
             <div className="d-flex justify-content-center">
@@ -14,4 +14,3 @@ class GrowingSpinner extends React.Component {
     }
 }
 
-module.exports = GrowingSpinner;

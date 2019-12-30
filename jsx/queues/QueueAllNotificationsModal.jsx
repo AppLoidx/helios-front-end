@@ -1,9 +1,11 @@
-const React = require('react');
-const Modal = require('react-bootstrap/Modal.js');
-const Button = require('react-bootstrap/Button.js');
-const Media = require('./QueueNotification.jsx');
+import React from 'react';
+import Modal from 'react-bootstrap/Modal.js';
+import Button from 'react-bootstrap/Button.js';
+import Media from './QueueNotification.jsx';
 
-class QueueAllNotificationsModal extends React.Component {
+export default class QueueAllNotificationsModal extends React.Component {
+
+
     render() {
         return (
             <Modal {...this.props} size="lg" aria-labelledby="queue-all-notice-modal-vcenter" centered>
@@ -15,13 +17,12 @@ class QueueAllNotificationsModal extends React.Component {
                 <Modal.Body>
                     {this.props.data.map((x, i) => <li style={{listStyle: 'none'}} key={i}>{x}</li>)}
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className={"justify-content-between"}>
+                    <Button onClick={this.props.onClearNotifications} variant={"danger"}>Очистить оповещения</Button>
                     <Button onClick={this.props.onHide} className={"btn-primary"}>Закрыть</Button>
                 </Modal.Footer>
             </Modal>
         )
     }
 }
-
-module.exports = QueueAllNotificationsModal;
 

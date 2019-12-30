@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class QueueNotification extends React.Component {
+export default class QueueNotification extends React.Component {
 
     render() {
         return (
@@ -12,11 +12,12 @@ class QueueNotification extends React.Component {
                             <div className={"d-inline"}>{this.props.time}</div>
                         </div>
                     </div>
-                    {this.props.message}
+                    <div className={"text-left"}>
+                        {this.props.message}
+                    </div>
+
                 </p>
             </div>
         )
     }
 }
-
-module.exports = QueueNotification;

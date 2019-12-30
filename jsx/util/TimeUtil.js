@@ -1,4 +1,4 @@
-class TimeUtil {
+export default class TimeUtil {
     static getFormattedTime(dateISO) {
         let a = dateISO.split(/[^0-9]/);
         let creationDate = new Date(Date.UTC(a[0], a[1] - 1, a[2], a[3], a[4], a[5]));
@@ -11,5 +11,3 @@ class TimeUtil {
         return `${HOURS}:${MINUTES}:${SECONDS} ${DATE} ${MONTH}`;
     }
 }
-
-module.exports = TimeUtil;

@@ -1,6 +1,6 @@
-const React = require('react');
+import React from 'react';
 
-class ProfileNavbar extends React.Component {
+export default class ProfileNavbar extends React.Component {
 
 
     render(){
@@ -22,12 +22,11 @@ class ProfileNavbar extends React.Component {
                             <a className="nav-link" href="#/myprofile">Очереди </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#/myprofile">Комментарии преподавателей</a>
+                            <a className="nav-link" href="#/myprofile/commentaries">Комментарии преподавателей</a>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link disabled" href="#/myprofile" tabIndex="-1"
-                               aria-disabled="true">Disabled</a>
+                            <a className="nav-link" href="#/profile-settings">Настройки</a>
                         </li>
                     </ul>
 
@@ -37,5 +36,3 @@ class ProfileNavbar extends React.Component {
     }
 
 }
-
-module.exports = ProfileNavbar;

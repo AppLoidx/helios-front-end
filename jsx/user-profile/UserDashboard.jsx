@@ -1,8 +1,8 @@
-const React = require('react');
-const TableElement = require('./TableElement.jsx');
-const Table = require('react-bootstrap/Table.js');
+import React from 'react';
+import TableElement from './TableElement.jsx';
+import Table from 'react-bootstrap/Table.js';
 
-class UserDashboard extends React.Component {
+export default class UserDashboard extends React.Component {
     render() {
         return (
             <Table bordered>
@@ -68,5 +68,3 @@ class UserDashboard extends React.Component {
         )
     }
 }
-
-module.exports = UserDashboard;

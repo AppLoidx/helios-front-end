@@ -1,10 +1,10 @@
-const React = require('react');
-const Navbar = require('./GroupsNavbar.jsx');
-const SearchBar = require('./../search/SearchBar.jsx');
-const GroupsList = require('./GroupsList.jsx');
+import React from 'react';
+import Navbar from './GroupsNavbar.jsx';
+import SearchBar from './../search/SearchBar.jsx';
+import GroupsList from './GroupsList.jsx';
 
 
-class GroupsSearch extends React.Component {
+export default class GroupsSearch extends React.Component {
 
     render(){
         return(
@@ -23,4 +23,3 @@ class GroupsSearch extends React.Component {
     }
 }
 
-module.exports = GroupsSearch;

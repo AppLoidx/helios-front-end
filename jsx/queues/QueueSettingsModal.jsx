@@ -1,9 +1,10 @@
-const React = require('react');
-const Modal = require('react-bootstrap/Modal.js');
-const Button = require('react-bootstrap/Button.js');
-const ConfirmModal = require('./../util/ConfirmModal.jsx');
+import React from 'react';
+import Modal from 'react-bootstrap/Modal.js';
+import Button from 'react-bootstrap/Button.js';
+import ConfirmModal from './../util/ConfirmModal.jsx';
+import QueueUser from "./QueueUser.jsx";
 
-class QueueSettingsModal extends React.Component {
+export default class QueueSettingsModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -82,10 +83,29 @@ class QueueSettingsModal extends React.Component {
                             </button>
                         </li>
                         <li className={"text-center my-3"} style={{listStyle: 'none'}}>
+                            <button className="btn btn-outline-primary col-8"
+                                    onClick={() => alert("Функция еще не предусмотрена")}>Назначить администраторов
+                            </button>
+                        </li>
+                        <li className={"text-center my-3"} style={{listStyle: 'none'}}>
                             <button className="btn btn-outline-danger col-8"
                                     onClick={() => this.setState({showDeleteConfirm: true})}>Удалить очередь
                             </button>
                         </li>
+                        <hr/>
+                        <div className={"justify-content-between d-flex flex-row"}><h3>Администраторы</h3> <button className={"btn btn-sm btn-secondary"}>Добавить</button></div>
+                        {this.props.superUsers.map((x, i) => <li  style={{listStyle: 'none'}} key={i}>
+                            <QueueUser
+                                username={x["username"]}
+                                fullname={x["first_name"] + " " + (x["last_name"] === null ? "" : x["last_name"])}
+                                queuename={this.props.queueName}
+                                onChange={() => this.fetchQueue(this.props)}
+                                imgUrl={x["contact_details"]["img"] === null ? "https://i.pinimg.com/564x/10/48/bb/1048bb24cfd89080238940e977c2936d.jpg" : x["contact_details"]["img"]}
+                                alreadyInQueue={false}
+                                isCanManage={false}
+                                onlyForList={true}
+                            />
+                        </li>)}
                     </ul>
                 </Modal.Body>
                 <Modal.Footer>
@@ -110,5 +130,3 @@ class QueueSettingsModal extends React.Component {
         )
     }
 }
-
-module.exports = QueueSettingsModal;
